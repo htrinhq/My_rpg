@@ -11,4 +11,6 @@
 #include "my_printf.h"
 #include "graph.h"
 
+int check_env(char **envp);
+
 #endif
