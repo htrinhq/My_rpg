@@ -14,7 +14,7 @@ NAME	=	my_rpg
 
 CFLAGS	=	-g -W -Wall -Wextra -Iinclude
 
-LDFLAGS	=	-g -L ./lib/my -l myprintf -L ./lib/graph -lgraph
+LDFLAGS	=	-g -l c_graph_prog -L ./lib/my -l myprintf -L ./lib/graph -lgraph
 
 #-g -L ./lib/my -l myprintf -L ./lib/graph -lgraph
 #-g -L ./lib/my -l myprintf -L lib/graph -l graph -Wl,-R /lib/ -lcsfml-audio -lcsfml-graphics -lcsfml-network -lcsfml-system -lcsfml-window
