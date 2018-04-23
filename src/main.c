@@ -49,14 +49,22 @@ void player_animation(sprite_t *player)
 
 sprite_t *move_player(sprite_t *map, sprite_t *player)
 {
-	if (sfKeyboard_isKeyPressed(sfKeyUp))
+	if (sfKeyboard_isKeyPressed(sfKeyUp)) {
 		map->r_sprt.top -= 10;
-	if (sfKeyboard_isKeyPressed(sfKeyDown))
+		player_animation(player);
+	}
+	if (sfKeyboard_isKeyPressed(sfKeyDown)) {
 		map->r_sprt.top += 10;
-	if (sfKeyboard_isKeyPressed(sfKeyLeft))
+		player_animation(player);
+	}
+	if (sfKeyboard_isKeyPressed(sfKeyLeft)) {
 		map->r_sprt.left -= 10;
-	if (sfKeyboard_isKeyPressed(sfKeyRight))
+		player_animation(player);
+	}
+	if (sfKeyboard_isKeyPressed(sfKeyRight)) {
 		map->r_sprt.left += 10;
+		player_animation(player);
+	}
 	sfSprite_setTextureRect(map->s_sprt, map->r_sprt);
 	return (map);
 }
@@ -66,9 +74,12 @@ sprite_t *game_event(sfRenderWindow *window, sfEvent event, sprite_t *map, sprit
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
+		if (event.type == sfEvtKeyPressed && sfKeyboard_isKeyPressed(sfKeyEscape) && player->o_sprt == 0)
+			player->o_sprt = 1;
+		else if (event.type == sfEvtKeyPressed && sfKeyboard_isKeyPressed(sfKeyEscape) && player->o_sprt == 1)
+			player->o_sprt = 0;
 		if (event.type == sfEvtKeyPressed) {
 			map = move_player(map, player);
-			player_animation(player);
 		}
 	}
 	return (map);
@@ -106,13 +117,18 @@ void disp_text(sfRenderWindow *window, text_t **text)
 
 void game_loop(sfRenderWindow *window)
 {
+	sprite_t *inventory = malloc(sizeof(sprite_t));
 	sprite_t *player = malloc(sizeof(sprite_t));
 	sprite_t *map = malloc(sizeof(sprite_t));
 	sfVector2f scale = {0.5, 0.5};
 	sfEvent event;
 
+	inventory = create_sprite(inventory, "rsrc/pictures/inventory.png");
 	player = create_sprite(player, "rsrc/pictures/p1.png");
 	map = create_sprite(map, "rsrc/pictures/map.png");
+	inventory->o_sprt = 0;
+	inventory->v_sprt.x = 0;
+	inventory->v_sprt.y = 0;
 	map->r_sprt.top = 1480;
 	map->r_sprt.left = 1260;
 	map->r_sprt.width = 1920;
@@ -127,10 +143,13 @@ void game_loop(sfRenderWindow *window)
 	sfSprite_setTextureRect(player->s_sprt, player->r_sprt);
 	sfSprite_setPosition(player->s_sprt, player->v_sprt);
 	sfSprite_setScale(player->s_sprt, scale);
+	sfSprite_setPosition(inventory->s_sprt, inventory->v_sprt);
 	while (sfRenderWindow_isOpen(window)) {
 		map = game_event(window, event, map, player);
 		sfRenderWindow_drawSprite(window, map->s_sprt, NULL);
 		sfRenderWindow_drawSprite(window, player->s_sprt, NULL);
+		if (player->o_sprt == 1)
+			sfRenderWindow_drawSprite(window, inventory->s_sprt, NULL);
 		sfRenderWindow_display(window);
 	}
 }
