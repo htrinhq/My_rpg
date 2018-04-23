@@ -22,6 +22,7 @@ typedef struct text_s {
 	sfVector2f pos;
 	sfText *text;
 	sfFont *font;
+	int bo;
 } text_t;
 
 struct sprite_s {
@@ -36,5 +37,6 @@ typedef struct sprite_s sprite_t;
 
 sprite_t *create_sprite(sprite_t *sprite, char *path);
 sfIntRect create_recth(int top, int left, int width, int height);
+void game_loop();
 
 #endif

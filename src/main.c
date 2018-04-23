@@ -39,19 +39,36 @@ text_t **move_cursos_up(text_t **text)
 	return (text);
 }
 
-text_t **game_event(sfRenderWindow *window, sfEvent event, text_t **text)
+void game_event(sfRenderWindow *window, sfEvent event)
 {
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
-		if (event.type == sfEvtKeyPressed && sfKeyboard_isKeyPressed(sfKeyUp))
+	}
+}
+
+text_t **menu_event(sfRenderWindow *window, sfEvent event, text_t **text)
+{
+	while (sfRenderWindow_pollEvent(window, &event)) {
+		if (event.type == sfEvtClosed)
+			sfRenderWindow_close(window);
+		if (event.type == sfEvtKeyPressed &&
+		sfKeyboard_isKeyPressed(sfKeyUp) && text[0]->bo == 0)
 			text = move_cursos_up(text);
-		if (event.type == sfEvtKeyPressed && sfKeyboard_isKeyPressed(sfKeyDown))
+		if (event.type == sfEvtKeyPressed &&
+		sfKeyboard_isKeyPressed(sfKeyDown) && text[0]->bo == 0)
 			text = move_cursos_down(text);
+		if (event.type == sfEvtKeyPressed &&
+		sfKeyboard_isKeyPressed(sfKeyReturn) && text[0]->bo == 0 &&
+		text[2]->pos.y == 375 + (3 * 77))
+			sfRenderWindow_close(window);
+		if (event.type == sfEvtKeyPressed &&
+		sfKeyboard_isKeyPressed(sfKeyReturn) && text[0]->bo == 0 &&
+		text[2]->pos.y == 375 + 77)
+			game_loop(window);
 	}
 	return (text);
 }
-
 
 void disp_text(sfRenderWindow *window, text_t **text)
 {
@@ -60,14 +77,33 @@ void disp_text(sfRenderWindow *window, text_t **text)
 	sfRenderWindow_drawText(window, text[2]->text, NULL);
 }
 
-void game_loop(sfRenderWindow *window, text_t **text)
+void game_loop(sfRenderWindow *window)
+{
+	sfEvent event;
+	sprite_t *map = malloc(sizeof(sprite_t));
+	sfIntRect rect;
+	rect.top = 1480;
+	rect.left = 1380;
+	rect.width = 1920;
+	rect.height = 1080;
+
+	map = create_sprite(map, "rsrc/pictures/map.png");
+	sfSprite_setTextureRect(map->s_sprt, rect);
+	while (sfRenderWindow_isOpen(window)) {
+		game_event(window, event);
+		sfRenderWindow_drawSprite(window, map->s_sprt, NULL);
+		sfRenderWindow_display(window);
+	}
+}
+
+void menu_loop(sfRenderWindow *window, text_t **text)
 {
 	sfEvent event;
 	sprite_t *bg = malloc(sizeof(sprite_t));
 
 	bg = create_sprite(bg, "rsrc/pictures/bg.png");
 	while (sfRenderWindow_isOpen(window)) {
-		text = game_event(window, event, text);
+		text = menu_event(window, event, text);
 		sfRenderWindow_drawSprite(window, bg->s_sprt, NULL);
 		disp_text(window, text);
 		sfRenderWindow_display(window);
@@ -83,6 +119,7 @@ text_t **initialize_text(text_t **text)
 	text[0]->text = sfText_create();
 	text[0]->pos.x = 550;
 	text[0]->pos.y = 125;
+	text[0]->bo = 0;
 	text[1]->text = sfText_create();
 	text[1]->pos.x = 820;
 	text[1]->pos.y = 372;
@@ -123,7 +160,7 @@ int main(int argc, char **argv, char**envp)
 	sfRenderWindow_setFramerateLimit(window, 60);
 	text = initialize_text(text);
 	text = set_text_value(text);
-	game_loop(window, text);
+	menu_loop(window, text);
 	sfRenderWindow_destroy(window);
 	return (0);
 }
