@@ -39,31 +39,37 @@ text_t **move_cursos_up(text_t **text)
 	return (text);
 }
 
-sprite_t *move_player(sprite_t *map)
+void player_animation(sprite_t *player)
 {
-	if (sfKeyboard_isKeyPressed(sfKeyUp)) {
+	player->r_sprt.top += 320;
+	if (player->r_sprt.top == 970)
+		player->r_sprt.top = 10;
+	sfSprite_setTextureRect(player->s_sprt, player->r_sprt);
+}
+
+sprite_t *move_player(sprite_t *map, sprite_t *player)
+{
+	if (sfKeyboard_isKeyPressed(sfKeyUp))
 		map->r_sprt.top -= 10;
-	}
-	if (sfKeyboard_isKeyPressed(sfKeyDown)) {
+	if (sfKeyboard_isKeyPressed(sfKeyDown))
 		map->r_sprt.top += 10;
-	}
-	if (sfKeyboard_isKeyPressed(sfKeyLeft)) {
+	if (sfKeyboard_isKeyPressed(sfKeyLeft))
 		map->r_sprt.left -= 10;
-	}
-	if (sfKeyboard_isKeyPressed(sfKeyRight)) {
+	if (sfKeyboard_isKeyPressed(sfKeyRight))
 		map->r_sprt.left += 10;
-	}
 	sfSprite_setTextureRect(map->s_sprt, map->r_sprt);
 	return (map);
 }
 
-sprite_t *game_event(sfRenderWindow *window, sfEvent event, sprite_t *map)
+sprite_t *game_event(sfRenderWindow *window, sfEvent event, sprite_t *map, sprite_t *player)
 {
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
-		if (event.type == sfEvtKeyPressed)
-			map = move_player(map);
+		if (event.type == sfEvtKeyPressed) {
+			map = move_player(map, player);
+			player_animation(player);
+		}
 	}
 	return (map);
 }
@@ -122,7 +128,7 @@ void game_loop(sfRenderWindow *window)
 	sfSprite_setPosition(player->s_sprt, player->v_sprt);
 	sfSprite_setScale(player->s_sprt, scale);
 	while (sfRenderWindow_isOpen(window)) {
-		map = game_event(window, event, map);
+		map = game_event(window, event, map, player);
 		sfRenderWindow_drawSprite(window, map->s_sprt, NULL);
 		sfRenderWindow_drawSprite(window, player->s_sprt, NULL);
 		sfRenderWindow_display(window);
