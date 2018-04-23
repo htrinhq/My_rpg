@@ -39,12 +39,33 @@ text_t **move_cursos_up(text_t **text)
 	return (text);
 }
 
-void game_event(sfRenderWindow *window, sfEvent event)
+sprite_t *move_player(sprite_t *map)
+{
+	if (sfKeyboard_isKeyPressed(sfKeyUp)) {
+		map->r_sprt.top -= 10;
+	}
+	if (sfKeyboard_isKeyPressed(sfKeyDown)) {
+		map->r_sprt.top += 10;
+	}
+	if (sfKeyboard_isKeyPressed(sfKeyLeft)) {
+		map->r_sprt.left -= 10;
+	}
+	if (sfKeyboard_isKeyPressed(sfKeyRight)) {
+		map->r_sprt.left += 10;
+	}
+	sfSprite_setTextureRect(map->s_sprt, map->r_sprt);
+	return (map);
+}
+
+sprite_t *game_event(sfRenderWindow *window, sfEvent event, sprite_t *map)
 {
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
+		if (event.type == sfEvtKeyPressed)
+			map = move_player(map);
 	}
+	return (map);
 }
 
 text_t **menu_event(sfRenderWindow *window, sfEvent event, text_t **text)
@@ -79,19 +100,31 @@ void disp_text(sfRenderWindow *window, text_t **text)
 
 void game_loop(sfRenderWindow *window)
 {
-	sfEvent event;
+	sprite_t *player = malloc(sizeof(sprite_t));
 	sprite_t *map = malloc(sizeof(sprite_t));
-	sfIntRect rect;
-	rect.top = 1480;
-	rect.left = 1380;
-	rect.width = 1920;
-	rect.height = 1080;
+	sfVector2f scale = {0.5, 0.5};
+	sfEvent event;
 
+	player = create_sprite(player, "rsrc/pictures/p1.png");
 	map = create_sprite(map, "rsrc/pictures/map.png");
-	sfSprite_setTextureRect(map->s_sprt, rect);
+	map->r_sprt.top = 1480;
+	map->r_sprt.left = 1260;
+	map->r_sprt.width = 1920;
+	map->r_sprt.height = 1080;
+	player->r_sprt.top = 10;
+	player->r_sprt.left = 70;
+	player->r_sprt.width = 136;
+	player->r_sprt.height = 183;
+	player->v_sprt.x = 960;
+	player->v_sprt.y = 540;
+	sfSprite_setTextureRect(map->s_sprt, map->r_sprt);
+	sfSprite_setTextureRect(player->s_sprt, player->r_sprt);
+	sfSprite_setPosition(player->s_sprt, player->v_sprt);
+	sfSprite_setScale(player->s_sprt, scale);
 	while (sfRenderWindow_isOpen(window)) {
-		game_event(window, event);
+		map = game_event(window, event, map);
 		sfRenderWindow_drawSprite(window, map->s_sprt, NULL);
+		sfRenderWindow_drawSprite(window, player->s_sprt, NULL);
 		sfRenderWindow_display(window);
 	}
 }
