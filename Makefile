@@ -7,6 +7,9 @@
 
 SRC	=	src/main.c			\
 		src/utilities.c			\
+		src/character_gen.c		\
+		src/stock_var.c			\
+		src/sprites.c
 
 OBJ	=	$(SRC:.c=.o)
 

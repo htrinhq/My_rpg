@@ -18,7 +18,14 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+typedef struct text_s {
+	sfVector2f pos;
+	sfText *text;
+	sfFont *font;
+} text_t;
+
 struct sprite_s {
+	char *name;
 	sfTexture *t_sprt;
 	sfSprite *s_sprt;
 	sfVector2f v_sprt;
