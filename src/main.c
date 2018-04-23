@@ -126,9 +126,6 @@ void game_loop(sfRenderWindow *window)
 	inventory = create_sprite(inventory, "rsrc/pictures/inventory.png");
 	player = create_sprite(player, "rsrc/pictures/p1.png");
 	map = create_sprite(map, "rsrc/pictures/map.png");
-	inventory->o_sprt = 0;
-	inventory->v_sprt.x = 0;
-	inventory->v_sprt.y = 0;
 	map->r_sprt.top = 1480;
 	map->r_sprt.left = 1260;
 	map->r_sprt.width = 1920;
@@ -143,7 +140,6 @@ void game_loop(sfRenderWindow *window)
 	sfSprite_setTextureRect(player->s_sprt, player->r_sprt);
 	sfSprite_setPosition(player->s_sprt, player->v_sprt);
 	sfSprite_setScale(player->s_sprt, scale);
-	sfSprite_setPosition(inventory->s_sprt, inventory->v_sprt);
 	while (sfRenderWindow_isOpen(window)) {
 		map = game_event(window, event, map, player);
 		sfRenderWindow_drawSprite(window, map->s_sprt, NULL);
