@@ -20,7 +20,7 @@ CFLAGS	=	-g -W -Wall -Wextra -Iinclude
 
 LDFLAGS	=	-g -L ./lib/my -l myprintf -L ./lib/graph -lgraph -lc_graph_prog
 
-#-g -L ./lib/my -l myprintf -L ./lib/graph -lgraph
+#-g -L ./lib/my -l myprintf -L ./lib/graph -lgraph -lc_graph_prog
 #-g -L ./lib/my -l myprintf -L lib/graph -l graph -Wl,-R /lib/ -lcsfml-audio -lcsfml-graphics -lcsfml-network -lcsfml-system -lcsfml-window
 
 

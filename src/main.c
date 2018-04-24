@@ -49,19 +49,19 @@ void player_animation(sprite_t *player)
 
 sprite_t *move_player(sprite_t *map, sprite_t *player)
 {
-	if (sfKeyboard_isKeyPressed(sfKeyUp)) {
+	if (sfKeyboard_isKeyPressed(sfKeyZ)) {
 		map->r_sprt.top -= 10;
 		player_animation(player);
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyDown)) {
+	if (sfKeyboard_isKeyPressed(sfKeyS)) {
 		map->r_sprt.top += 10;
 		player_animation(player);
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyLeft)) {
+	if (sfKeyboard_isKeyPressed(sfKeyQ)) {
 		map->r_sprt.left -= 10;
 		player_animation(player);
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyRight)) {
+	if (sfKeyboard_isKeyPressed(sfKeyD)) {
 		map->r_sprt.left += 10;
 		player_animation(player);
 	}
@@ -74,9 +74,9 @@ sprite_t *game_event(sfRenderWindow *window, sfEvent event, sprite_t *map, sprit
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
-		if (event.type == sfEvtKeyPressed && sfKeyboard_isKeyPressed(sfKeyEscape) && player->o_sprt == 0)
+		if (event.type == sfEvtKeyPressed && sfKeyboard_isKeyPressed(sfKeyI) && player->o_sprt == 0)
 			player->o_sprt = 1;
-		else if (event.type == sfEvtKeyPressed && sfKeyboard_isKeyPressed(sfKeyEscape) && player->o_sprt == 1)
+		else if (event.type == sfEvtKeyPressed && sfKeyboard_isKeyPressed(sfKeyI) && player->o_sprt == 1)
 			player->o_sprt = 0;
 		if (event.type == sfEvtKeyPressed) {
 			map = move_player(map, player);
@@ -207,8 +207,12 @@ int main(int argc, char **argv, char**envp)
 {
 	sfRenderWindow *window = NULL;
 	text_t **text = malloc(sizeof(text_t *));
+	sfMusic *music = sfMusic_createFromFile("rsrc/sounds/main.ogg");
 	idobj_t **obj = malloc(sizeof(id_t *) * 16);
 
+	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
+		return (84);
+	sfMusic_play(music);
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
 		return (84);
 	obj = fill_obj_id(obj);
