@@ -7,14 +7,14 @@
 
 #include "rpg.h"
 
-quard_t *guards_gen(void)
+guard_t *guards_gen(void)
 {
 	guard_t *guard = malloc(sizeof(guard_t));
 	npcst_t stat;
 
-	stat->max_lp = 100;
-	stat->lp = 100;
-	stat->strength = 40;
+	stat.max_lp = 100;
+	stat.lp = 100;
+	stat.strength = 40;
 	guard->stat = stat;
 	guard->sprite = find_sprite("rsrc/pictures/gardian.png");
 	return (guard);

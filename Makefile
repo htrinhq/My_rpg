@@ -10,7 +10,8 @@ SRC	=	src/main.c			\
 		src/character_gen.c		\
 		src/stock_var.c			\
 		src/sprites.c			\
-		src/struct_obj.c
+		src/struct_obj.c		\
+		src/guards_gen.c
 
 OBJ	=	$(SRC:.c=.o)
 

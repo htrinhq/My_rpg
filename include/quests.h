@@ -25,7 +25,8 @@ typedef struct npc {
 } npc_t;
 
 quest_t quest_gen(int has_quest);
-npc_t npc_gen(void);
+npc_t *npc_gen(void);
+npc_t **get_npc(int bo, npc_t **npc);
 
 #endif
 
