@@ -207,11 +207,19 @@ int main(int argc, char **argv, char**envp)
 {
 	sfRenderWindow *window = NULL;
 	text_t **text = malloc(sizeof(text_t *));
+<<<<<<< HEAD
 	sfMusic *music = sfMusic_createFromFile("rsrc/sounds/main.ogg");
 
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
 		return (84);
 	sfMusic_play(music);
+=======
+	idobj_t **obj = malloc(sizeof(id_t *) * 16);
+
+	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
+		return (84);
+	obj = fill_obj_id(obj);
+>>>>>>> a2cf64e9af94991708ddeba4d9ef9e8053e3aa62
 	window = renderwindow_create(window);
 	sfRenderWindow_setFramerateLimit(window, 60);
 	text = initialize_text(text);

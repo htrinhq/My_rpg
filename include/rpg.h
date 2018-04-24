@@ -13,6 +13,11 @@
 #include "my_printf.h"
 #include "graph.h"
 
+typedef struct id {
+	char *path;
+	int id;
+} idobj_t;
+
 typedef struct stat_npc {
 	int level;
 	int max_lp;
@@ -35,5 +40,7 @@ npcst_t stat_gen(void);
 sprite_t *find_sprite(char *name);
 char *my_revstr(char *str);
 char *my_int_to_str(int nb);
+idobj_t **fill_obj_id(idobj_t **obj);
+int my_strcmp(char const *s1, char const *s2);
 
 #endif
