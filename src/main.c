@@ -71,6 +71,7 @@ sprite_t *move_player(sprite_t *map, sprite_t *player)
 
 sprite_t *game_event(sfRenderWindow *window, sfEvent event, sprite_t *map, sprite_t *player)
 {
+	sfVector2i mouse = sfMouse_getPosition((sfWindow *)window);
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
@@ -78,9 +79,18 @@ sprite_t *game_event(sfRenderWindow *window, sfEvent event, sprite_t *map, sprit
 			player->o_sprt = 1;
 		else if (event.type == sfEvtKeyPressed && sfKeyboard_isKeyPressed(sfKeyI) && player->o_sprt == 1)
 			player->o_sprt = 0;
-		if (event.type == sfEvtKeyPressed) {
+		if (event.type == sfEvtKeyPressed)
 			map = move_player(map, player);
-		}
+		if (player->o_sprt == 1 && (mouse.x >= 1332 &&
+		mouse.x <= (1332 + 250)) &&
+		(mouse.y <= 747 && mouse.y >= (747 - 95)) &&
+		sfMouse_isButtonPressed(sfMouseLeft))
+			sfRenderWindow_destroy(window);
+		if (player->o_sprt == 1 && (mouse.x >= 1605 &&
+		mouse.x <= (1605 + 250)) &&
+		(mouse.y <= 747 && mouse.y >= (747 - 95)) &&
+		sfMouse_isButtonPressed(sfMouseLeft))
+			menu_loop(window);
 	}
 	return (map);
 }
@@ -150,11 +160,14 @@ void game_loop(sfRenderWindow *window)
 	}
 }
 
-void menu_loop(sfRenderWindow *window, text_t **text)
+void menu_loop(sfRenderWindow *window)
 {
-	sfEvent event;
+	text_t **text = malloc(sizeof(text_t *));
 	sprite_t *bg = malloc(sizeof(sprite_t));
+	sfEvent event;
 
+	text = initialize_text(text);
+	text = set_text_value(text);
 	bg = create_sprite(bg, "rsrc/pictures/bg.png");
 	while (sfRenderWindow_isOpen(window)) {
 		text = menu_event(window, event, text);
@@ -206,7 +219,6 @@ text_t **set_text_value(text_t **text)
 int main(int argc, char **argv, char**envp)
 {
 	sfRenderWindow *window = NULL;
-	text_t **text = malloc(sizeof(text_t *));
 	sfMusic *music = sfMusic_createFromFile("rsrc/sounds/main.ogg");
 	idobj_t **obj = malloc(sizeof(id_t *) * 16);
 
@@ -218,9 +230,7 @@ int main(int argc, char **argv, char**envp)
 	obj = fill_obj_id(obj);
 	window = renderwindow_create(window);
 	sfRenderWindow_setFramerateLimit(window, 60);
-	text = initialize_text(text);
-	text = set_text_value(text);
-	menu_loop(window, text);
+	menu_loop(window);
 	sfRenderWindow_destroy(window);
 	return (0);
 }
