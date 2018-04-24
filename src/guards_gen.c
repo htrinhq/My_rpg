@@ -31,6 +31,7 @@ guard_t **get_all_guards(int guards_nb)
 		i = i + 1;
 	}
 	get_guards(1, guards);
+	return (guards);
 }
 
 sprite_t *find_sprite(char *name)

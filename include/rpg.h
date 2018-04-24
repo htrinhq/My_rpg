@@ -48,5 +48,6 @@ char *my_revstr(char *str);
 char *my_int_to_str(int nb);
 idobj_t **fill_obj_id(idobj_t **obj);
 int my_strcmp(char const *s1, char const *s2);
+guard_t **get_guards(int bo, guard_t **guards);
 
 #endif
