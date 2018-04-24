@@ -18,6 +18,11 @@ typedef struct id {
 	int id;
 } idobj_t;
 
+typedef struct guards {
+	sprite_t *sprite;
+	npcst_t stat;
+} guard_t;
+
 typedef struct stat_npc {
 	int level;
 	int max_lp;

@@ -43,9 +43,9 @@ npcst_t stat_gen(void)
 	return (stat);
 }
 
-npc_t npc_gen(void)
+npc_t *npc_gen(void)
 {
-	npc_t npc;
+	npc_t *npc = malloc(sizeof(npc_t));
 	int sprite_id = 0;
 	int i = 0;
 	char *s = malloc(sizeof(char) * 23);
@@ -63,15 +63,15 @@ npc_t npc_gen(void)
 	return (npc);
 }
 
-sprite_t *find_sprite(char *name)
+npc_t **get_all_npcs(int npc_nb)
 {
-	sprite_t **sprites = get_sprite(0, NULL);
 	int i = 0;
+	npc_t **npcs = malloc(sizeof(npc_t*) * (npc_nb + 1));
 
-	while (sprites[i] != NULL) {
-		if (my_strcmp(sprites[i]->name, name))
-			return (sprites[i]);
+	while (i < npcs_nb) {
+		npcs[i] = malloc(sizeof(npc_t));
+		npcs[i] = npc_gen();
 		i = i + 1;
 	}
-	return (NULL);
+	get_npcs(1, npcs);
 }
