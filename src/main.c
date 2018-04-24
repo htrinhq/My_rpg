@@ -207,9 +207,11 @@ int main(int argc, char **argv, char**envp)
 {
 	sfRenderWindow *window = NULL;
 	text_t **text = malloc(sizeof(text_t *));
+	idobj_t **obj = malloc(sizeof(id_t *) * 16);
 
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
 		return (84);
+	obj = fill_obj_id(obj);
 	window = renderwindow_create(window);
 	sfRenderWindow_setFramerateLimit(window, 60);
 	text = initialize_text(text);

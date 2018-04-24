@@ -74,21 +74,25 @@ npc_t npc_gen(void);
 #endif
 
 #ifndef MQUEST2
-#define MQUEST2 ("\
-")
+#define MQUEST2 ("You need to eat!")
 #endif
 
 #ifndef MQUEST3
-#define MQUEST3 ("\
-")
+#define MQUEST3 ("Talk to Niels, I think he needs something...")
 #endif
 
 #ifndef MQUEST4
-#define MQUEST4 ("\
-")
+#define MQUEST4 ("Don't miss the daytasks!")
 #endif
 
 #ifndef MQUEST5
-#define MQUEST5 ("\
-")
+#define MQUEST5 ("Find a screwdriver")
+#endif
+
+#ifndef MQUEST6
+#define MQUEST6 ("Find a way to the Internet Room")
+#endif
+
+#ifndef MQUEST7
+#define MQUEST7 ("F**k, there's no phone here! I need to go to the Director's Office to get one. I will surely need to create a diversion to get there..")
 #endif
