@@ -1,7 +1,46 @@
-total 64
-drwxrwxr-x. 2 ngeorge-peillex ngeorge-peillex  4096 24 avril 15:27 include
-drwxrwxr-x. 4 ngeorge-peillex ngeorge-peillex  4096 18 avril 11:26 lib
--rw-rw-r--. 1 ngeorge-peillex ngeorge-peillex     0 25 avril 11:16 Makefile
--rwxrwxr-x. 1 ngeorge-peillex ngeorge-peillex 48456 24 avril 15:58 my_rpg
-drwxrwxr-x. 5 ngeorge-peillex ngeorge-peillex  4096 24 avril 13:54 rsrc
-drwxrwxr-x. 2 ngeorge-peillex ngeorge-peillex  4096 24 avril 15:58 src
+##
+## EPITECH PROJECT, 2018
+## Makefile
+## File description:
+## Makefile
+##
+
+SRC	=	src/main.c			\
+		src/stock_var.c		\
+		src/utilities.c		\
+		src/struct_obj.c		\
+		src/sprites.c		\
+		src/guards_gen.c		\
+		src/character_gen.c		\
+		src/chest.c
+
+OBJ	=	$(SRC:.c=.o)
+
+NAME	=	my_rpg
+
+CFLAGS	=	-W -Wall -Wextra -I include -g
+
+LDFLAGS	=	-l c_graph_prog -L ./lib/my/ -lmyprintf -L ./lib/graph/ -lgraph
+
+all:	libmake $(NAME)
+
+$(NAME):	$(OBJ)
+	gcc -o $(NAME) $(OBJ) $(LDFLAGS)
+
+libmake:
+	make -C ./lib/my/
+	make -C./lib/graph/
+
+clean:
+	rm -f $(OBJ)
+	make clean -C ./lib/my/
+	make clean -C ./lib/graph/
+
+fclean:	clean
+	rm -f $(NAME)
+	make fclean -C ./lib/my/
+	make fclean -C ./lib/graph/
+
+re:	fclean all
+
+.PHONY:	clean fclean re all libmake

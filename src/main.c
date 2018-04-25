@@ -83,12 +83,12 @@ sprite_t *game_event(sfRenderWindow *window, sfEvent event, sprite_t *map, sprit
 			map = move_player(map, player);
 		if (player->o_sprt == 1 && (mouse.x >= 1332 &&
 		mouse.x <= (1332 + 250)) &&
-		(mouse.y <= 747 && mouse.y >= (747 - 95)) &&
+		(mouse.y >= 747 && mouse.y <= (747 + 95)) &&
 		sfMouse_isButtonPressed(sfMouseLeft))
 			sfRenderWindow_destroy(window);
 		if (player->o_sprt == 1 && (mouse.x >= 1605 &&
 		mouse.x <= (1605 + 250)) &&
-		(mouse.y <= 747 && mouse.y >= (747 - 95)) &&
+		(mouse.y >= 747 && mouse.y <= (747 + 95)) &&
 		sfMouse_isButtonPressed(sfMouseLeft)) {
 			player->o_sprt = 0;
 			menu_loop(window);
