@@ -89,8 +89,10 @@ sprite_t *game_event(sfRenderWindow *window, sfEvent event, sprite_t *map, sprit
 		if (player->o_sprt == 1 && (mouse.x >= 1605 &&
 		mouse.x <= (1605 + 250)) &&
 		(mouse.y <= 747 && mouse.y >= (747 - 95)) &&
-		sfMouse_isButtonPressed(sfMouseLeft))
+		sfMouse_isButtonPressed(sfMouseLeft)) {
+			player->o_sprt = 0;
 			menu_loop(window);
+		}
 	}
 	return (map);
 }
@@ -146,6 +148,7 @@ void game_loop(sfRenderWindow *window)
 	player->r_sprt.height = 183;
 	player->v_sprt.x = 960;
 	player->v_sprt.y = 540;
+	player->o_sprt = 0;
 	sfSprite_setTextureRect(map->s_sprt, map->r_sprt);
 	sfSprite_setTextureRect(player->s_sprt, player->r_sprt);
 	sfSprite_setPosition(player->s_sprt, player->v_sprt);

@@ -1,49 +1,7 @@
-##
-## EPITECH PROJECT, 2017
-## Makefile
-## File description:
-##
-##
-
-SRC	=	src/main.c			\
-		src/utilities.c			\
-		src/character_gen.c		\
-		src/stock_var.c			\
-		src/sprites.c			\
-		src/struct_obj.c		\
-		src/guards_gen.c
-
-OBJ	=	$(SRC:.c=.o)
-
-NAME	=	my_rpg
-
-CFLAGS	=	-g -W -Wall -Wextra -Iinclude
-
-LDFLAGS	=	-g -L ./lib/my -l myprintf -L ./lib/graph -lgraph -lc_graph_prog
-
-#-g -L ./lib/my -l myprintf -L ./lib/graph -lgraph -lc_graph_prog
-#-g -L ./lib/my -l myprintf -L lib/graph -l graph -Wl,-R /lib/ -lcsfml-audio -lcsfml-graphics -lcsfml-network -lcsfml-system -lcsfml-window
-
-
-all:	libmake $(NAME)
-
-$(NAME): $(OBJ)
-	gcc -o $(NAME) $(OBJ) $(LDFLAGS)
-
-libmake:
-	make -C ./lib/my
-	make -C ./lib/graph
-
-clean:
-	make clean -C ./lib/my/
-	make clean -C ./lib/graph
-	rm -f $(OBJ)
-
-fclean:	clean
-	make fclean -C ./lib/my/
-	make fclean -C ./lib/graph
-	rm -f $(NAME)
-
-re:	fclean all
-
-.PHONY: all clean fclean re libmake
+total 64
+drwxrwxr-x. 2 ngeorge-peillex ngeorge-peillex  4096 24 avril 15:27 include
+drwxrwxr-x. 4 ngeorge-peillex ngeorge-peillex  4096 18 avril 11:26 lib
+-rw-rw-r--. 1 ngeorge-peillex ngeorge-peillex     0 25 avril 11:16 Makefile
+-rwxrwxr-x. 1 ngeorge-peillex ngeorge-peillex 48456 24 avril 15:58 my_rpg
+drwxrwxr-x. 5 ngeorge-peillex ngeorge-peillex  4096 24 avril 13:54 rsrc
+drwxrwxr-x. 2 ngeorge-peillex ngeorge-peillex  4096 24 avril 15:58 src
