@@ -33,7 +33,7 @@ typedef struct guards {
 
 #include "quests.h"
 
-void game_loop(sfRenderWindow *window);
+void game_loop();
 int check_env(char **envp);
 char **get_paths(void);
 int my_tablen(char **tab);

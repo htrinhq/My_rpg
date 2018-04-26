@@ -69,32 +69,35 @@ sprite_t *move_player(sprite_t *map, sprite_t *player)
 	return (map);
 }
 
-sprite_t *game_event(sfRenderWindow *window, sfEvent event, sprite_t *map, sprite_t *player)
+sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite)
 {
 	sfVector2i mouse = sfMouse_getPosition((sfWindow *)window);
+	
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
-		if (event.type == sfEvtKeyPressed && sfKeyboard_isKeyPressed(sfKeyI) && player->o_sprt == 0)
-			player->o_sprt = 1;
-		else if (event.type == sfEvtKeyPressed && sfKeyboard_isKeyPressed(sfKeyI) && player->o_sprt == 1)
-			player->o_sprt = 0;
+		if (event.type == sfEvtKeyPressed &&
+		    sfKeyboard_isKeyPressed(sfKeyI) && sprite[1]->o_sprt == 0)
+			sprite[1]->o_sprt = 1;
+		else if (event.type == sfEvtKeyPressed &&
+			 sfKeyboard_isKeyPressed(sfKeyI) && sprite[1]->o_sprt == 1)
+			sprite[1]->o_sprt = 0;
 		if (event.type == sfEvtKeyPressed)
-			map = move_player(map, player);
-		if (player->o_sprt == 1 && (mouse.x >= 1332 &&
-		mouse.x <= (1332 + 250)) &&
-		(mouse.y >= 747 && mouse.y <= (747 + 95)) &&
-		sfMouse_isButtonPressed(sfMouseLeft))
+			sprite[0] = move_player(sprite[0], sprite[1]);
+		if (sprite[1]->o_sprt == 1 && (mouse.x >= 1332 &&
+					       mouse.x <= (1332 + 250)) &&
+		    (mouse.y >= 747 && mouse.y <= (747 + 95)) &&
+		    sfMouse_isButtonPressed(sfMouseLeft))
 			sfRenderWindow_destroy(window);
-		if (player->o_sprt == 1 && (mouse.x >= 1605 &&
-		mouse.x <= (1605 + 250)) &&
-		(mouse.y >= 747 && mouse.y <= (747 + 95)) &&
-		sfMouse_isButtonPressed(sfMouseLeft)) {
-			player->o_sprt = 0;
+		if (sprite[1]->o_sprt == 1 && (mouse.x >= 1605 &&
+					       mouse.x <= (1605 + 250)) &&
+		    (mouse.y >= 747 && mouse.y <= (747 + 95)) &&
+		    sfMouse_isButtonPressed(sfMouseLeft)) {
+			sprite[1]->o_sprt = 0;
 			menu_loop(window);
 		}
 	}
-	return (map);
+	return (sprite);
 }
 
 text_t **menu_event(sfRenderWindow *window, sfEvent event, text_t **text)
@@ -115,9 +118,43 @@ text_t **menu_event(sfRenderWindow *window, sfEvent event, text_t **text)
 		if (event.type == sfEvtKeyPressed &&
 		sfKeyboard_isKeyPressed(sfKeyReturn) && text[0]->bo == 0 &&
 		text[2]->pos.y == 375 + 77)
-			game_loop(window);
+			text[0]->bo = 1;
 	}
 	return (text);
+}
+
+sprite_t **initialize_sprite(sprite_t **sprite)
+{
+	/*
+	  0 = map
+	  1 = player
+	  2 = inventory
+	 */
+	sprite[0] = malloc(sizeof(sprite_t) * 5);
+	sprite[1] = malloc(sizeof(sprite_t) * 5);
+	sprite[2] = malloc(sizeof(sprite_t) * 5);
+	sfVector2f scale = {0.5, 0.5};
+	sfEvent event;
+
+	sprite[2] = create_sprite(sprite[2], "rsrc/pictures/inventory.png");
+	sprite[1] = create_sprite(sprite[1], "rsrc/pictures/p1.png");
+	sprite[0] = create_sprite(sprite[0], "rsrc/pictures/map.png");
+	sprite[0]->r_sprt.top = 1480;
+	sprite[0]->r_sprt.left = 1260;
+	sprite[0]->r_sprt.width = 1920;
+	sprite[0]->r_sprt.height = 1080;
+	sprite[1]->r_sprt.top = 10;
+	sprite[1]->r_sprt.left = 70;
+	sprite[1]->r_sprt.width = 136;
+	sprite[1]->r_sprt.height = 183;
+	sprite[1]->v_sprt.x = 960;
+	sprite[1]->v_sprt.y = 540;
+	sprite[1]->o_sprt = 0;
+	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
+	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
+	sfSprite_setPosition(sprite[1]->s_sprt, sprite[1]->v_sprt);
+	sfSprite_setScale(sprite[1]->s_sprt, scale);
+	return (sprite);
 }
 
 void disp_text(sfRenderWindow *window, text_t **text)
@@ -127,40 +164,16 @@ void disp_text(sfRenderWindow *window, text_t **text)
 	sfRenderWindow_drawText(window, text[2]->text, NULL);
 }
 
-void game_loop(sfRenderWindow *window)
+void game_loop(sfRenderWindow *window, sprite_t **sprite)
 {
-	sprite_t *inventory = malloc(sizeof(sprite_t));
-	sprite_t *player = malloc(sizeof(sprite_t));
-	sprite_t *map = malloc(sizeof(sprite_t));
-	sfVector2f scale = {0.5, 0.5};
 	sfEvent event;
 
-	inventory = create_sprite(inventory, "rsrc/pictures/inventory.png");
-	player = create_sprite(player, "rsrc/pictures/p1.png");
-	map = create_sprite(map, "rsrc/pictures/map.png");
-	map->r_sprt.top = 1480;
-	map->r_sprt.left = 1260;
-	map->r_sprt.width = 1920;
-	map->r_sprt.height = 1080;
-	player->r_sprt.top = 10;
-	player->r_sprt.left = 70;
-	player->r_sprt.width = 136;
-	player->r_sprt.height = 183;
-	player->v_sprt.x = 960;
-	player->v_sprt.y = 540;
-	player->o_sprt = 0;
-	sfSprite_setTextureRect(map->s_sprt, map->r_sprt);
-	sfSprite_setTextureRect(player->s_sprt, player->r_sprt);
-	sfSprite_setPosition(player->s_sprt, player->v_sprt);
-	sfSprite_setScale(player->s_sprt, scale);
-	while (sfRenderWindow_isOpen(window)) {
-		map = game_event(window, event, map, player);
-		sfRenderWindow_drawSprite(window, map->s_sprt, NULL);
-		sfRenderWindow_drawSprite(window, player->s_sprt, NULL);
-		if (player->o_sprt == 1)
-			sfRenderWindow_drawSprite(window, inventory->s_sprt, NULL);
-		sfRenderWindow_display(window);
-	}
+	game_event(window, event, sprite);
+	sfRenderWindow_drawSprite(window, sprite[0]->s_sprt, NULL);
+	sfRenderWindow_drawSprite(window, sprite[1]->s_sprt, NULL);
+	if (sprite[1]->o_sprt == 1)
+		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
+	sfRenderWindow_display(window);
 }
 
 void menu_loop(sfRenderWindow *window)
@@ -168,15 +181,22 @@ void menu_loop(sfRenderWindow *window)
 	text_t **text = malloc(sizeof(text_t *));
 	sprite_t *bg = malloc(sizeof(sprite_t));
 	sfEvent event;
-
+	sprite_t **sprite = malloc(sizeof(sprite_t *) * 4);
+	
+	sprite = initialize_sprite(sprite);
+	sprite = game_event(window, event, sprite);
 	text = initialize_text(text);
 	text = set_text_value(text);
 	bg = create_sprite(bg, "rsrc/pictures/bg.png");
 	while (sfRenderWindow_isOpen(window)) {
-		text = menu_event(window, event, text);
-		sfRenderWindow_drawSprite(window, bg->s_sprt, NULL);
-		disp_text(window, text);
-		sfRenderWindow_display(window);
+		if (text[0]->bo == 0) {
+			text = menu_event(window, event, text);
+			sfRenderWindow_drawSprite(window, bg->s_sprt, NULL);
+			disp_text(window, text);
+			sfRenderWindow_display(window);
+		} else {
+			game_loop(window, sprite);
+		}
 	}
 }
 
