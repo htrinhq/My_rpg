@@ -70,18 +70,18 @@ sprite_t *move_player(sprite_t *map, sprite_t *player)
 }
 
 void game_event2(sfRenderWindow *window, sfEvent event,
-		 sprite_t **sprite, sfVector2i mouse)
+		 sprite_t **sprite)
 {
 	if (event.type == sfEvtKeyPressed)
 		sprite[0] = move_player(sprite[0], sprite[1]);
-	if (sprite[1]->o_sprt == 1 && (mouse.x >= 1332 &&
-				       mouse.x <= (1332 + 250)) &&
-	    (mouse.y >= 747 && mouse.y <= (747 + 95)) &&
+	if (sprite[1]->o_sprt == 1 && (event.mouseButton.x >= 1332 &&
+				       event.mouseButton.x <= (1332 + 250)) &&
+	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
 	    sfMouse_isButtonPressed(sfMouseLeft))
 		sfRenderWindow_destroy(window);
-	if (sprite[1]->o_sprt == 1 && (mouse.x >= 1605 &&
-				       mouse.x <= (1605 + 250)) &&
-	    (mouse.y >= 747 && mouse.y <= (747 + 95)) &&
+	if (sprite[1]->o_sprt == 1 && (event.mouseButton.x >= 1605 &&
+				       event.mouseButton.x <= (1605 + 250)) &&
+	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
 	    sfMouse_isButtonPressed(sfMouseLeft)) {
 		sprite[1]->o_sprt = 0;
 		menu_loop(window);
@@ -90,8 +90,6 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 
 sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite)
 {
-	sfVector2i mouse = sfMouse_getPosition((sfWindow *)window);
-
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
@@ -102,7 +100,7 @@ sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite)
 			 sfKeyboard_isKeyPressed(sfKeyI) &&
 			 sprite[1]->o_sprt == 1)
 				sprite[1]->o_sprt = 0;
-		game_event2(window, event, sprite, mouse);
+		game_event2(window, event, sprite);
 	}
 	return (sprite);
 }
@@ -186,7 +184,7 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite)
 
 void menu_loop(sfRenderWindow *window)
 {
-	text_t **text = malloc(sizeof(text_t *));
+	text_t **text = malloc(sizeof(text_t *) * 5);
 	sprite_t *bg = malloc(sizeof(sprite_t));
 	sfEvent event;
 	sprite_t **sprite = malloc(sizeof(sprite_t *) * 4);
@@ -261,7 +259,7 @@ int main(int argc, char **argv, char**envp)
 	obj = fill_obj_id(obj);
 	window = renderwindow_create(window);
 	sfRenderWindow_setFramerateLimit(window, 60);
+	sfMusic_destroy(music);
 	menu_loop(window);
-	sfRenderWindow_destroy(window);
 	return (0);
 }
