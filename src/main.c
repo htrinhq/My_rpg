@@ -69,10 +69,29 @@ sprite_t *move_player(sprite_t *map, sprite_t *player)
 	return (map);
 }
 
+void game_event2(sfRenderWindow *window, sfEvent event,
+		 sprite_t **sprite, sfVector2i mouse)
+{
+	if (event.type == sfEvtKeyPressed)
+		sprite[0] = move_player(sprite[0], sprite[1]);
+	if (sprite[1]->o_sprt == 1 && (mouse.x >= 1332 &&
+				       mouse.x <= (1332 + 250)) &&
+	    (mouse.y >= 747 && mouse.y <= (747 + 95)) &&
+	    sfMouse_isButtonPressed(sfMouseLeft))
+		sfRenderWindow_destroy(window);
+	if (sprite[1]->o_sprt == 1 && (mouse.x >= 1605 &&
+				       mouse.x <= (1605 + 250)) &&
+	    (mouse.y >= 747 && mouse.y <= (747 + 95)) &&
+	    sfMouse_isButtonPressed(sfMouseLeft)) {
+		sprite[1]->o_sprt = 0;
+		menu_loop(window);
+	}
+}
+
 sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite)
 {
 	sfVector2i mouse = sfMouse_getPosition((sfWindow *)window);
-	
+
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
@@ -80,22 +99,10 @@ sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite)
 		    sfKeyboard_isKeyPressed(sfKeyI) && sprite[1]->o_sprt == 0)
 			sprite[1]->o_sprt = 1;
 		else if (event.type == sfEvtKeyPressed &&
-			 sfKeyboard_isKeyPressed(sfKeyI) && sprite[1]->o_sprt == 1)
-			sprite[1]->o_sprt = 0;
-		if (event.type == sfEvtKeyPressed)
-			sprite[0] = move_player(sprite[0], sprite[1]);
-		if (sprite[1]->o_sprt == 1 && (mouse.x >= 1332 &&
-					       mouse.x <= (1332 + 250)) &&
-		    (mouse.y >= 747 && mouse.y <= (747 + 95)) &&
-		    sfMouse_isButtonPressed(sfMouseLeft))
-			sfRenderWindow_destroy(window);
-		if (sprite[1]->o_sprt == 1 && (mouse.x >= 1605 &&
-					       mouse.x <= (1605 + 250)) &&
-		    (mouse.y >= 747 && mouse.y <= (747 + 95)) &&
-		    sfMouse_isButtonPressed(sfMouseLeft)) {
-			sprite[1]->o_sprt = 0;
-			menu_loop(window);
-		}
+			 sfKeyboard_isKeyPressed(sfKeyI) &&
+			 sprite[1]->o_sprt == 1)
+				sprite[1]->o_sprt = 0;
+		game_event2(window, event, sprite, mouse);
 	}
 	return (sprite);
 }
@@ -123,26 +130,10 @@ text_t **menu_event(sfRenderWindow *window, sfEvent event, text_t **text)
 	return (text);
 }
 
-sprite_t **initialize_sprite(sprite_t **sprite)
+void initialize_sprite2(sprite_t **sprite)
 {
-	/*
-	  0 = map
-	  1 = player
-	  2 = inventory
-	 */
-	sprite[0] = malloc(sizeof(sprite_t) * 5);
-	sprite[1] = malloc(sizeof(sprite_t) * 5);
-	sprite[2] = malloc(sizeof(sprite_t) * 5);
 	sfVector2f scale = {0.5, 0.5};
-	sfEvent event;
 
-	sprite[2] = create_sprite(sprite[2], "rsrc/pictures/inventory.png");
-	sprite[1] = create_sprite(sprite[1], "rsrc/pictures/p1.png");
-	sprite[0] = create_sprite(sprite[0], "rsrc/pictures/map.png");
-	sprite[0]->r_sprt.top = 1480;
-	sprite[0]->r_sprt.left = 1260;
-	sprite[0]->r_sprt.width = 1920;
-	sprite[0]->r_sprt.height = 1080;
 	sprite[1]->r_sprt.top = 10;
 	sprite[1]->r_sprt.left = 70;
 	sprite[1]->r_sprt.width = 136;
@@ -154,6 +145,23 @@ sprite_t **initialize_sprite(sprite_t **sprite)
 	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
 	sfSprite_setPosition(sprite[1]->s_sprt, sprite[1]->v_sprt);
 	sfSprite_setScale(sprite[1]->s_sprt, scale);
+}
+
+sprite_t **initialize_sprite(sprite_t **sprite)
+{
+	sfEvent event;
+
+	sprite[0] = malloc(sizeof(sprite_t) * 5);
+	sprite[1] = malloc(sizeof(sprite_t) * 5);
+	sprite[2] = malloc(sizeof(sprite_t) * 5);
+	sprite[2] = create_sprite(sprite[2], "rsrc/pictures/inventory.png");
+	sprite[1] = create_sprite(sprite[1], "rsrc/pictures/p1.png");
+	sprite[0] = create_sprite(sprite[0], "rsrc/pictures/map.png");
+	sprite[0]->r_sprt.top = 1480;
+	sprite[0]->r_sprt.left = 1260;
+	sprite[0]->r_sprt.width = 1920;
+	sprite[0]->r_sprt.height = 1080;
+	initialize_sprite2(sprite);
 	return (sprite);
 }
 
@@ -182,7 +190,7 @@ void menu_loop(sfRenderWindow *window)
 	sprite_t *bg = malloc(sizeof(sprite_t));
 	sfEvent event;
 	sprite_t **sprite = malloc(sizeof(sprite_t *) * 4);
-	
+
 	sprite = initialize_sprite(sprite);
 	sprite = game_event(window, event, sprite);
 	text = initialize_text(text);
