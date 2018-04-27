@@ -40,6 +40,7 @@ int my_tablen(char **tab);
 void display_tab(char **tab);
 int my_dirlen(DIR *directory);
 int check_name(char *name);
+int rand_gen(int min, int max);
 sprite_t **get_sprite(int bo, sprite_t **sprite);
 sprite_t **create_sprite_tab(void);
 npcst_t stat_gen(void);
@@ -51,5 +52,11 @@ void menu_loop();
 text_t **set_text_value();
 text_t **initialize_text();
 int my_strcmp(char const *s1, char const *s2);
+int *shift_inventory(int *inventory);
+int *spawn_objects(void);
+int spawn_obj_id(void);
+int *player_take_obj(int *inventory, int obj_id);
+void display_obj(int *inventory, idobj_t **obj);
+guard_t **get_guards(int bo, guard_t **guards);
 
 #endif

@@ -5,14 +5,15 @@
 ## Makefile
 ##
 
-SRC	=	src/main.c			\
+SRC	=	src/main.c		\
 		src/stock_var.c		\
 		src/utilities.c		\
-		src/struct_obj.c		\
+		src/struct_obj.c	\
 		src/sprites.c		\
-		src/guards_gen.c		\
-		src/character_gen.c		\
-		src/chest.c
+		src/guards_gen.c	\
+		src/character_gen.c	\
+		src/chest.c		\
+		src/inventory.c
 
 OBJ	=	$(SRC:.c=.o)
 
