@@ -8,8 +8,6 @@
 #ifndef QUEST_H_
 #define QUEST_H_
 
-#include "rpg.h"
-
 typedef struct quest {
 	int bo;
 	int main_q;

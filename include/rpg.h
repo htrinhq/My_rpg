@@ -5,13 +5,14 @@
 ** rpg
 */
 
-#ifndef RPG_H_
-#define RPG_H_
-
 #include <sys/types.h>
 #include <dirent.h>
+#include "get_next_line.h"
 #include "my_printf.h"
 #include "graph.h"
+
+#ifndef RPG_H_
+#define RPG_H_
 
 typedef struct id {
 	char *path;

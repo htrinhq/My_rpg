@@ -13,13 +13,14 @@ SRC	=	src/main.c		\
 		src/guards_gen.c	\
 		src/character_gen.c	\
 		src/chest.c		\
-		src/inventory.c
+		src/inventory.c		\
+		src/get_next_line.c
 
 OBJ	=	$(SRC:.c=.o)
 
 NAME	=	my_rpg
 
-CFLAGS	=	-W -Wall -Wextra -I include -g
+CFLAGS	=	-W -Wall -Wextra -I include -g -fdiagnostics-color=always
 
 LDFLAGS	=	-l c_graph_prog -L ./lib/my/ -lmyprintf -L ./lib/graph/ -lgraph
 
