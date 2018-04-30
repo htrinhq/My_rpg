@@ -18,6 +18,10 @@ typedef struct id {
 	int id;
 } idobj_t;
 
+typedef struct chest {
+	int *inside;
+	int name;
+} chest_t;
 
 typedef struct stat_npc {
 	int level;
@@ -47,6 +51,7 @@ npcst_t stat_gen(void);
 sprite_t *find_sprite(char *name);
 char *my_revstr(char *str);
 char *my_int_to_str(int nb);
+chest_t **create_chests(chest_t **chests);
 idobj_t **fill_obj_id(idobj_t **obj);
 void menu_loop();
 text_t **set_text_value();
