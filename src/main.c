@@ -264,7 +264,9 @@ int main(int argc, char **argv, char**envp)
 	sfRenderWindow *window = NULL;
 	sfMusic *music = sfMusic_createFromFile("rsrc/sounds/main.ogg");
 	idobj_t **obj = malloc(sizeof(id_t *) * 16);
+	chest_t **chests = NULL;
 
+	chests = create_chests(chests);
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
 		return (84);
 	sfMusic_play(music);
