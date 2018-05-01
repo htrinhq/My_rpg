@@ -47,39 +47,42 @@ text_t **move_cursos_up(text_t **text)
 	return (text);
 }
 
-void player_animation(sprite_t *player, sprite_t *map)
+sprite_t **player_animation(sprite_t **sprite, int x, int y)
 {
 	if (game_clock() > 0.46)
-		player->r_sprt.top += 320;
-	if (player->r_sprt.top == 970)
-		player->r_sprt.top = 10;
-	sfSprite_setTextureRect(player->s_sprt, player->r_sprt);
-	sfSprite_setTextureRect(map->s_sprt, map->r_sprt);
+		sprite[1]->r_sprt.top += 320;
+	if (sprite[1]->r_sprt.top == 970)
+		sprite[1]->r_sprt.top = 10;
+	sprite[4]->v_sprt.x = y / 2 - 6;
+	sprite[4]->v_sprt.y = x / 2 - 15;
+	sfSprite_setPosition(sprite[4]->s_sprt, sprite[4]->v_sprt);
+	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
+	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
+	return (sprite);
 }
 
-sprite_t *move_player(sprite_t *map, sprite_t *player, char **map_txt)
+sprite_t **move_player(sprite_t **sprite, char **map_txt)
 {
 	static int y = 225;
 	static int x = 213;
 
 	if (sfKeyboard_isKeyPressed(sfKeyZ) && x > 0 && map_txt[x - 1][y] == ' ') {
-		map->r_sprt.top -= 10;
+		sprite[0]->r_sprt.top -= 10;
 		x--;
 	}
 	if (sfKeyboard_isKeyPressed(sfKeyS) && x < 3050 && map_txt[x + 1][y] == ' ') {
-		map->r_sprt.top += 10;
+		sprite[0]->r_sprt.top += 10;
 		x++;
 	}
 	if (sfKeyboard_isKeyPressed(sfKeyQ) && y > 0 && map_txt[x][y - 1] == ' ') {
-		map->r_sprt.left -= 10;
+		sprite[0]->r_sprt.left -= 10;
 		y--;
 	}
 	if (sfKeyboard_isKeyPressed(sfKeyD) && y < 4600 && map_txt[x][y + 1] == ' ') {
-		map->r_sprt.left += 10;
+		sprite[0]->r_sprt.left += 10;
 		y++;
 	}
-	player_animation(player, map);
-	return (map);
+	return (player_animation(sprite, x, y));
 }
 
 void game_event2(sfRenderWindow *window, sfEvent event,
@@ -101,7 +104,7 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 		return;
 	if (sfKeyboard_isKeyPressed(sfKeyI))
 		sprite[2]->o_sprt = (sprite[2]->o_sprt == 0) ? 1 : 0;
-	sprite[0] = move_player(sprite[0], sprite[1], map_txt);
+	sprite = move_player(sprite, map_txt);
 }
 
 sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite, char **map_txt)
@@ -144,6 +147,9 @@ void initialize_sprite2(sprite_t **sprite)
 	sprite[1]->r_sprt.height = 183;
 	sprite[1]->v_sprt.x = 960;
 	sprite[1]->v_sprt.y = 540;
+	sprite[4]->v_sprt.x = 225 / 2 - 6;
+	sprite[4]->v_sprt.y = 213 / 2 - 15;
+	sfSprite_setPosition(sprite[4]->s_sprt, sprite[4]->v_sprt);
 	sprite[1]->o_sprt = 0;
 	sprite[2]->o_sprt = 0;
 	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
@@ -159,6 +165,10 @@ sprite_t **initialize_sprite(sprite_t **sprite)
 	sprite[0] = malloc(sizeof(sprite_t) * 5);
 	sprite[1] = malloc(sizeof(sprite_t) * 5);
 	sprite[2] = malloc(sizeof(sprite_t) * 5);
+	sprite[3] = malloc(sizeof(sprite_t) * 5);
+	sprite[4] = malloc(sizeof(sprite_t) * 5);
+	sprite[4] = create_sprite(sprite[4], "rsrc/pictures/minimap_perso.png");
+	sprite[3] = create_sprite(sprite[3], "rsrc/pictures/minimap.png");
 	sprite[2] = create_sprite(sprite[2], "rsrc/pictures/inventory.png");
 	sprite[1] = create_sprite(sprite[1], "rsrc/pictures/p1.png");
 	sprite[0] = create_sprite(sprite[0], "rsrc/pictures/map.png");
@@ -184,6 +194,8 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, char **map_txt)
 	game_event(window, event, sprite, map_txt);
 	sfRenderWindow_drawSprite(window, sprite[0]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[1]->s_sprt, NULL);
+	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
+	sfRenderWindow_drawSprite(window, sprite[4]->s_sprt, NULL);
 	if (sprite[2]->o_sprt == 1)
 		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
 	sfRenderWindow_display(window);
