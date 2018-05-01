@@ -7,6 +7,14 @@
 
 #include "rpg.h"
 
+float game_clock(void)
+{
+	sfClock *clock = sfClock_create();
+	float a = sfTime_asMicroseconds(sfClock_getElapsedTime(clock));
+
+	return (a);
+}
+
 sfRenderWindow *renderwindow_create(sfRenderWindow *wd)
 {
 	sfVideoMode v_mode;
@@ -41,7 +49,8 @@ text_t **move_cursos_up(text_t **text)
 
 void player_animation(sprite_t *player, sprite_t *map)
 {
-	player->r_sprt.top += 320;
+	if (game_clock() > 0.46)
+		player->r_sprt.top += 320;
 	if (player->r_sprt.top == 970)
 		player->r_sprt.top = 10;
 	sfSprite_setTextureRect(player->s_sprt, player->r_sprt);
@@ -57,7 +66,7 @@ sprite_t *move_player(sprite_t *map, sprite_t *player, char **map_txt)
 		map->r_sprt.top -= 10;
 		x--;
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyS) && x < 305 && map_txt[x + 1][y] == ' ') {
+	if (sfKeyboard_isKeyPressed(sfKeyS) && x < 3050 && map_txt[x + 1][y] == ' ') {
 		map->r_sprt.top += 10;
 		x++;
 	}
@@ -65,19 +74,17 @@ sprite_t *move_player(sprite_t *map, sprite_t *player, char **map_txt)
 		map->r_sprt.left -= 10;
 		y--;
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyD) && y < 460 && map_txt[x][y + 1] == ' ') {
+	if (sfKeyboard_isKeyPressed(sfKeyD) && y < 4600 && map_txt[x][y + 1] == ' ') {
 		map->r_sprt.left += 10;
 		y++;
 	}
-		player_animation(player, map);
+	player_animation(player, map);
 	return (map);
 }
 
 void game_event2(sfRenderWindow *window, sfEvent event,
 		 sprite_t **sprite, char **map_txt)
 {
-	if (event.type == sfEvtKeyPressed)
-		sprite[0] = move_player(sprite[0], sprite[1], map_txt);
 	if (sprite[1]->o_sprt == 1 && (event.mouseButton.x >= 1332 &&
 				       event.mouseButton.x <= (1332 + 250)) &&
 	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
@@ -90,6 +97,11 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 		sprite[1]->o_sprt = 0;
 		menu_loop(window);
 	}
+	if (event.type != sfEvtKeyPressed)
+		return;
+	if (sfKeyboard_isKeyPressed(sfKeyI))
+		sprite[2]->o_sprt = (sprite[2]->o_sprt == 0) ? 1 : 0;
+	sprite[0] = move_player(sprite[0], sprite[1], map_txt);
 }
 
 sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite, char **map_txt)
@@ -97,12 +109,8 @@ sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite, 
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
-		if (sfKeyboard_isKeyPressed(sfKeyI) && sprite[1]->o_sprt == 0)
-			sprite[1]->o_sprt = 1;
-		else if (sfKeyboard_isKeyPressed(sfKeyI) &&
-			 sprite[1]->o_sprt == 1)
-				sprite[1]->o_sprt = 0;
-		game_event2(window, event, sprite, map_txt);
+		else
+			game_event2(window, event, sprite, map_txt);
 	}
 	return (sprite);
 }
@@ -137,6 +145,7 @@ void initialize_sprite2(sprite_t **sprite)
 	sprite[1]->v_sprt.x = 960;
 	sprite[1]->v_sprt.y = 540;
 	sprite[1]->o_sprt = 0;
+	sprite[2]->o_sprt = 0;
 	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
 	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
 	sfSprite_setPosition(sprite[1]->s_sprt, sprite[1]->v_sprt);
@@ -175,7 +184,7 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, char **map_txt)
 	game_event(window, event, sprite, map_txt);
 	sfRenderWindow_drawSprite(window, sprite[0]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[1]->s_sprt, NULL);
-	if (sprite[1]->o_sprt == 1)
+	if (sprite[2]->o_sprt == 1)
 		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
 	sfRenderWindow_display(window);
 }
@@ -204,7 +213,6 @@ void menu_loop(sfRenderWindow *window)
 	char **map_txt = get_map_txt();
 
 	sprite = initialize_sprite(sprite);
-	sprite = game_event(window, event, sprite, map_txt);
 	text = initialize_text(text);
 	text = set_text_value(text);
 	bg = create_sprite(bg, "rsrc/pictures/bg.png");
@@ -243,7 +251,7 @@ text_t **set_text_value(text_t **text)
 {
 	sfText_setString(text[0]->text, "The Great Escape:");
 	sfText_setString(text[1]->text, "Continue\nNew Game\nOptions\nQuit");
-	sfText_setString(text[2]->text, ">                          <");
+	sfText_setString(text[2]->text, ">\t\t\t\t\t\t<");
 	sfText_setFont(text[0]->text, text[0]->font);
 	sfText_setFont(text[1]->text, text[0]->font);
 	sfText_setFont(text[2]->text, text[0]->font);

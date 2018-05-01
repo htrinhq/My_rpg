@@ -64,5 +64,6 @@ int spawn_obj_id(void);
 int *player_take_obj(int *inventory, int obj_id);
 void display_obj(int *inventory, idobj_t **obj);
 guard_t **get_guards(int bo, guard_t **guards);
+float game_clock(void);
 
 #endif
