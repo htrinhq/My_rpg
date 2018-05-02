@@ -135,6 +135,13 @@ text_t **menu_event(sfRenderWindow *window, sfEvent event, text_t **text, sprite
 		if (sfKeyboard_isKeyPressed(sfKeyReturn) && sprite[5]->o_sprt == 0 &&
 		    text[2]->pos.y == 375 + 77)
 			sprite[5]->o_sprt = 1;
+		if (sfKeyboard_isKeyPressed(sfKeyS))
+			sprite[5]->o_sprt = 5;
+		if (event.mouseButton.x >= 1480 &&
+		    event.mouseButton.x <= 1680 &&
+		    event.mouseButton.y >= 690 &&
+		    event.mouseButton.y <= 890)
+			sprite[5]->o_sprt = 5;
 	}
 	return (text);
 }
@@ -171,6 +178,8 @@ sprite_t **initialize_sprite(sprite_t **sprite)
 	sprite[3] = malloc(sizeof(sprite_t) * 5);
 	sprite[4] = malloc(sizeof(sprite_t) * 5);
 	sprite[5] = malloc(sizeof(sprite_t) * 5);
+	sprite[6] = malloc(sizeof(sprite_t) * 5);
+	sprite[6] = create_sprite(sprite[6], "rsrc/pictures/dlc.png");
 	sprite[5] = create_sprite(sprite[5], "rsrc/pictures/pause.png");
 	sprite[4] = create_sprite(sprite[4], "rsrc/pictures/minimap_perso.png");
 	sprite[3] = create_sprite(sprite[3], "rsrc/pictures/minimap.png");
@@ -192,6 +201,28 @@ void disp_text(sfRenderWindow *window, text_t **text)
 	sfRenderWindow_drawText(window, text[2]->text, NULL);
 }
 
+void dlc_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite)
+{
+	while (sfRenderWindow_pollEvent(window, &event)) {
+		if (event.type == sfEvtClosed)
+			sfRenderWindow_close(window);
+		if (event.type != sfEvtKeyPressed)
+			return;
+		if (sfKeyboard_isKeyPressed(sfKeyQ))
+			sfRenderWindow_close(window);
+		if (sfKeyboard_isKeyPressed(sfKeyEscape))
+			sprite[5]->o_sprt = 0;
+	}
+}
+void dlc_loop(sfRenderWindow *window, sprite_t **sprite)
+{
+	sfEvent event;
+
+	dlc_event(window, event, sprite);
+	sfRenderWindow_drawSprite(window, sprite[6]->s_sprt, NULL);
+	sfRenderWindow_display(window);
+}
+
 void pause_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite)
 {
 	while (sfRenderWindow_pollEvent(window, &event)) {
@@ -202,8 +233,8 @@ void pause_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite)
 		if (sfKeyboard_isKeyPressed(sfKeyQ))
 			sfRenderWindow_close(window);
 		if (sfKeyboard_isKeyPressed(sfKeyP) ||
-			sfKeyboard_isKeyPressed(sfKeyEscape) ||
-			sfKeyboard_isKeyPressed(sfKeyR))
+		    sfKeyboard_isKeyPressed(sfKeyEscape) ||
+		    sfKeyboard_isKeyPressed(sfKeyR))
 			sprite[5]->o_sprt = 1;
 	}
 }
@@ -251,7 +282,7 @@ void menu_loop(sfRenderWindow *window)
 	text_t **text = malloc(sizeof(text_t *) * 5);
 	sprite_t *bg = malloc(sizeof(sprite_t));
 	sfEvent event;
-	sprite_t **sprite = malloc(sizeof(sprite_t *) * 6);
+	sprite_t **sprite = malloc(sizeof(sprite_t *) * 8);
 	char **map_txt = get_map_txt();
 
 	sprite = initialize_sprite(sprite);
@@ -266,6 +297,8 @@ void menu_loop(sfRenderWindow *window)
 			sfRenderWindow_display(window);
 		} else if (sprite[5]->o_sprt == 3) {
 			pause_loop(window, sprite);
+		} else if (sprite[5]->o_sprt == 5) {
+			dlc_loop(window, sprite);
 		} else {
 			game_loop(window, sprite, map_txt);
 		}
