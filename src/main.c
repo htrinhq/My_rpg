@@ -88,12 +88,12 @@ sprite_t **move_player(sprite_t **sprite, char **map_txt)
 void game_event2(sfRenderWindow *window, sfEvent event,
 		 sprite_t **sprite, char **map_txt)
 {
-	if (sprite[1]->o_sprt == 1 && (event.mouseButton.x >= 1332 &&
+	if (sprite[5]->o_sprt == 3 && (event.mouseButton.x >= 1332 &&
 				       event.mouseButton.x <= (1332 + 250)) &&
 	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
 	    sfMouse_isButtonPressed(sfMouseLeft))
 		sfRenderWindow_destroy(window);
-	if (sprite[1]->o_sprt == 1 && (event.mouseButton.x >= 1605 &&
+	if (sprite[5]->o_sprt == 3 && (event.mouseButton.x >= 1605 &&
 				       event.mouseButton.x <= (1605 + 250)) &&
 	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
 	    sfMouse_isButtonPressed(sfMouseLeft)) {
@@ -149,11 +149,16 @@ text_t **menu_event(sfRenderWindow *window, sfEvent event, text_t **text, sprite
 void initialize_sprite2(sprite_t **sprite)
 {
 	sfVector2f scale = {0.5, 0.5};
+	sfVector2f scale2 = {2, 2};
 
 	sprite[1]->r_sprt.top = 10;
 	sprite[1]->r_sprt.left = 70;
 	sprite[1]->r_sprt.width = 136;
 	sprite[1]->r_sprt.height = 183;
+	sprite[7]->r_sprt.width = 100;
+	sprite[7]->r_sprt.height = 20;
+	sprite[7]->v_sprt.x = 40;
+	sprite[7]->v_sprt.y = 960;
 	sprite[1]->v_sprt.x = 960;
 	sprite[1]->v_sprt.y = 540;
 	sprite[4]->v_sprt.x = 225 / 2 - 6;
@@ -164,8 +169,11 @@ void initialize_sprite2(sprite_t **sprite)
 	sprite[5]->o_sprt = 0;
 	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
 	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
+	sfSprite_setTextureRect(sprite[7]->s_sprt, sprite[7]->r_sprt);
 	sfSprite_setPosition(sprite[1]->s_sprt, sprite[1]->v_sprt);
+	sfSprite_setPosition(sprite[7]->s_sprt, sprite[7]->v_sprt);
 	sfSprite_setScale(sprite[1]->s_sprt, scale);
+	sfSprite_setScale(sprite[7]->s_sprt, scale2);
 }
 
 sprite_t **initialize_sprite(sprite_t **sprite)
@@ -179,6 +187,8 @@ sprite_t **initialize_sprite(sprite_t **sprite)
 	sprite[4] = malloc(sizeof(sprite_t) * 5);
 	sprite[5] = malloc(sizeof(sprite_t) * 5);
 	sprite[6] = malloc(sizeof(sprite_t) * 5);
+	sprite[7] = malloc(sizeof(sprite_t) * 5);
+	sprite[7] = create_sprite(sprite[7], "rsrc/pictures/life.png");
 	sprite[6] = create_sprite(sprite[6], "rsrc/pictures/dlc.png");
 	sprite[5] = create_sprite(sprite[5], "rsrc/pictures/pause.png");
 	sprite[4] = create_sprite(sprite[4], "rsrc/pictures/minimap_perso.png");
@@ -257,6 +267,7 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, char **map_txt)
 	sfRenderWindow_drawSprite(window, sprite[1]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[4]->s_sprt, NULL);
+	sfRenderWindow_drawSprite(window, sprite[7]->s_sprt, NULL);
 	if (sprite[2]->o_sprt == 1)
 		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
 	sfRenderWindow_display(window);
