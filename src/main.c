@@ -61,11 +61,12 @@ sprite_t **player_animation(sprite_t **sprite, int x, int y)
 	return (sprite);
 }
 
-sprite_t **move_player(sprite_t **sprite, char **map_txt)
+sprite_t **move_player(sprite_t **sprite, char **map_txt, sfRenderWindow *window)
 {
 	static int y = 225;
 	static int x = 213;
 
+	detect_chest(x, y, sprite);
 	if (sfKeyboard_isKeyPressed(sfKeyZ) && x > 0 && map_txt[x - 1][y] == ' ') {
 		sprite[0]->r_sprt.top -= 10;
 		x--;
@@ -89,24 +90,22 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 		 sprite_t **sprite, char **map_txt)
 {
 	if (sprite[5]->o_sprt == 3 && (event.mouseButton.x >= 1332 &&
-				       event.mouseButton.x <= (1332 + 250)) &&
-	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
-	    sfMouse_isButtonPressed(sfMouseLeft))
+	event.mouseButton.x <= (1332 + 250)) &&
+	(event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
+	sfMouse_isButtonPressed(sfMouseLeft))
 		sfRenderWindow_destroy(window);
 	if (sprite[5]->o_sprt == 3 && (event.mouseButton.x >= 1605 &&
-				       event.mouseButton.x <= (1605 + 250)) &&
-	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
-	    sfMouse_isButtonPressed(sfMouseLeft)) {
+	event.mouseButton.x <= (1605 + 250)) &&
+	(event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
+	sfMouse_isButtonPressed(sfMouseLeft)) {
 		sprite[1]->o_sprt = 0;
 		sprite[5]->o_sprt = 0;
 	}
-	if (event.type != sfEvtKeyPressed)
-		return;
+	sprite = move_player(sprite, map_txt, window);
 	if (sfKeyboard_isKeyPressed(sfKeyP))
 		sprite[5]->o_sprt = 3;
 	if (sfKeyboard_isKeyPressed(sfKeyI))
 		sprite[2]->o_sprt = (sprite[2]->o_sprt == 0) ? 1 : 0;
-	sprite = move_player(sprite, map_txt);
 }
 
 sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite, char **map_txt)
@@ -114,8 +113,7 @@ sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite, 
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
-		else
-			game_event2(window, event, sprite, map_txt);
+		game_event2(window, event, sprite, map_txt);
 	}
 	return (sprite);
 }
@@ -188,6 +186,8 @@ sprite_t **initialize_sprite(sprite_t **sprite)
 	sprite[5] = malloc(sizeof(sprite_t) * 5);
 	sprite[6] = malloc(sizeof(sprite_t) * 5);
 	sprite[7] = malloc(sizeof(sprite_t) * 5);
+	sprite[8] = malloc(sizeof(sprite_t) * 5);
+	sprite[8] = create_sprite(sprite[8], "rsrc/pictures/openchest.png");
 	sprite[7] = create_sprite(sprite[7], "rsrc/pictures/life.png");
 	sprite[6] = create_sprite(sprite[6], "rsrc/pictures/dlc.png");
 	sprite[5] = create_sprite(sprite[5], "rsrc/pictures/pause.png");
@@ -262,7 +262,6 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, char **map_txt)
 {
 	sfEvent event;
 
-	game_event(window, event, sprite, map_txt);
 	sfRenderWindow_drawSprite(window, sprite[0]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[1]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
@@ -270,6 +269,9 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, char **map_txt)
 	sfRenderWindow_drawSprite(window, sprite[7]->s_sprt, NULL);
 	if (sprite[2]->o_sprt == 1)
 		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
+	if (sprite[8]->o_sprt == 1)
+		sfRenderWindow_drawSprite(window, sprite[8]->s_sprt, NULL);
+	game_event(window, event, sprite, map_txt);
 	sfRenderWindow_display(window);
 }
 
@@ -293,7 +295,7 @@ void menu_loop(sfRenderWindow *window)
 	text_t **text = malloc(sizeof(text_t *) * 5);
 	sprite_t *bg = malloc(sizeof(sprite_t));
 	sfEvent event;
-	sprite_t **sprite = malloc(sizeof(sprite_t *) * 8);
+	sprite_t **sprite = malloc(sizeof(sprite_t *) * 10);
 	char **map_txt = get_map_txt();
 
 	sprite = initialize_sprite(sprite);

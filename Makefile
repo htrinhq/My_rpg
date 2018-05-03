@@ -14,7 +14,8 @@ SRC	=	src/main.c		\
 		src/character_gen.c	\
 		src/chest.c		\
 		src/inventory.c		\
-		src/get_next_line.c
+		src/get_next_line.c	\
+		src/open_chest.c
 
 OBJ	=	$(SRC:.c=.o)
 
