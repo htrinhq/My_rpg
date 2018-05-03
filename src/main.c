@@ -161,10 +161,13 @@ void initialize_sprite2(sprite_t **sprite)
 	sprite[1]->v_sprt.y = 540;
 	sprite[4]->v_sprt.x = 225 / 2 - 6;
 	sprite[4]->v_sprt.y = 213 / 2 - 15;
-	sfSprite_setPosition(sprite[4]->s_sprt, sprite[4]->v_sprt);
+	sprite[8]->v_sprt.x = 960;
+	sprite[8]->v_sprt.y = 440;
+	sfSprite_setPosition(sprite[8]->s_sprt, sprite[8]->v_sprt);
 	sprite[1]->o_sprt = 0;
 	sprite[2]->o_sprt = 0;
 	sprite[5]->o_sprt = 0;
+	sprite[8]->o_sprt = 0;
 	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
 	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
 	sfSprite_setTextureRect(sprite[7]->s_sprt, sprite[7]->r_sprt);
@@ -172,6 +175,7 @@ void initialize_sprite2(sprite_t **sprite)
 	sfSprite_setPosition(sprite[7]->s_sprt, sprite[7]->v_sprt);
 	sfSprite_setScale(sprite[1]->s_sprt, scale);
 	sfSprite_setScale(sprite[7]->s_sprt, scale2);
+	sfSprite_setScale(sprite[8]->s_sprt, scale2);
 }
 
 sprite_t **initialize_sprite(sprite_t **sprite)
