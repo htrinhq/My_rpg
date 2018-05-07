@@ -20,6 +20,8 @@ typedef struct npc {
 	quest_t quest;
 	int *inventory;
 	char *name;
+	sfVector2f pos;
+	char token;
 } npc_t;
 
 quest_t quest_gen(int has_quest);

@@ -34,6 +34,8 @@ typedef struct stat_npc {
 typedef struct guards {
 	sprite_t *sprite;
 	npcst_t stat;
+	sfVector2f pos;
+	char token;
 } guard_t;
 
 #include "quests.h"
@@ -65,5 +67,12 @@ int *player_take_obj(int *inventory, int obj_id);
 void display_obj(int *inventory, idobj_t **obj);
 guard_t **get_guards(int bo, guard_t **guards);
 float game_clock(void);
+sfVector2f find_character(char **map, char token);
+int find_token(char *str, sfVector2f *pos, char token);
+void follow(char follower, sfVector2f pos, char **map);
+void follow2(char follower, char **map, sfVector2f pos, sfVector2f pos_f);
+void basic_move(char follower, char **map, sfVector2f pos_f);
+sfVector2f get_pos_routine(char token, char **map);
+sfVector2f get_pos_routine2(char **map, char token);
 
 #endif

@@ -49,6 +49,7 @@ npc_t *npc_gen(void)
 	int sprite_id = 0;
 	int i = 0;
 	char *s = malloc(sizeof(char) * 23);
+	static int token = 48;
 
 	sprite_id = rand_gen(2, 28);
 	s = my_strcat("rsrc/pictures/p", 3, my_int_to_str(sprite_id), ".png");
@@ -56,10 +57,12 @@ npc_t *npc_gen(void)
 	npc->quest = quest_gen(rand_gen(1, 3));
 	npc->stat = stat_gen();
 	npc->inventory = malloc(sizeof(int) * 18);
+	npc->token = token;
 	while (i < 18) {
 		npc->inventory[i] = -1;
 		i = i + 1;
 	}
+	token = token + 1;
 	return (npc);
 }
 

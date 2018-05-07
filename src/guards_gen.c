@@ -11,12 +11,15 @@ guard_t *guards_gen(void)
 {
 	guard_t *guard = malloc(sizeof(guard_t));
 	npcst_t stat;
+	static int token = 55;
 
 	stat.max_lp = 100;
 	stat.lp = 100;
 	stat.strength = 40;
 	guard->stat = stat;
 	guard->sprite = find_sprite("rsrc/pictures/gardian.png");
+	guard->token = token;
+	token = token + 1;
 	return (guard);
 }
 
