@@ -110,7 +110,8 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 		sprite[2]->o_sprt = (sprite[2]->o_sprt == 0) ? 1 : 0;
 }
 
-sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite, char **map_txt)
+sprite_t **game_event(sfRenderWindow *window, sfEvent event,
+		      sprite_t **sprite, char **map_txt)
 {
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
@@ -120,7 +121,8 @@ sprite_t **game_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite, 
 	return (sprite);
 }
 
-text_t **menu_event(sfRenderWindow *window, sfEvent event, text_t **text, sprite_t **sprite)
+text_t **menu_event(sfRenderWindow *window, sfEvent event, text_t **text,
+		sprite_t **sprite)
 {
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
@@ -374,7 +376,7 @@ int main(int argc, char **argv, char**envp)
 	obj = fill_obj_id(obj);
 	window = renderwindow_create(window);
 	sfRenderWindow_setFramerateLimit(window, 60);
-	sfMusic_destroy(music);
 	menu_loop(window);
+	sfMusic_destroy(music);
 	return (0);
 }
