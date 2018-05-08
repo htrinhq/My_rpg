@@ -61,25 +61,25 @@ sprite_t **player_animation(sprite_t **sprite, int x, int y)
 	return (sprite);
 }
 
-sprite_t **move_player(sprite_t **sprite, char **map_txt)
+sprite_t **move_player(sprite_t **sprite, icm_t *icm)
 {
 	static int y = 225;
 	static int x = 213;
 
-	detect_chest(x, y, sprite);
-	if (sfKeyboard_isKeyPressed(sfKeyZ) && x > 0 && map_txt[x - 1][y] == ' ') {
+	detect_chest(x, y, sprite, icm);
+	if (sfKeyboard_isKeyPressed(sfKeyZ) && x > 0 && icm->map_txt[x - 1][y] == ' ') {
 		sprite[0]->r_sprt.top -= 10;
 		x--;
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyS) && x < 3050 && map_txt[x + 1][y] == ' ') {
+	if (sfKeyboard_isKeyPressed(sfKeyS) && x < 3050 && icm->map_txt[x + 1][y] == ' ') {
 		sprite[0]->r_sprt.top += 10;
 		x++;
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyQ) && y > 0 && map_txt[x][y - 1] == ' ') {
+	if (sfKeyboard_isKeyPressed(sfKeyQ) && y > 0 && icm->map_txt[x][y - 1] == ' ') {
 		sprite[0]->r_sprt.left -= 10;
 		y--;
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyD) && y < 4600 && map_txt[x][y + 1] == ' ') {
+	if (sfKeyboard_isKeyPressed(sfKeyD) && y < 4600 && icm->map_txt[x][y + 1] == ' ') {
 		sprite[0]->r_sprt.left += 10;
 		y++;
 	}
@@ -87,7 +87,7 @@ sprite_t **move_player(sprite_t **sprite, char **map_txt)
 }
 
 void game_event2(sfRenderWindow *window, sfEvent event,
-		 sprite_t **sprite, char **map_txt)
+		 sprite_t **sprite, icm_t *icm)
 {
 	if (sprite[2]->o_sprt == 1 && (event.mouseButton.x >= 1332 &&
 				       event.mouseButton.x <= (1332 + 250)) &&
@@ -102,22 +102,22 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 		sprite[5]->o_sprt = 0;
 	}
 	if (sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyS) || sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyD))
-		sprite = move_player(sprite, map_txt);
+		sprite = move_player(sprite, icm);
 	if (event.type != sfEvtKeyPressed)
 		return;
 	if (sfKeyboard_isKeyPressed(sfKeyP))
 		sprite[5]->o_sprt = 3;
-	if (sfKeyboard_isKeyPressed(sfKeyI))
+	if (sfKeyboard_isKeyPressed(sfKeyI) || sfKeyboard_isKeyPressed(sfKeyE))
 		sprite[2]->o_sprt = (sprite[2]->o_sprt == 0) ? 1 : 0;
 }
 
 sprite_t **game_event(sfRenderWindow *window, sfEvent event,
-		      sprite_t **sprite, char **map_txt)
+		      sprite_t **sprite, icm_t *icm)
 {
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)
 			sfRenderWindow_close(window);
-		game_event2(window, event, sprite, map_txt);
+		game_event2(window, event, sprite, icm);
 	}
 	return (sprite);
 }
@@ -264,7 +264,7 @@ void pause_loop(sfRenderWindow *window, sprite_t **sprite)
 	sfRenderWindow_display(window);
 }
 
-void game_loop(sfRenderWindow *window, sprite_t **sprite, char **map_txt)
+void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm)
 {
 	sfEvent event;
 
@@ -277,7 +277,7 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, char **map_txt)
 		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
 	if (sprite[8]->o_sprt == 1)
 		sfRenderWindow_drawSprite(window, sprite[8]->s_sprt, NULL);
-	game_event(window, event, sprite, map_txt);
+	game_event(window, event, sprite, icm);
 	sfRenderWindow_display(window);
 }
 
@@ -296,13 +296,13 @@ char **get_map_txt(void)
 	return (map_txt);
 }
 
-void menu_loop(sfRenderWindow *window)
+void menu_loop(sfRenderWindow *window, icm_t *icm)
 {
 	text_t **text = malloc(sizeof(text_t *) * 5);
 	sprite_t *bg = malloc(sizeof(sprite_t));
 	sfEvent event;
 	sprite_t **sprite = malloc(sizeof(sprite_t *) * 10);
-	char **map_txt = get_map_txt();
+	icm->map_txt = get_map_txt();
 
 	sprite = initialize_sprite(sprite);
 	text = initialize_text(text);
@@ -319,7 +319,7 @@ void menu_loop(sfRenderWindow *window)
 		} else if (sprite[5]->o_sprt == 5) {
 			dlc_loop(window, sprite);
 		} else {
-			game_loop(window, sprite, map_txt);
+			game_loop(window, sprite, icm);
 		}
 	}
 }
@@ -367,17 +367,17 @@ int main(int argc, char **argv, char**envp)
 {
 	sfRenderWindow *window = NULL;
 	sfMusic *music = sfMusic_createFromFile("rsrc/sounds/main.ogg");
-	idobj_t **obj = malloc(sizeof(id_t *) * 16);
-	chest_t **chests = NULL;
+	icm_t *icm = malloc(sizeof(icm_t));
 
-	chests = create_chests(chests);
+	icm->obj = malloc(sizeof(idobj_t *) * 16);
+	icm->chests = create_chests(icm->chests);
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
 		return (84);
 	sfMusic_play(music);
-	obj = fill_obj_id(obj);
+	icm->obj = fill_obj_id(obj);
 	window = renderwindow_create(window);
 	sfRenderWindow_setFramerateLimit(window, 60);
-	menu_loop(window);
+	menu_loop(window, icm);
 	sfMusic_destroy(music);
 	return (0);
 }

@@ -37,3 +37,27 @@ chest_t **create_chests(chest_t **chests)
 	}
 	return (chests);
 }
+
+void add_in_chest(chest_t **chests, int chestnb, int id)
+{
+	int x = 0;
+
+	for (x = 0; chests[chestnb]->inside[x] != -2; x = x + 1) {
+		if (chests[chestnb]->inside[x] == -1) {
+			chests[chestnb]->inside[x] = id;
+			break;
+		}
+	}
+}
+
+void remove_in_chest(chest_t **chests, int chestnb, int id)
+{
+	int x = 0;
+
+	for (x = 0; chests[chestnb]->inside[x] != -2; x = x + 1) {
+		if (chests[chestnb]->inside[x] == id) {
+			chests[chestnb]->inside[x] = -1;
+			break;
+		}
+	}
+}
