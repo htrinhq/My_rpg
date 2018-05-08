@@ -24,6 +24,12 @@ typedef struct chest {
 	int name;
 } chest_t;
 
+typedef struct icm {
+	char **map_txt;
+	idobj_t **obj;
+	chest_t **chests;
+} icm_t;
+
 typedef struct stat_npc {
 	int level;
 	int max_lp;

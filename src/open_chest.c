@@ -25,22 +25,22 @@ void display_inside(int obj, /*sprite_t **sprite, */icm_t *icm, sfRenderWindow *
 void display_chest(int x, int y, /*sprite_t **sprite, */icm_t *icm, sfRenderWindow *window)
 {
 	if (x > 107 && x < 119 && y > 140 && y < 150) {
-		printf("chest 0\n");
+		//printf("chest 0\n");
 	}
 	if (x > 107 && x < 119 && y > 110 && y < 120) {
-		printf("chest 1\n");
+		//printf("chest 1\n");
 	}
 	if (x > 217 && x < 227 && y > 110 && y < 120) {
-		printf("chest 2\n");
+		//printf("chest 2\n");
 	}
 	if (x > 217 && x < 227 && y > 140 && y < 150) {
-		printf("chest 3\n");
+		//printf("chest 3\n");
 	}
 	if (x > 217 && x < 227 && y > 170 && y < 180) {
-		printf("chest 4\n");
+		//printf("chest 4\n");
 	}
 	if (x > 217 && x < 227 && y > 200 && y < 210) {
-		printf("chest 5\n");
+		//printf("chest 5\n");
 	}
 	if (x > 217 && x < 227 && y > 231 && y < 241) {
 		display_inside(icm->chests[6]->inside[0], /*sprite, */icm, window);
@@ -54,13 +54,13 @@ void display_chest(int x, int y, /*sprite_t **sprite, */icm_t *icm, sfRenderWind
 		//display_inside(icm->chests[6][8], sprite, icm, window);
 	}
 	if (x > 217 && x < 227 && y > 261 && y < 271) {
-		printf("chest 7\n");
+		//printf("chest 7\n");
 	}
 	if (x > 217 && x < 227 && y > 292 && y < 302) {
-		printf("chest 8\n");
+		//printf("chest 8\n");
 	}
 	if (x > 217 && x < 227 && y > 312 && y < 332) {
-		printf("chest 9\n");
+		//printf("chest 9\n");
 	}
 }
 

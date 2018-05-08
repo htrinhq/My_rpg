@@ -374,7 +374,7 @@ int main(int argc, char **argv, char**envp)
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
 		return (84);
 	sfMusic_play(music);
-	icm->obj = fill_obj_id(obj);
+	icm->obj = fill_obj_id(icm->obj);
 	window = renderwindow_create(window);
 	sfRenderWindow_setFramerateLimit(window, 60);
 	menu_loop(window, icm);
