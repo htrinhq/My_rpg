@@ -23,4 +23,4 @@ int detect_chest(int x, int y, sprite_t **sprite)
 	else
 		    sprite[8]->o_sprt = 0;
 	    return (1);
-	    }
+}

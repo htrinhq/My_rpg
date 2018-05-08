@@ -61,7 +61,7 @@ sprite_t **player_animation(sprite_t **sprite, int x, int y)
 	return (sprite);
 }
 
-sprite_t **move_player(sprite_t **sprite, char **map_txt, sfRenderWindow *window)
+sprite_t **move_player(sprite_t **sprite, char **map_txt)
 {
 	static int y = 225;
 	static int x = 213;
@@ -101,7 +101,7 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 		sprite[1]->o_sprt = 0;
 		sprite[5]->o_sprt = 0;
 	}
-	sprite = move_player(sprite, map_txt, window);
+	sprite = move_player(sprite, map_txt);
 	if (event.type != sfEvtKeyPressed)
 		return;
 	if (sfKeyboard_isKeyPressed(sfKeyP))
@@ -182,8 +182,6 @@ void initialize_sprite2(sprite_t **sprite)
 
 sprite_t **initialize_sprite(sprite_t **sprite)
 {
-	sfEvent event;
-
 	sprite[0] = malloc(sizeof(sprite_t) * 5);
 	sprite[1] = malloc(sizeof(sprite_t) * 5);
 	sprite[2] = malloc(sizeof(sprite_t) * 5);
@@ -262,7 +260,6 @@ void pause_loop(sfRenderWindow *window, sprite_t **sprite)
 	sfRenderWindow_drawSprite(window, sprite[5]->s_sprt, NULL);
 	sfRenderWindow_display(window);
 }
-
 
 void game_loop(sfRenderWindow *window, sprite_t **sprite, char **map_txt)
 {

@@ -40,6 +40,7 @@ typedef struct guards {
 
 #include "quests.h"
 
+int detect_chest();
 void game_loop();
 int check_env(char **envp);
 char **get_paths(void);
