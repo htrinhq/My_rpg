@@ -27,6 +27,9 @@ CFLAGS	=	-W -Wall -Wextra -I include -g -fdiagnostics-color=always
 
 LDFLAGS	=	-g -L ./lib/my -l myprintf -L lib/graph -l graph -Wl,-R /lib/ -lcsfml-audio -lcsfml-graphics -lcsfml-network -lcsfml-system -lcsfml-window
 
+#-g -L ./lib/my -l myprintf -L lib/graph -l graph -Wl,-R /lib/ -lcsfml-audio -lcsfml-graphics -lcsfml-network -lcsfml-system -lcsfml-window
+#-l c_graph_prog -L ./lib/my/ -lmyprintf -L ./lib/graph/ -lgraph
+
 all:	libmake $(NAME)
 
 $(NAME):	$(OBJ)
