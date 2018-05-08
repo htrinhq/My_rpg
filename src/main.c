@@ -101,7 +101,8 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 		sprite[1]->o_sprt = 0;
 		sprite[5]->o_sprt = 0;
 	}
-	sprite = move_player(sprite, map_txt);
+	if (sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyS) || sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyD))
+		sprite = move_player(sprite, map_txt);
 	if (event.type != sfEvtKeyPressed)
 		return;
 	if (sfKeyboard_isKeyPressed(sfKeyP))
