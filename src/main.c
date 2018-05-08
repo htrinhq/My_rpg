@@ -89,12 +89,12 @@ sprite_t **move_player(sprite_t **sprite, char **map_txt)
 void game_event2(sfRenderWindow *window, sfEvent event,
 		 sprite_t **sprite, char **map_txt)
 {
-	if (sprite[5]->o_sprt == 3 && (event.mouseButton.x >= 1332 &&
+	if (sprite[2]->o_sprt == 1 && (event.mouseButton.x >= 1332 &&
 				       event.mouseButton.x <= (1332 + 250)) &&
 	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
 	    sfMouse_isButtonPressed(sfMouseLeft))
 		sfRenderWindow_destroy(window);
-	if (sprite[5]->o_sprt == 3 && (event.mouseButton.x >= 1605 &&
+	if (sprite[2]->o_sprt == 1 && (event.mouseButton.x >= 1605 &&
 				       event.mouseButton.x <= (1605 + 250)) &&
 	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
 	    sfMouse_isButtonPressed(sfMouseLeft)) {
