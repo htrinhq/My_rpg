@@ -368,11 +368,11 @@ text_t **set_text_value(text_t **text)
 
 void initialize_stat(plstat_t *stat)
 {
-	stat->level = 0;
+	stat->level = 1;
 	stat->force = 1;
 	stat->inteligence = 1;
 	stat->speed = 1;
-	stat->xp = 0;
+	stat->xp = 165;
 }
 
 int main(int argc, char **argv, char**envp)
@@ -389,6 +389,7 @@ int main(int argc, char **argv, char**envp)
 	music = sfMusic_createFromFile("rsrc/sounds/main.ogg");
 	sfMusic_play(music);
 	icm->obj = fill_obj_id(icm->obj);
+	initialize_stat(stat);
 	window = renderwindow_create(window);
 	sfRenderWindow_setFramerateLimit(window, 60);
 	menu_loop(window, icm, stat);

@@ -16,23 +16,48 @@ char *my_itoa(int nbr)
 	return (str);
 }
 
-void display_level(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window)
+void display_level2(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window)
 {
-	char *level = my_itoa(stat->xp);
+	char *level = NULL;
 	sfText *text = sfText_create();
 	sfFont *font = sfFont_createFromFile("rsrc/fonts/copyfonts.com_algol-ix.ttf");
-	sfVector2f pos = {500, 500};
+	sfVector2f pos = {730, 650};
 
+	if (stat->xp < 100)
+		level = my_itoa(0);
+	else
+		level = my_itoa(stat->xp / 100);
 	sfText_setString(text, level);
 	sfText_setFont(text, font);
 	sfText_setPosition(text, pos);
+	sfText_setCharacterSize(text, 70);
 	sfRenderWindow_drawText(window, text, NULL);
+}
+
+void display_level(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window)
+{
+	sprite_t *level = malloc(sizeof(sprite_t) * 8);
+	sfVector2f pos = {700, 650};
+	sfVector2f scale = {5, 5};
+	int lev = (stat->xp % 100) * 8 / 100;
+	static int i = 0;
+
+	level = create_sprite(level, "rsrc/pictures/level.png");
+	level->r_sprt.top = 20 * lev;
+	level->r_sprt.left = 0;
+	level->r_sprt.width = 100;
+	level->r_sprt.height = 20;
+	sfSprite_setTextureRect(level->s_sprt, level->r_sprt);
+	sfSprite_setPosition(level->s_sprt, pos);
+	sfSprite_setScale(level->s_sprt, scale);
+	sfRenderWindow_drawSprite(window, level->s_sprt, NULL);
+	display_level2(stat, sprite, window);
 }
 
 void display_force(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window)
 {
 	sprite_t *force = malloc(sizeof(sprite_t) * 8);
-	sfVector2f pos = {700, 400};
+	sfVector2f pos = {700, 350};
 	sfVector2f scale = {5, 5};
 
 	force = create_sprite(force, "rsrc/pictures/force.png");
@@ -46,10 +71,11 @@ void display_force(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window)
 	sfRenderWindow_drawSprite(window, force->s_sprt, NULL);
 }
 
-void display_inteligence(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window)
+void display_inteligence(plstat_t *stat, sprite_t **sprite,
+			sfRenderWindow *window)
 {
 	sprite_t *intel = malloc(sizeof(sprite_t) * 8);
-	sfVector2f pos = {700, 500};
+	sfVector2f pos = {700, 450};
 	sfVector2f scale = {5, 5};
 
 	intel = create_sprite(intel, "rsrc/pictures/inteligence.png");
@@ -66,7 +92,7 @@ void display_inteligence(plstat_t *stat, sprite_t **sprite, sfRenderWindow *wind
 void display_speed(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window)
 {
 	sprite_t *speed = malloc(sizeof(sprite_t) * 8);
-	sfVector2f pos = {700, 600};
+	sfVector2f pos = {700, 550};
 	sfVector2f scale = {5, 5};
 
 	speed = create_sprite(speed, "rsrc/pictures/speed.png");
