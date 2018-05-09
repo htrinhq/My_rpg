@@ -22,7 +22,8 @@ SRC	=	./src/binary_convert.c\
 		./src/short_and_long_manage.c\
 		./src/call_function.c\
 		./src/my_rand.c\
-		./src/my_strcat.c
+		./src/my_strcat.c\
+		./src/my_getnbr.c
 
 OBJ	=	$(SRC:.c=.o)
 

@@ -37,6 +37,15 @@ typedef struct stat_npc {
 	int strength;
 } npcst_t;
 
+typedef struct stat_pl {
+	int xp;
+	int level;
+	int force;
+	int inteligence;
+	int life;
+	int speed;
+} plstat_t;
+
 typedef struct guards {
 	sprite_t *sprite;
 	npcst_t stat;
@@ -46,6 +55,7 @@ typedef struct guards {
 
 #include "quests.h"
 
+char *my_getnbr();
 int detect_chest();
 void game_loop();
 int check_env(char **envp);
