@@ -101,14 +101,19 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 		sprite[1]->o_sprt = 0;
 		sprite[5]->o_sprt = 0;
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyS) || sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyD))
-		sprite = move_player(sprite, icm);
+	if (sprite[9]->o_sprt == 0) {
+		if (sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyS) || sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyD))
+			sprite = move_player(sprite, icm);
+	}
 	if (event.type != sfEvtKeyPressed)
 		return;
 	if (sfKeyboard_isKeyPressed(sfKeyP))
 		sprite[5]->o_sprt = 3;
-	if (sfKeyboard_isKeyPressed(sfKeyI) || sfKeyboard_isKeyPressed(sfKeyE))
+	if (sfKeyboard_isKeyPressed(sfKeyI))
 		sprite[2]->o_sprt = (sprite[2]->o_sprt == 0) ? 1 : 0;
+	if (sfKeyboard_isKeyPressed(sfKeyE)) {
+		sprite[9]->o_sprt = (sprite[9]->o_sprt == 0) ? 1 : 0;
+	}
 }
 
 sprite_t **game_event(sfRenderWindow *window, sfEvent event,
@@ -173,6 +178,7 @@ void initialize_sprite2(sprite_t **sprite)
 	sprite[2]->o_sprt = 0;
 	sprite[5]->o_sprt = 0;
 	sprite[8]->o_sprt = 0;
+	sprite[9]->o_sprt = 0;
 	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
 	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
 	sfSprite_setTextureRect(sprite[7]->s_sprt, sprite[7]->r_sprt);
@@ -194,6 +200,8 @@ sprite_t **initialize_sprite(sprite_t **sprite)
 	sprite[6] = malloc(sizeof(sprite_t) * 5);
 	sprite[7] = malloc(sizeof(sprite_t) * 5);
 	sprite[8] = malloc(sizeof(sprite_t) * 5);
+	sprite[9] = malloc(sizeof(sprite_t) * 5);
+	sprite[9] = create_sprite(sprite[9], "rsrc/pictures/chest.png");
 	sprite[8] = create_sprite(sprite[8], "rsrc/pictures/openchest.png");
 	sprite[7] = create_sprite(sprite[7], "rsrc/pictures/life.png");
 	sprite[6] = create_sprite(sprite[6], "rsrc/pictures/dlc.png");
@@ -274,12 +282,17 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[4]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[7]->s_sprt, NULL);
+	//sfRenderWindow_drawSprite(window, icm->s_obj[0]->s_sprt, NULL);
 	if (sprite[2]->o_sprt == 1) {
 		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
 		display_stat(stat, sprite, window);
 	}
 	if (sprite[8]->o_sprt == 1)
 		sfRenderWindow_drawSprite(window, sprite[8]->s_sprt, NULL);
+	if (sprite[9]->o_sprt == 1 && sprite[8]->o_sprt == 1) {
+		sfRenderWindow_drawSprite(window, sprite[9]->s_sprt, NULL);
+		display_chest(sprite[9]->v_sprt.x, sprite[9]->v_sprt.y, icm, window);
+	}
 	game_event(window, event, sprite, icm);
 	sfRenderWindow_display(window);
 }
@@ -304,7 +317,7 @@ void menu_loop(sfRenderWindow *window, icm_t *icm, plstat_t *stat)
 	text_t **text = malloc(sizeof(text_t *) * 5);
 	sprite_t *bg = malloc(sizeof(sprite_t));
 	sfEvent event;
-	sprite_t **sprite = malloc(sizeof(sprite_t *) * 10);
+	sprite_t **sprite = malloc(sizeof(sprite_t *) * 11);
 	icm->map_txt = get_map_txt();
 
 	sprite = initialize_sprite(sprite);
@@ -383,7 +396,9 @@ int main(int argc, char **argv, char**envp)
 	plstat_t *stat = malloc(sizeof(plstat_t));
 
 	icm->obj = malloc(sizeof(idobj_t *) * 16);
+	icm->s_obj = malloc(sizeof(sprite_t *) * 15);
 	icm->chests = create_chests(icm->chests);
+	icm->s_obj = fill_obj_sprite(icm->s_obj);
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
 		return (84);
 	music = sfMusic_createFromFile("rsrc/sounds/main.ogg");

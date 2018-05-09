@@ -28,6 +28,7 @@ typedef struct icm {
 	char **map_txt;
 	idobj_t **obj;
 	chest_t **chests;
+	sprite_t **s_obj;
 } icm_t;
 
 typedef struct stat_npc {
@@ -91,5 +92,7 @@ void follow2(char follower, char **map, sfVector2f pos, sfVector2f pos_f);
 void basic_move(char follower, char **map, sfVector2f pos_f);
 sfVector2f get_pos_routine(char token, char **map);
 sfVector2f get_pos_routine2(char **map, char token);
+sprite_t **fill_obj_sprite(sprite_t **obj);
+void display_chest(int x, int y, icm_t *icm, sfRenderWindow *window);
 
 #endif
