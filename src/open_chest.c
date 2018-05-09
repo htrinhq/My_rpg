@@ -133,8 +133,8 @@ int detect_chest(int x, int y, sprite_t **sprite, icm_t *icm)
 	(x > 217 && x < 227 && y > 261 && y < 271) ||
 	(x > 217 && x < 227 && y > 292 && y < 302) ||
 	(x > 217 && x < 227 && y > 312 && y < 332)) {
-			sprite[9]->v_sprt.x = x;
-			sprite[9]->v_sprt.y = y;
+			sprite[14]->v_sprt.x = x;
+			sprite[14]->v_sprt.y = y;
 			sprite[8]->o_sprt = 1;
 	} else
 		sprite[8]->o_sprt = 0;
