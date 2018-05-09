@@ -366,13 +366,14 @@ text_t **set_text_value(text_t **text)
 int main(int argc, char **argv, char**envp)
 {
 	sfRenderWindow *window = NULL;
-	sfMusic *music = sfMusic_createFromFile("rsrc/sounds/main.ogg");
+	sfMusic *music;
 	icm_t *icm = malloc(sizeof(icm_t));
 
 	icm->obj = malloc(sizeof(idobj_t *) * 16);
 	icm->chests = create_chests(icm->chests);
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
 		return (84);
+	music = sfMusic_createFromFile("rsrc/sounds/main.ogg");
 	sfMusic_play(music);
 	icm->obj = fill_obj_id(icm->obj);
 	window = renderwindow_create(window);
