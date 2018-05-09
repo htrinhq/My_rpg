@@ -61,25 +61,26 @@ sprite_t **player_animation(sprite_t **sprite, int x, int y)
 	return (sprite);
 }
 
-sprite_t **move_player(sprite_t **sprite, icm_t *icm)
+sprite_t **move_player(sprite_t **sprite, icm_t *icm, int pst)
 {
 	static int y = 225;
 	static int x = 213;
 
 	detect_chest(x, y, sprite, icm);
-	if (sfKeyboard_isKeyPressed(sfKeyZ) && x > 0 && icm->map_txt[x - 1][y] == ' ') {
+	if ((pst == 1 ||pst == 3 ||pst == 5 || pst == 9) && x > 0
+	&& icm->map_txt[x - 1][y] == ' ') {
 		sprite[0]->r_sprt.top -= 10;
 		x--;
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyS) && x < 3050 && icm->map_txt[x + 1][y] == ' ') {
+	if ((pst == 2 ||pst == 6 ||pst == 10 || pst == 3) && x < 3050 && icm->map_txt[x + 1][y] == ' ') {
 		sprite[0]->r_sprt.top += 10;
 		x++;
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyQ) && y > 0 && icm->map_txt[x][y - 1] == ' ') {
+	if ((pst == 4 ||pst == 6 ||pst == 5 || pst == 12) && y > 0 && icm->map_txt[x][y - 1] == ' ') {
 		sprite[0]->r_sprt.left -= 10;
 		y--;
 	}
-	if (sfKeyboard_isKeyPressed(sfKeyD) && y < 4600 && icm->map_txt[x][y + 1] == ' ') {
+	if ((pst == 8 ||pst == 10 ||pst == 9 || pst == 14) && y < 4600 && icm->map_txt[x][y + 1] == ' ') {
 		sprite[0]->r_sprt.left += 10;
 		y++;
 	}
@@ -89,6 +90,7 @@ sprite_t **move_player(sprite_t **sprite, icm_t *icm)
 void game_event2(sfRenderWindow *window, sfEvent event,
 		 sprite_t **sprite, icm_t *icm)
 {
+	int pst = 0;
 	if (sprite[2]->o_sprt == 1 && (event.mouseButton.x >= 1332 &&
 				       event.mouseButton.x <= (1332 + 250)) &&
 	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
@@ -101,12 +103,22 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 		sprite[1]->o_sprt = 0;
 		sprite[5]->o_sprt = 0;
 	}
-	if (sprite[14]->o_sprt == 0) {
-		if (sfKeyboard_isKeyPressed(sfKeyZ) || sfKeyboard_isKeyPressed(sfKeyS) || sfKeyboard_isKeyPressed(sfKeyQ) || sfKeyboard_isKeyPressed(sfKeyD))
-			sprite = move_player(sprite, icm);
-	}
 	if (event.type != sfEvtKeyPressed)
 		return;
+	if (sprite[14]->o_sprt == 0) {
+		if (sfKeyboard_isKeyPressed(sfKeyZ))
+			pst += 1;
+		if (sfKeyboard_isKeyPressed(sfKeyS))
+			pst += 2;
+		if (sfKeyboard_isKeyPressed(sfKeyQ))
+			pst += 4;
+		if (sfKeyboard_isKeyPressed(sfKeyD))
+			pst += 8;
+		if (pst != 0) {
+			move_player(sprite, icm, pst);
+			particules(window, 975, 630, 1);
+		}
+	}
 	if (sfKeyboard_isKeyPressed(sfKeyP))
 		sprite[5]->o_sprt = 3;
 	if (sfKeyboard_isKeyPressed(sfKeyI))
@@ -227,11 +239,11 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sfSprite_setScale(sprite[10]->s_sprt, scale3);
 	sfSprite_setScale(sprite[11]->s_sprt, scale3);
 	sfSprite_setScale(sprite[12]->s_sprt, scale3);
-	sprite[13]->text = sfText_create();
-	sprite[13]->font = sfFont_createFromFile("rsrc/fonts/copyfonts.com_algol-ix.ttf");
-	sfText_setFont(sprite[13]->text, sprite[13]->font);
-	sfText_setPosition(sprite[13]->text, sprite[13]->v_sprt);
-	sfText_setCharacterSize(sprite[13]->text, 70);
+	//sprite[13]->text = sfText_create();
+	//sprite[13]->font = sfFont_createFromFile("rsrc/fonts/copyfonts.com_algol-ix.ttf");
+	//sfText_setFont(sprite[13]->text, sprite[13]->font);
+	//sfText_setPosition(sprite[13]->text, sprite[13]->v_sprt);
+	//sfText_setCharacterSize(sprite[13]->text, 70);
 }
 
 sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
@@ -405,7 +417,7 @@ text_t **initialize_text(text_t **text)
 	text[0]->text = sfText_create();
 	text[0]->pos.x = 550;
 	text[0]->pos.y = 125;
-	text[0]->bo = 0;
+//	text[0]->bo = 0;
 	text[1]->text = sfText_create();
 	text[1]->pos.x = 820;
 	text[1]->pos.y = 372;

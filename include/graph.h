@@ -9,6 +9,7 @@
 #define GRAPH_H_
 
 #include <SFML/Graphics.h>
+#include <SFML/Graphics/Export.h>
 #include <SFML/Audio/Music.h>
 #include <SFML/Window/Export.h>
 #include <SFML/Window/Types.h>
@@ -22,7 +23,6 @@ typedef struct text_s {
 	sfVector2f pos;
 	sfText *text;
 	sfFont *font;
-	int bo;
 } text_t;
 
 struct sprite_s {
@@ -32,13 +32,12 @@ struct sprite_s {
 	sfVector2f v_sprt;
 	int o_sprt;
 	sfIntRect r_sprt;
-	sfText *text;
-	sfFont *font;
 };
 
 typedef struct sprite_s sprite_t;
 
 sprite_t *create_sprite(sprite_t *sprite, char *path);
 sfIntRect create_recth(int top, int left, int width, int height);
+void particules(sfRenderWindow *window, int x, int y, int color);
 
 #endif
