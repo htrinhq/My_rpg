@@ -39,11 +39,11 @@ typedef struct stat_npc {
 
 typedef struct stat_pl {
 	int xp;
-	int level;
 	int force;
 	int inteligence;
 	int life;
 	int speed;
+	sprite_t **sprite;
 } plstat_t;
 
 typedef struct guards {
@@ -58,7 +58,9 @@ typedef struct guards {
 char *my_getnbr();
 int detect_chest();
 void game_loop();
+void display_stat();
 int check_env(char **envp);
+void initialize_stat();
 char **get_paths(void);
 int my_tablen(char **tab);
 void display_tab(char **tab);
