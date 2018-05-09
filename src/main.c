@@ -264,7 +264,8 @@ void pause_loop(sfRenderWindow *window, sprite_t **sprite)
 	sfRenderWindow_display(window);
 }
 
-void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm)
+void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
+	plstat_t *stat)
 {
 	sfEvent event;
 
@@ -273,8 +274,10 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm)
 	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[4]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[7]->s_sprt, NULL);
-	if (sprite[2]->o_sprt == 1)
+	if (sprite[2]->o_sprt == 1) {
 		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
+		display_stat(stat, sprite, window);
+	}
 	if (sprite[8]->o_sprt == 1)
 		sfRenderWindow_drawSprite(window, sprite[8]->s_sprt, NULL);
 	game_event(window, event, sprite, icm);
@@ -296,7 +299,7 @@ char **get_map_txt(void)
 	return (map_txt);
 }
 
-void menu_loop(sfRenderWindow *window, icm_t *icm)
+void menu_loop(sfRenderWindow *window, icm_t *icm, plstat_t *stat)
 {
 	text_t **text = malloc(sizeof(text_t *) * 5);
 	sprite_t *bg = malloc(sizeof(sprite_t));
@@ -319,7 +322,7 @@ void menu_loop(sfRenderWindow *window, icm_t *icm)
 		} else if (sprite[5]->o_sprt == 5) {
 			dlc_loop(window, sprite);
 		} else {
-			game_loop(window, sprite, icm);
+			game_loop(window, sprite, icm, stat);
 		}
 	}
 }
@@ -363,11 +366,21 @@ text_t **set_text_value(text_t **text)
 	return (text);
 }
 
+void initialize_stat(plstat_t *stat)
+{
+	stat->level = 0;
+	stat->force = 1;
+	stat->inteligence = 1;
+	stat->speed = 1;
+	stat->xp = 0;
+}
+
 int main(int argc, char **argv, char**envp)
 {
 	sfRenderWindow *window = NULL;
 	sfMusic *music;
 	icm_t *icm = malloc(sizeof(icm_t));
+	plstat_t *stat = malloc(sizeof(plstat_t));
 
 	icm->obj = malloc(sizeof(idobj_t *) * 16);
 	icm->chests = create_chests(icm->chests);
@@ -378,7 +391,7 @@ int main(int argc, char **argv, char**envp)
 	icm->obj = fill_obj_id(icm->obj);
 	window = renderwindow_create(window);
 	sfRenderWindow_setFramerateLimit(window, 60);
-	menu_loop(window, icm);
+	menu_loop(window, icm, stat);
 	sfMusic_destroy(music);
 	return (0);
 }
