@@ -48,8 +48,8 @@ void day_time(sfRenderWindow *wd, sprite_t **sprite)
 {
 	text_t text;
 	float time = sfTime_asSeconds(sfClock_getElapsedTime(sprite[0]->clock));
-	static int hour = 9;
-	static int min = 55;
+	static int hour = 0;
+	static int min = 0;
 
 	if (time >= 1) {
 		min++;
