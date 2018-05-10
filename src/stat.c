@@ -28,6 +28,6 @@ void display_stat(sprite_t **sprite, sfRenderWindow *window, plstat_t *stat)
 		level = my_itoa(0);
 	else
 		level = my_itoa(stat->xp / 100);
-//	sfText_setString(sprite[13]->text, level);
-//	sfRenderWindow_drawText(window, sprite[13]->text, NULL);
+	sfText_setString(sprite[13]->text, level);
+	sfRenderWindow_drawText(window, sprite[13]->text, NULL);
 }

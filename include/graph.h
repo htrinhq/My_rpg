@@ -32,6 +32,8 @@ struct sprite_s {
 	sfVector2f v_sprt;
 	int o_sprt;
 	sfIntRect r_sprt;
+	sfText *text;
+	sfFont *font;
 };
 
 typedef struct sprite_s sprite_t;

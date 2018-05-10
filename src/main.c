@@ -177,6 +177,8 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sprite[1]->r_sprt.left = 70;
 	sprite[1]->r_sprt.width = 136;
 	sprite[1]->r_sprt.height = 183;
+	sprite[7]->r_sprt.top = 20 * stat->life;
+	sprite[7]->r_sprt.left = 0;
 	sprite[7]->r_sprt.width = 100;
 	sprite[7]->r_sprt.height = 20;
 	sprite[9]->r_sprt.top = 20 * stat->force;
@@ -239,11 +241,11 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sfSprite_setScale(sprite[10]->s_sprt, scale3);
 	sfSprite_setScale(sprite[11]->s_sprt, scale3);
 	sfSprite_setScale(sprite[12]->s_sprt, scale3);
-	//sprite[13]->text = sfText_create();
-	//sprite[13]->font = sfFont_createFromFile("rsrc/fonts/copyfonts.com_algol-ix.ttf");
-	//sfText_setFont(sprite[13]->text, sprite[13]->font);
-	//sfText_setPosition(sprite[13]->text, sprite[13]->v_sprt);
-	//sfText_setCharacterSize(sprite[13]->text, 70);
+	sprite[13]->text = sfText_create();
+	sprite[13]->font = sfFont_createFromFile("rsrc/fonts/copyfonts.com_algol-ix.ttf");
+	sfText_setFont(sprite[13]->text, sprite[13]->font);
+	sfText_setPosition(sprite[13]->text, sprite[13]->v_sprt);
+	sfText_setCharacterSize(sprite[13]->text, 70);
 }
 
 sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
@@ -258,12 +260,13 @@ sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
 	sprite[7] = malloc(sizeof(sprite_t) * 5);
 	sprite[8] = malloc(sizeof(sprite_t) * 5);
 	sprite[9] = malloc(sizeof(sprite_t) * 5);
-	sprite[14] = malloc(sizeof(sprite_t) * 5);
 	sprite[10] = malloc(sizeof(sprite_t) * 5);
 	sprite[11] = malloc(sizeof(sprite_t) * 5);
 	sprite[12] = malloc(sizeof(sprite_t) * 5);
 	sprite[13] = malloc(sizeof(sprite_t) * 5);
+	sprite[14] = malloc(sizeof(sprite_t) * 5);
 	sprite[14] = create_sprite(sprite[14], "rsrc/pictures/chest.png");
+	sprite[13]->text = sfText_create();
 	sprite[12] = create_sprite(sprite[12], "rsrc/pictures/level.png");
 	sprite[11] = create_sprite(sprite[11], "rsrc/pictures/speed.png");
 	sprite[10] = create_sprite(sprite[10], "rsrc/pictures/inteligence.png");
@@ -453,6 +456,7 @@ void initialize_stat(plstat_t *stat)
 	stat->inteligence = 1;
 	stat->speed = 1;
 	stat->xp = 165;
+	stat->life = 5;
 }
 
 int main(int argc, char **argv, char**envp)
