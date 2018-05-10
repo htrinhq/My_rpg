@@ -281,10 +281,17 @@ sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
 	sprite[2] = create_sprite(sprite[2], "rsrc/pictures/inventory.png");
 	sprite[1] = create_sprite(sprite[1], "rsrc/pictures/p1.png");
 	sprite[0] = create_sprite(sprite[0], "rsrc/pictures/map.png");
+	sprite[0]->clock = sfClock_create();
 	sprite[0]->r_sprt.top = 1480;
 	sprite[0]->r_sprt.left = 1260;
 	sprite[0]->r_sprt.width = 1920;
 	sprite[0]->r_sprt.height = 1080;
+	sprite[0]->text = sfText_create();
+	sprite[0]->font = sfFont_createFromFile("./rsrc/fonts/copyfonts.com_algol-ix.ttf");
+	sfText_setFont(sprite[0]->text, sprite[0]->font);
+	sfText_setCharacterSize(sprite[0]->text, 90);
+	sfText_setColor(sprite[0]->text, sfColor_fromRGB(255, 255, 255));
+	sfText_setPosition(sprite[0]->text, (sfVector2f){880, 0});
 	initialize_sprite2(sprite, stat);
 	return (sprite);
 }
@@ -363,7 +370,7 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 		sfRenderWindow_drawSprite(window, sprite[14]->s_sprt, NULL);
 		display_chest(sprite[14]->v_sprt.x, sprite[14]->v_sprt.y, icm, window);
 	}
-	day_time(window);
+	day_time(window, sprite);
 	game_event(window, event, sprite, icm);
 	sfRenderWindow_display(window);
 }

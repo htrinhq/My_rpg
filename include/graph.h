@@ -34,6 +34,7 @@ struct sprite_s {
 	sfIntRect r_sprt;
 	sfText *text;
 	sfFont *font;
+	sfClock *clock;
 };
 
 typedef struct sprite_s sprite_t;
