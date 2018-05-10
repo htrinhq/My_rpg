@@ -220,6 +220,7 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sprite[5]->o_sprt = 0;
 	sprite[8]->o_sprt = 0;
 	sprite[9]->o_sprt = 0;
+	sprite[14]->o_sprt = 0;
 	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
 	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
 	sfSprite_setTextureRect(sprite[7]->s_sprt, sprite[7]->r_sprt);
