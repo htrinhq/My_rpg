@@ -359,6 +359,7 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 		sfRenderWindow_drawSprite(window, sprite[14]->s_sprt, NULL);
 		display_chest(sprite[14]->v_sprt.x, sprite[14]->v_sprt.y, icm, window);
 	}
+	day_time(window);
 	game_event(window, event, sprite, icm);
 	sfRenderWindow_display(window);
 }

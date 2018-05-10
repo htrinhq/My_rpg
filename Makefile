@@ -18,7 +18,8 @@ SRC	=	src/main.c		\
 		src/open_chest.c	\
 		src/move_npc.c		\
 		src/pathfinding.c	\
-		src/stat.c
+		src/stat.c		\
+		src/day_time.c
 
 OBJ	=	$(SRC:.c=.o)
 
