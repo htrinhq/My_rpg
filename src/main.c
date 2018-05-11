@@ -492,6 +492,7 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 	sfEvent event;
 
 	sfRenderWindow_drawSprite(window, sprite[0]->s_sprt, NULL);
+	display_npc(window, sprite[0]->r_sprt);
 	sfRenderWindow_drawSprite(window, sprite[1]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[4]->s_sprt, NULL);
@@ -514,7 +515,6 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 		display_chest(sprite[14]->v_sprt.x, sprite[14]->v_sprt.y, icm, window);
 		display_inventory(window, icm);
 	}
-	display_npc(window, sprite[0]->r_sprt);
 	day_time(window, sprite);
 	game_event(window, event, sprite, icm);
 	sfRenderWindow_display(window);
