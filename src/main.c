@@ -70,15 +70,16 @@ sprite_t **move_player(sprite_t **sprite, icm_t *icm, int pst)
 	if ((pst == 1 ||pst == 3 ||pst == 5 || pst == 9) && x > 0
 	&& icm->map_txt[x - 1][y] == ' ')
 		sprite[0]->r_sprt.top -= 10;
-	if ((pst == 2 ||pst == 6 ||pst == 10 || pst == 3) && x < 3050
+	if ((pst == 2 ||pst == 6 ||pst == 10 || pst == 3) && x < 305
 	    && icm->map_txt[x + 1][y] == ' ')
 		sprite[0]->r_sprt.top += 10;
 	if ((pst == 4 ||pst == 6 ||pst == 5 || pst == 12) && y > 0 &&
 	    icm->map_txt[x][y - 1] == ' ')
 		sprite[0]->r_sprt.left -= 10;
-	if ((pst == 8 ||pst == 10 ||pst == 9 || pst == 14) && y < 4600 &&
+	if ((pst == 8 ||pst == 10 ||pst == 9 || pst == 14) && y < 460 &&
 	    icm->map_txt[x][y + 1] == ' ')
 		sprite[0]->r_sprt.left += 10;
+	printf("%d, %d\n", x, y);
 	return (player_animation(sprite, x, y));
 }
 
