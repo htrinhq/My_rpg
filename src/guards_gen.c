@@ -28,6 +28,7 @@ guard_t **get_all_guards(int guards_nb)
 {
 	int i = 0;
 	guard_t **guards = malloc(sizeof(guard_t*) * (guards_nb + 1));
+	sfVector2f scale = {0.5, 0.5};
 
 	while (i < guards_nb) {
 		guards[i] = malloc(sizeof(guard_t));
@@ -49,4 +50,12 @@ sprite_t *find_sprite(char *name)
 		i = i + 1;
 	}
 	return (NULL);
+}
+
+void init_var(void)
+{
+	create_sprite_tab();
+	get_all_npcs(7);
+	get_all_guards(3);
+	read_npc_routes();
 }

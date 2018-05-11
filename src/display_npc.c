@@ -16,30 +16,44 @@ void display_npc3(sfRenderWindow *window, sfIntRect rect, npc_t *npc)
 	sfSprite_setPosition(npc->spr->s_sprt,
 	get_real_pos(npc->map, npc->token, rect));
 	sfRenderWindow_drawSprite(window, npc->spr->s_sprt, NULL);
-	if (game_clock2() > 1 / 100) {
-		get_pos_routine(npc->token, npc->map);
-		npc->spr->r_sprt = npc_animation(npc->spr->r_sprt);
-	}
 }
 
-void display_npc(sfRenderWindow *window, sfIntRect rect)
+void display_npc(sfRenderWindow *window, sfIntRect rect, sprite_t *sprite)
 {
 	npc_t **npc = get_npc(0, NULL);
-	guard_t **guard = get_guards(0, NULL);
 	int i = 0;
+	float a = sfTime_asSeconds(sfClock_getElapsedTime(sprite->clock));
 
 	while (i < 7) {
+		if (a > 0.03) {
+			get_pos_routine(npc[i]->token, npc[i]->map);
+			npc[i]->spr->r_sprt = npc_animation(
+				npc[i]->spr->r_sprt);
+			sfClock_restart(sprite->clock);
+		}
 		display_npc3(window, rect, npc[i]);
 		i = i + 1;
 	}
-	i = 0;
+	display_guards(window, rect, a);
+}
+
+void display_guards(sfRenderWindow *window, sfIntRect rect, float a)
+{
+	guard_t **guard = get_guards(0, NULL);
+	int i = 0;
+
 	while (i < 3) {
-		display_guards(window, rect, guard[i]);
+		if (a > 0.03) {
+			get_pos_routine(guard[i]->token, guard[i]->map);
+			guard[i]->sprite->r_sprt = npc_animation(
+				guard[i]->sprite->r_sprt);
+		}
+		display_guards2(window, rect, guard[i]);
 		i = i + 1;
 	}
 }
 
-void display_guards(sfRenderWindow *window, sfIntRect rect, guard_t *guard)
+void display_guards2(sfRenderWindow *window, sfIntRect rect, guard_t *guard)
 {
 	sfVector2f scale = {0.5, 0.5};
 
@@ -48,10 +62,6 @@ void display_guards(sfRenderWindow *window, sfIntRect rect, guard_t *guard)
 	sfSprite_setPosition(guard->sprite->s_sprt,
 	get_real_pos(guard->map, guard->token, rect));
 	sfRenderWindow_drawSprite(window, guard->sprite->s_sprt, NULL);
-	if (game_clock2() > 1 / 60) {
-		get_pos_routine(guard->token, guard->map);
-		guard->sprite->r_sprt = npc_animation(guard->sprite->r_sprt);
-	}
 }
 
 sfIntRect npc_animation(sfIntRect rect)
@@ -68,12 +78,4 @@ sfIntRect npc_animation(sfIntRect rect)
 		rect.top = 0;
 		return (rect);
 	}
-}
-
-void init_var(void)
-{
-	create_sprite_tab();
-	get_all_npcs(7);
-	get_all_guards(3);
-	read_npc_routes();
 }

@@ -98,7 +98,8 @@ sfVector2f get_pos_routine2(char **map, char token);
 sfVector2f get_pos_routine3(char **map, char token);
 sprite_t **fill_obj_sprite(sprite_t **obj);
 void display_chest(int x, int y, icm_t *icm, sfRenderWindow *window);
-void display_guards(sfRenderWindow *window, sfIntRect rect, guard_t *guard);
+void display_guards(sfRenderWindow *window, sfIntRect rect, float a);
+void display_guards2(sfRenderWindow *window, sfIntRect rect, guard_t *guard);
 sfVector2f get_real_pos(char **map, char token, sfIntRect rect);
 char **read_routes(char *path);
 void read_npc_routes(void);
@@ -106,5 +107,6 @@ guard_t **get_all_guards(int guards_nb);
 npc_t **get_all_npcs(int npc_nb);
 void init_var();
 sfIntRect npc_animation(sfIntRect rect);
+void display_npc(sfRenderWindow *window, sfIntRect rect, sprite_t *sprite);
 
 #endif

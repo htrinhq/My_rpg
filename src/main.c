@@ -284,6 +284,7 @@ sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
 	sprite[1] = create_sprite(sprite[1], "rsrc/pictures/p1.png");
 	sprite[0] = create_sprite(sprite[0], "rsrc/pictures/map.png");
 	sprite[0]->clock = sfClock_create();
+	sprite[1]->clock = sfClock_create();
 	sprite[0]->r_sprt.top = 1480;
 	sprite[0]->r_sprt.left = 1260;
 	sprite[0]->r_sprt.width = 1920;
@@ -357,6 +358,7 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 	sfEvent event;
 
 	sfRenderWindow_drawSprite(window, sprite[0]->s_sprt, NULL);
+	display_npc(window, sprite[0]->r_sprt, sprite[1]);
 	sfRenderWindow_drawSprite(window, sprite[1]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[4]->s_sprt, NULL);
@@ -371,7 +373,6 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 		sfRenderWindow_drawSprite(window, sprite[14]->s_sprt, NULL);
 		display_chest(sprite[14]->v_sprt.x, sprite[14]->v_sprt.y, icm, window);
 	}
-	display_npc(window, sprite[0]->r_sprt);
 	day_time(window, sprite);
 	game_event(window, event, sprite, icm);
 	sfRenderWindow_display(window);
