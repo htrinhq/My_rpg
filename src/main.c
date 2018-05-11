@@ -192,6 +192,12 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sprite[12]->r_sprt.left = 0;
 	sprite[12]->r_sprt.width = 100;
 	sprite[12]->r_sprt.height = 20;
+	sprite[16]->r_sprt.top = 10;
+	sprite[16]->r_sprt.left = 70;
+	sprite[16]->r_sprt.width = 136;
+	sprite[16]->r_sprt.height = 183;
+	sprite[16]->v_sprt.x = 198;
+	sprite[16]->v_sprt.y = 42;
 	sprite[7]->v_sprt.x = 40;
 	sprite[7]->v_sprt.y = 960;
 	sprite[1]->v_sprt.x = 960;
@@ -223,6 +229,7 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sfSprite_setTextureRect(sprite[10]->s_sprt, sprite[10]->r_sprt);
 	sfSprite_setTextureRect(sprite[11]->s_sprt, sprite[11]->r_sprt);
 	sfSprite_setTextureRect(sprite[12]->s_sprt, sprite[12]->r_sprt);
+	sfSprite_setTextureRect(sprite[16]->s_sprt, sprite[16]->r_sprt);
 	sfSprite_setPosition(sprite[1]->s_sprt, sprite[1]->v_sprt);
 	sfSprite_setPosition(sprite[7]->s_sprt, sprite[7]->v_sprt);
 	sfSprite_setPosition(sprite[8]->s_sprt, sprite[8]->v_sprt);
@@ -230,6 +237,7 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sfSprite_setPosition(sprite[10]->s_sprt, sprite[10]->v_sprt);
 	sfSprite_setPosition(sprite[11]->s_sprt, sprite[11]->v_sprt);
 	sfSprite_setPosition(sprite[12]->s_sprt, sprite[12]->v_sprt);
+	sfSprite_setPosition(sprite[16]->s_sprt, sprite[16]->v_sprt);
 	sfSprite_setScale(sprite[1]->s_sprt, scale);
 	sfSprite_setScale(sprite[7]->s_sprt, scale2);
 	sfSprite_setScale(sprite[8]->s_sprt, scale2);
@@ -237,6 +245,7 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sfSprite_setScale(sprite[10]->s_sprt, scale3);
 	sfSprite_setScale(sprite[11]->s_sprt, scale3);
 	sfSprite_setScale(sprite[12]->s_sprt, scale3);
+	sfSprite_setScale(sprite[16]->s_sprt, scale);
 	sprite[13]->text = sfText_create();
 	sprite[13]->font = sfFont_createFromFile("rsrc/fonts/copyfonts.com_algol-ix.ttf");
 	sfText_setFont(sprite[13]->text, sprite[13]->font);
@@ -262,6 +271,8 @@ sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
 	sprite[13] = malloc(sizeof(sprite_t) * 5);
 	sprite[14] = malloc(sizeof(sprite_t) * 5);
 	sprite[15] = malloc(sizeof(sprite_t) * 5);
+	sprite[16] = malloc(sizeof(sprite_t) * 5);
+	sprite[16] = create_sprite(sprite[16], "rsrc/pictures/gardian.png");
 	sprite[15] = create_sprite(sprite[15], "rsrc/pictures/timeout.png");
 	sprite[14] = create_sprite(sprite[14], "rsrc/pictures/chest.png");
 	sprite[13]->text = sfText_create();
@@ -356,6 +367,12 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[4]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[7]->s_sprt, NULL);
+	sfRenderWindow_drawSprite(window, sprite[16]->s_sprt, NULL);
+	sprite[16]->v_sprt.x = 198;
+	sprite[16]->v_sprt.y = 42;
+	sprite[16]->v_sprt.x = sprite[16]->v_sprt.x * 9.8- sprite[0]->r_sprt.left;
+	sprite[16]->v_sprt.y = sprite[16]->v_sprt.y * 18.5 - sprite[0]->r_sprt.top;
+	sfSprite_setPosition(sprite[16]->s_sprt, sprite[16]->v_sprt);
 	if (sprite[2]->o_sprt == 1) {
 		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
 		display_stat(sprite, window, stat);
@@ -392,7 +409,7 @@ void menu_loop(sfRenderWindow *window, icm_t *icm)
 	text_t **text = malloc(sizeof(text_t *) * 5);
 	sprite_t *bg = malloc(sizeof(sprite_t));
 	sfEvent event;
-	sprite_t **sprite = malloc(sizeof(sprite_t *) * 16);
+	sprite_t **sprite = malloc(sizeof(sprite_t *) * 17);
 	plstat_t *stat = malloc(sizeof(plstat_t));
 
 	icm->map_txt = get_map_txt();
