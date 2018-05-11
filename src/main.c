@@ -116,14 +116,14 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 			pst += 8;
 		if (pst != 0) {
 			move_player(sprite, icm, pst);
-			particules(window, 975, 630, 1);
+			//particules(window, 975, 630, 1);
 		}
 	}
 	if (sfKeyboard_isKeyPressed(sfKeyP))
 		sprite[5]->o_sprt = 3;
 	if (sfKeyboard_isKeyPressed(sfKeyI))
 		sprite[2]->o_sprt = (sprite[2]->o_sprt == 0) ? 1 : 0;
-	if (sfKeyboard_isKeyPressed(sfKeyE)) {
+	if (sfKeyboard_isKeyPressed(sfKeyE) && sprite[8]->o_sprt == 1) {
 		sprite[14]->o_sprt = (sprite[14]->o_sprt == 0) ? 1 : 0;
 	}
 }
@@ -359,7 +359,6 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[4]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[7]->s_sprt, NULL);
-	//sfRenderWindow_drawSprite(window, icm->s_obj[0]->s_sprt, NULL);
 	if (sprite[2]->o_sprt == 1) {
 		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
 		display_stat(sprite, window, stat);
@@ -476,6 +475,8 @@ int main(int argc, char **argv, char**envp)
 
 	icm->obj = malloc(sizeof(idobj_t *) * 16);
 	icm->s_obj = malloc(sizeof(sprite_t *) * 15);
+	//icm->inventory = malloc(sizeof(int) * 17);
+	//icm->inventory = create_inventory(icm->inventory);
 	icm->chests = create_chests(icm->chests);
 	icm->s_obj = fill_obj_sprite(icm->s_obj);
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
