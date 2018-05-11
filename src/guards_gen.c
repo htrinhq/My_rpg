@@ -50,3 +50,11 @@ sprite_t *find_sprite(char *name)
 	}
 	return (NULL);
 }
+
+void init_var(void)
+{
+	create_sprite_tab();
+	get_all_npcs(7);
+	get_all_guards(3);
+	read_npc_routes();
+}

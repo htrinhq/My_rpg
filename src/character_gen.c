@@ -51,7 +51,7 @@ npc_t *npc_gen(void)
 	char *s = malloc(sizeof(char) * 23);
 	static int token = 48;
 
-	sprite_id = rand_gen(2, 28);
+	sprite_id = rand_gen(2, 14);
 	s = my_strcat("rsrc/pictures/p", 3, my_int_to_str(sprite_id), ".png");
 	npc->spr = find_sprite(s);
 	npc->quest = quest_gen(rand_gen(1, 3));

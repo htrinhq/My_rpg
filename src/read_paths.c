@@ -37,12 +37,3 @@ char **read_routes(char *path)
 	map_txt[153] = NULL;
 	return (map_txt);
 }
-
-float game_clock2(void)
-{
-	sfClock *clock = sfClock_create();
-	float a = sfTime_asMicroseconds(sfClock_getElapsedTime(clock));
-
-	sfClock_restart(clock);
-	return (a);
-}
