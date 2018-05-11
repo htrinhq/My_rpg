@@ -79,7 +79,6 @@ sprite_t **move_player(sprite_t **sprite, icm_t *icm, int pst)
 	if ((pst == 8 ||pst == 10 ||pst == 9 || pst == 14) && y < 460 &&
 	    icm->map_txt[x][y + 1] == ' ')
 		sprite[0]->r_sprt.left += 10;
-	printf("%d, %d\n", x, y);
 	return (player_animation(sprite, x, y));
 }
 
@@ -352,6 +351,7 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sprite[8]->o_sprt = 0;
 	sprite[9]->o_sprt = 0;
 	sprite[14]->o_sprt = 0;
+	sprite[16]->o_sprt = 8;
 	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
 	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
 	sfSprite_setTextureRect(sprite[7]->s_sprt, sprite[7]->r_sprt);
@@ -499,7 +499,9 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[4]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[7]->s_sprt, NULL);
-	sfRenderWindow_drawSprite(window, sprite[16]->s_sprt, NULL);
+	fight(stat, sprite, window);
+	if (sprite[16]->o_sprt > 0)
+		sfRenderWindow_drawSprite(window, sprite[16]->s_sprt, NULL);
 	sprite[16]->v_sprt.x = 198;
 	sprite[16]->v_sprt.y = 42;
 	sprite[16]->v_sprt.x = sprite[16]->v_sprt.x * 9.8- sprite[0]->r_sprt.left;

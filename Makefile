@@ -21,7 +21,8 @@ SRC	=	src/main.c		\
 		src/stat.c		\
 		src/day_time.c		\
 		src/display_npc.c	\
-		src/read_paths.c
+		src/read_paths.c	\
+		src/fight.c
 
 OBJ	=	$(SRC:.c=.o)
 
