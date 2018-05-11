@@ -68,7 +68,7 @@ sprite_t **move_player(sprite_t **sprite, icm_t *icm, int pst)
 
 	detect_chest(x, y, sprite, icm);
 	if ((pst == 1 ||pst == 3 ||pst == 5 || pst == 9) && x > 0
-	&& icm->map_txt[x - 1][y] == ' ') {
+	&& icm->map_txt[x - 1][y] == ' ')
 		sprite[0]->r_sprt.top -= 10;
 	if ((pst == 2 ||pst == 6 ||pst == 10 || pst == 3) && x < 3050
 	    && icm->map_txt[x + 1][y] == ' ')
