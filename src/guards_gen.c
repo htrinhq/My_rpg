@@ -19,6 +19,7 @@ guard_t *guards_gen(void)
 	guard->stat = stat;
 	guard->sprite = find_sprite("rsrc/pictures/gardian.png");
 	guard->token = token;
+	guard->sprite->r_sprt = create_recth(0, 0, 320, 320);
 	token = token + 1;
 	return (guard);
 }

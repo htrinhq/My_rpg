@@ -9,11 +9,11 @@
 
 sfVector2f find_character(char **map, char token)
 {
-	sfVector2f pos = { 0, 0 };
+	sfVector2f pos = { -1, -1 };
 	int y = 0;
 	int len = my_tablen(map);
 
-	while (y < len) {
+	while (y < len - 1) {
 		if (find_token(map[y], &pos, token)) {
 			pos.y = y;
 			break;
@@ -27,6 +27,10 @@ int find_token(char *str, sfVector2f *pos, char token)
 {
 	int i = 0;
 
+	if (str == NULL)
+		return (0);
+	if (!str[i])
+		return (0);
 	while (str[i] != '\0') {
 		if (str[i] == token) {
 			pos->x = i;
@@ -39,7 +43,6 @@ int find_token(char *str, sfVector2f *pos, char token)
 
 void follow(char follower, sfVector2f pos, char **map)
 {
-	//sfVector2f pos = find_character(map, token);
 	sfVector2f pos_f = find_character(map, follower);
 
 	if (pos_f.y < pos.y && map[(int)pos_f.y + 1][(int)pos_f.x] == ' ') {
