@@ -34,7 +34,7 @@ char **read_routes(char *path)
 	for (int i = 0; i < 153; i = i + 1) {
 		map_txt[i] = get_next_line(fd);
 	}
-	map_txt[154] = NULL;
+	map_txt[153] = NULL;
 	return (map_txt);
 }
 
