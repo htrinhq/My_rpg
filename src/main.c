@@ -266,6 +266,8 @@ sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
 	sprite[12] = malloc(sizeof(sprite_t) * 5);
 	sprite[13] = malloc(sizeof(sprite_t) * 5);
 	sprite[14] = malloc(sizeof(sprite_t) * 5);
+	sprite[15] = malloc(sizeof(sprite_t) * 5);
+	sprite[15] = create_sprite(sprite[15], "rsrc/pictures/timeout.png");
 	sprite[14] = create_sprite(sprite[14], "rsrc/pictures/chest.png");
 	sprite[13]->text = sfText_create();
 	sprite[12] = create_sprite(sprite[12], "rsrc/pictures/level.png");
@@ -394,7 +396,7 @@ void menu_loop(sfRenderWindow *window, icm_t *icm)
 	text_t **text = malloc(sizeof(text_t *) * 5);
 	sprite_t *bg = malloc(sizeof(sprite_t));
 	sfEvent event;
-	sprite_t **sprite = malloc(sizeof(sprite_t *) * 15);
+	sprite_t **sprite = malloc(sizeof(sprite_t *) * 16);
 	plstat_t *stat = malloc(sizeof(plstat_t));
 
 	icm->map_txt = get_map_txt();
