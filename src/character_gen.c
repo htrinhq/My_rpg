@@ -58,6 +58,7 @@ npc_t *npc_gen(void)
 	npc->stat = stat_gen();
 	npc->inventory = malloc(sizeof(int) * 18);
 	npc->token = token;
+	npc->spr->r_sprt = create_recth(0, 0, 320, 320);
 	while (i < 18) {
 		npc->inventory[i] = -1;
 		i = i + 1;

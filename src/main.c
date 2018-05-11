@@ -371,6 +371,7 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 		sfRenderWindow_drawSprite(window, sprite[14]->s_sprt, NULL);
 		display_chest(sprite[14]->v_sprt.x, sprite[14]->v_sprt.y, icm, window);
 	}
+	display_npc(window, sprite[0]->r_sprt);
 	day_time(window, sprite);
 	game_event(window, event, sprite, icm);
 	sfRenderWindow_display(window);
@@ -483,6 +484,7 @@ int main(int argc, char **argv, char**envp)
 	icm->s_obj = fill_obj_sprite(icm->s_obj);
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
 		return (84);
+	init_var();
 	music = sfMusic_createFromFile("rsrc/sounds/main.ogg");
 	sfMusic_play(music);
 	icm->obj = fill_obj_id(icm->obj);

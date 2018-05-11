@@ -19,7 +19,9 @@ SRC	=	src/main.c		\
 		src/move_npc.c		\
 		src/pathfinding.c	\
 		src/stat.c		\
-		src/day_time.c
+		src/day_time.c		\
+		src/display_npc.c	\
+		src/read_paths.c
 
 OBJ	=	$(SRC:.c=.o)
 

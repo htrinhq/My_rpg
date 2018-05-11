@@ -17,6 +17,7 @@ sprite_t **create_sprite_tab(void)
 		sprite[i] = malloc(sizeof(sprite_t));
 		sprite[i] = create_sprite(sprite[i],
 		my_strcat("rsrc/pictures/", 2, paths[i]));
+		sprite[i]->name = my_strcat("rsrc/pictures/", 2, paths[i]);
 		i = i + 1;
 	}
 	sprite[i] = NULL;
