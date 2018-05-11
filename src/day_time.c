@@ -44,30 +44,42 @@ void set_time(int hour, int min, sprite_t **sprite)
 	set_time_2(hour, min, sprite);
 }
 
+int delta_time(int t1, int t2)
+{
+	if (t2 - t1 < 0)
+		t2 += 60;
+	if (t2 - t1 > 60)
+		t2 -= 60;
+	return (t2 - t1);
+}
+
 void day_event(sfRenderWindow *wd, sprite_t **sprite, int hour, int min)
 {
 	static int mem = 0;
 
-	if (hour >= 18 && min % 2 == 0)
+	if (hour >= 18 && hour < 19 && min % 2 == 0)
 		sfText_setString(sprite[0]->text, "!!! GO TO SLEEP !!!");
-	if (hour >= 19 && (sprite[0]->r_sprt.top < 1390 || sprite[0]->r_sprt.top > 1690) && (sprite[0]->r_sprt.left < 1150 || sprite[0]->r_sprt.left > 1420)) {
+	if (hour >= 19 && hour < 20 && sprite[15]->o_sprt == 0 &&
+	(sprite[0]->r_sprt.top < 1370 || sprite[0]->r_sprt.top > 1710 ||
+	sprite[0]->r_sprt.left < 1130 || sprite[0]->r_sprt.left > 1440) &&
+	sprite[0]->r_sprt.left != 540 && sprite[0]->r_sprt.left != 1590) {
 		mem = min;
+		sprite[15]->o_sprt = 1;
 		sprite[0]->r_sprt.top = 540;
 		sprite[0]->r_sprt.left = 1590;
 	}
 	sfRenderWindow_drawText(wd, sprite[0]->text, NULL);
-	if (mem != 0 && (min - mem) <= 5) {
+	if (sprite[15]->o_sprt == 1)
 		sfRenderWindow_drawSprite(wd, sprite[15]->s_sprt, NULL);
-	} else if (mem != 0)
-		mem = 0;
+	if (sprite[15]->o_sprt == 1 && delta_time(mem, min) >= 5)
+		sprite[15]->o_sprt = 0;
 }
 
 void day_time(sfRenderWindow *wd, sprite_t **sprite)
 {
-	text_t text;
 	float time = sfTime_asSeconds(sfClock_getElapsedTime(sprite[0]->clock));
-	static int hour = 17;
-	static int min = 30;
+	static int hour = 7;
+	static int min = 00;
 
 	if (time >= 1) {
 		min++;
@@ -77,6 +89,8 @@ void day_time(sfRenderWindow *wd, sprite_t **sprite)
 		hour++;
 		min = 0;
 	}
+	if (hour == 20)
+		hour = 7;
 	set_time(hour, min, sprite);
 	day_event(wd, sprite, hour, min);
 }

@@ -78,4 +78,5 @@ sfIntRect npc_animation(sfIntRect rect)
 		rect.top = 0;
 		return (rect);
 	}
+	return (rect);
 }

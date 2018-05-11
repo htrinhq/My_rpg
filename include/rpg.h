@@ -28,6 +28,8 @@ typedef struct icm {
 	char **map_txt;
 	idobj_t **obj;
 	chest_t **chests;
+	int *inventory;
+	int ch;
 	sprite_t **s_obj;
 } icm_t;
 
@@ -100,6 +102,10 @@ sprite_t **fill_obj_sprite(sprite_t **obj);
 void display_chest(int x, int y, icm_t *icm, sfRenderWindow *window);
 void display_guards(sfRenderWindow *window, sfIntRect rect, float a);
 void display_guards2(sfRenderWindow *window, sfIntRect rect, guard_t *guard);
+int *create_inventory(int *inventory);
+void display_inventory(sfRenderWindow *window, icm_t *icm);
+int add_inventory(int id, icm_t *icm);
+int add_chest(int id, icm_t *icm, int nb);
 sfVector2f get_real_pos(char **map, char token, sfIntRect rect);
 char **read_routes(char *path);
 void read_npc_routes(void);

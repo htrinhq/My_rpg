@@ -63,34 +63,155 @@ sprite_t **player_animation(sprite_t **sprite, int x, int y)
 
 sprite_t **move_player(sprite_t **sprite, icm_t *icm, int pst)
 {
-	static int y = 225;
-	static int x = 213;
+	int y =  (sprite[0]->r_sprt.left - 1260) / 10 + 225;
+	int x = (sprite[0]->r_sprt.top - 1480) / 10 + 213;
 
 	detect_chest(x, y, sprite, icm);
 	if ((pst == 1 ||pst == 3 ||pst == 5 || pst == 9) && x > 0
-	&& icm->map_txt[x - 1][y] == ' ') {
+	&& icm->map_txt[x - 1][y] == ' ')
 		sprite[0]->r_sprt.top -= 10;
-		x--;
-	}
-	if ((pst == 2 ||pst == 6 ||pst == 10 || pst == 3) && x < 3050 && icm->map_txt[x + 1][y] == ' ') {
+	if ((pst == 2 ||pst == 6 ||pst == 10 || pst == 3) && x < 3050
+	    && icm->map_txt[x + 1][y] == ' ')
 		sprite[0]->r_sprt.top += 10;
-		x++;
-	}
-	if ((pst == 4 ||pst == 6 ||pst == 5 || pst == 12) && y > 0 && icm->map_txt[x][y - 1] == ' ') {
+	if ((pst == 4 ||pst == 6 ||pst == 5 || pst == 12) && y > 0 &&
+	    icm->map_txt[x][y - 1] == ' ')
 		sprite[0]->r_sprt.left -= 10;
-		y--;
-	}
-	if ((pst == 8 ||pst == 10 ||pst == 9 || pst == 14) && y < 4600 && icm->map_txt[x][y + 1] == ' ') {
+	if ((pst == 8 ||pst == 10 ||pst == 9 || pst == 14) && y < 4600 &&
+	    icm->map_txt[x][y + 1] == ' ')
 		sprite[0]->r_sprt.left += 10;
-		y++;
-	}
 	return (player_animation(sprite, x, y));
+}
+
+void change_chest(sfEvent event, icm_t *icm)
+{
+	if (event.mouseButton.x > 747 &&  event.mouseButton.x < 846 && event.mouseButton.y > 432 && event.mouseButton.y < 531) {
+		if (icm->chests[icm->ch]->inside[0] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[0], icm))
+				icm->chests[icm->ch]->inside[0] = -1;
+		}
+	}
+	if (event.mouseButton.x > 857 &&  event.mouseButton.x < 955 && event.mouseButton.y > 432 && event.mouseButton.y < 531)
+		if (icm->chests[icm->ch]->inside[1] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[1], icm))
+				icm->chests[icm->ch]->inside[1] = -1;
+		}
+	if (event.mouseButton.x > 966 &&  event.mouseButton.x < 1065 && event.mouseButton.y > 432 && event.mouseButton.y < 531)
+		if (icm->chests[icm->ch]->inside[2] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[2], icm))
+				icm->chests[icm->ch]->inside[2] = -1;
+		}
+	if (event.mouseButton.x > 1077 &&  event.mouseButton.x < 1175 && event.mouseButton.y > 432 && event.mouseButton.y < 531)
+		if (icm->chests[icm->ch]->inside[3] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[3], icm))
+				icm->chests[icm->ch]->inside[3] = -1;
+		}
+	if (event.mouseButton.x > 747 &&  event.mouseButton.x < 846 && event.mouseButton.y > 558 && event.mouseButton.y < 656)
+		if (icm->chests[icm->ch]->inside[4] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[4], icm))
+				icm->chests[icm->ch]->inside[4] = -1;
+		}
+	if (event.mouseButton.x > 857 &&  event.mouseButton.x < 955 && event.mouseButton.y > 558 && event.mouseButton.y < 656)
+		if (icm->chests[icm->ch]->inside[5] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[5], icm))
+				icm->chests[icm->ch]->inside[5] = -1;
+		}
+	if (event.mouseButton.x > 966 &&  event.mouseButton.x < 1065 && event.mouseButton.y > 558 && event.mouseButton.y < 656)
+		if (icm->chests[icm->ch]->inside[6] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[6], icm))
+				icm->chests[icm->ch]->inside[6] = -1;
+		}
+	if (event.mouseButton.x > 1077 &&  event.mouseButton.x < 1175 && event.mouseButton.y > 558 && event.mouseButton.y < 656)
+		if (icm->chests[icm->ch]->inside[7] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[7], icm))
+				icm->chests[icm->ch]->inside[7] = -1;
+		}
+	if (event.mouseButton.x > 112 &&  event.mouseButton.x < 211 && event.mouseButton.y > 373 && event.mouseButton.y < 471)
+		if (icm->inventory[0] != -1) {
+			add_chest(icm->inventory[0], icm, icm->ch);
+			icm->inventory[0] = -1;
+		}
+	if (event.mouseButton.x > 221 &&  event.mouseButton.x < 322 && event.mouseButton.y > 373 && event.mouseButton.y < 471)
+		if (icm->inventory[1] != -1) {
+			if (add_chest(icm->inventory[1], icm, icm->ch))
+				icm->inventory[1] = -1;
+		}
+	if (event.mouseButton.x > 332 &&  event.mouseButton.x < 432 && event.mouseButton.y > 373 && event.mouseButton.y < 471)
+		if (icm->inventory[2] != -1) {
+			if (add_chest(icm->inventory[2], icm, icm->ch))
+				icm->inventory[2] = -1;
+		}
+	if (event.mouseButton.x > 442 &&  event.mouseButton.x < 541 && event.mouseButton.y > 373 && event.mouseButton.y < 471)
+		if (icm->inventory[3] != -1) {
+			if (add_chest(icm->inventory[3], icm, icm->ch))
+				icm->inventory[3] = -1;
+		}
+	if (event.mouseButton.x > 112 &&  event.mouseButton.x < 211 && event.mouseButton.y > 483 && event.mouseButton.y < 581)
+		if (icm->inventory[4] != -1) {
+			if (add_chest(icm->inventory[4], icm, icm->ch))
+				icm->inventory[4] = -1;
+		}
+	if (event.mouseButton.x > 221 &&  event.mouseButton.x < 322 && event.mouseButton.y > 483 && event.mouseButton.y < 581)
+		if (icm->inventory[5] != -1) {
+			if (add_chest(icm->inventory[5], icm, icm->ch))
+				icm->inventory[5] = -1;
+		}
+	if (event.mouseButton.x > 332 &&  event.mouseButton.x < 432 && event.mouseButton.y > 483 && event.mouseButton.y < 581)
+		if (icm->inventory[6] != -1) {
+			if (add_chest(icm->inventory[6], icm, icm->ch))
+				icm->inventory[6] = -1;
+		}
+	if (event.mouseButton.x > 442 &&  event.mouseButton.x < 541 && event.mouseButton.y > 483 && event.mouseButton.y < 581)
+		if (icm->inventory[7] != -1) {
+			if (add_chest(icm->inventory[7], icm, icm->ch))
+				icm->inventory[7] = -1;
+		}
+	if (event.mouseButton.x > 112 &&  event.mouseButton.x < 211 && event.mouseButton.y > 592 && event.mouseButton.y < 692)
+		if (icm->inventory[8] != -1) {
+			if (add_chest(icm->inventory[8], icm, icm->ch))
+				icm->inventory[8] = -1;
+		}
+	if (event.mouseButton.x > 221 &&  event.mouseButton.x < 322 && event.mouseButton.y > 592 && event.mouseButton.y < 692)
+		if (icm->inventory[9] != -1) {
+			add_chest(icm->inventory[9], icm, icm->ch);
+			icm->inventory[9] = -1;
+		}
+	if (event.mouseButton.x > 332 &&  event.mouseButton.x < 432 && event.mouseButton.y > 592 && event.mouseButton.y < 692)
+		if (icm->inventory[10] != -1) {
+			if (add_chest(icm->inventory[10], icm, icm->ch))
+				icm->inventory[10] = -1;
+		}
+	if (event.mouseButton.x > 442 &&  event.mouseButton.x < 541 && event.mouseButton.y > 592 && event.mouseButton.y < 692)
+		if (icm->inventory[11] != -1) {
+			if (add_chest(icm->inventory[11], icm, icm->ch))
+				icm->inventory[11] = -1;
+		}
+	if (event.mouseButton.x > 112 &&  event.mouseButton.x < 211 && event.mouseButton.y > 703 && event.mouseButton.y < 803)
+		if (icm->inventory[12] != -1) {
+			if (add_chest(icm->inventory[12], icm, icm->ch))
+				icm->inventory[12] = -1;
+		}
+	if (event.mouseButton.x > 221 &&  event.mouseButton.x < 322 && event.mouseButton.y > 703 && event.mouseButton.y < 803)
+		if (icm->inventory[13] != -1) {
+			if (add_chest(icm->inventory[13], icm, icm->ch))
+				icm->inventory[13] = -1;
+		}
+	if (event.mouseButton.x > 332 &&  event.mouseButton.x < 432 && event.mouseButton.y > 703 && event.mouseButton.y < 803)
+		if (icm->inventory[14] != -1) {
+			if (add_chest(icm->inventory[14], icm, icm->ch))
+				icm->inventory[14] = -1;
+		}
+	if (event.mouseButton.x > 442 &&  event.mouseButton.x < 541 && event.mouseButton.y > 703 && event.mouseButton.y < 803)
+		if (icm->inventory[15] != -1) {
+			if (add_chest(icm->inventory[15], icm, icm->ch))
+				icm->inventory[15] = -1;
+		}
 }
 
 void game_event2(sfRenderWindow *window, sfEvent event,
 		 sprite_t **sprite, icm_t *icm)
 {
 	int pst = 0;
+	int x = 0;
 	if (sprite[2]->o_sprt == 1 && (event.mouseButton.x >= 1332 &&
 				       event.mouseButton.x <= (1332 + 250)) &&
 	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
@@ -102,6 +223,10 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 	    sfMouse_isButtonPressed(sfMouseLeft)) {
 		sprite[1]->o_sprt = 0;
 		sprite[5]->o_sprt = 0;
+	}
+	if (sprite[14]->o_sprt == 1) {
+		if (sfMouse_isButtonPressed(sfMouseLeft))
+			change_chest(event, icm);
 	}
 	if (event.type != sfEvtKeyPressed)
 		return;
@@ -116,16 +241,15 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 			pst += 8;
 		if (pst != 0) {
 			move_player(sprite, icm, pst);
-			//particules(window, 975, 630, 1);
+			particules(window, 975, 630, 1);
 		}
 	}
 	if (sfKeyboard_isKeyPressed(sfKeyP))
 		sprite[5]->o_sprt = 3;
-	if (sfKeyboard_isKeyPressed(sfKeyI))
+	if (sfKeyboard_isKeyPressed(sfKeyI) && sprite[14]->o_sprt == 0)
 		sprite[2]->o_sprt = (sprite[2]->o_sprt == 0) ? 1 : 0;
-	if (sfKeyboard_isKeyPressed(sfKeyE) && sprite[8]->o_sprt == 1) {
+	if (sfKeyboard_isKeyPressed(sfKeyE) && sprite[8]->o_sprt == 1 && sprite[2]->o_sprt == 0)
 		sprite[14]->o_sprt = (sprite[14]->o_sprt == 0) ? 1 : 0;
-	}
 }
 
 sprite_t **game_event(sfRenderWindow *window, sfEvent event,
@@ -197,6 +321,12 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sprite[12]->r_sprt.left = 0;
 	sprite[12]->r_sprt.width = 100;
 	sprite[12]->r_sprt.height = 20;
+	sprite[16]->r_sprt.top = 10;
+	sprite[16]->r_sprt.left = 70;
+	sprite[16]->r_sprt.width = 136;
+	sprite[16]->r_sprt.height = 183;
+	sprite[16]->v_sprt.x = 198;
+	sprite[16]->v_sprt.y = 42;
 	sprite[7]->v_sprt.x = 40;
 	sprite[7]->v_sprt.y = 960;
 	sprite[1]->v_sprt.x = 960;
@@ -228,6 +358,7 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sfSprite_setTextureRect(sprite[10]->s_sprt, sprite[10]->r_sprt);
 	sfSprite_setTextureRect(sprite[11]->s_sprt, sprite[11]->r_sprt);
 	sfSprite_setTextureRect(sprite[12]->s_sprt, sprite[12]->r_sprt);
+	sfSprite_setTextureRect(sprite[16]->s_sprt, sprite[16]->r_sprt);
 	sfSprite_setPosition(sprite[1]->s_sprt, sprite[1]->v_sprt);
 	sfSprite_setPosition(sprite[7]->s_sprt, sprite[7]->v_sprt);
 	sfSprite_setPosition(sprite[8]->s_sprt, sprite[8]->v_sprt);
@@ -235,6 +366,7 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sfSprite_setPosition(sprite[10]->s_sprt, sprite[10]->v_sprt);
 	sfSprite_setPosition(sprite[11]->s_sprt, sprite[11]->v_sprt);
 	sfSprite_setPosition(sprite[12]->s_sprt, sprite[12]->v_sprt);
+	sfSprite_setPosition(sprite[16]->s_sprt, sprite[16]->v_sprt);
 	sfSprite_setScale(sprite[1]->s_sprt, scale);
 	sfSprite_setScale(sprite[7]->s_sprt, scale2);
 	sfSprite_setScale(sprite[8]->s_sprt, scale2);
@@ -242,6 +374,7 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sfSprite_setScale(sprite[10]->s_sprt, scale3);
 	sfSprite_setScale(sprite[11]->s_sprt, scale3);
 	sfSprite_setScale(sprite[12]->s_sprt, scale3);
+	sfSprite_setScale(sprite[16]->s_sprt, scale);
 	sprite[13]->text = sfText_create();
 	sprite[13]->font = sfFont_createFromFile("rsrc/fonts/copyfonts.com_algol-ix.ttf");
 	sfText_setFont(sprite[13]->text, sprite[13]->font);
@@ -267,6 +400,8 @@ sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
 	sprite[13] = malloc(sizeof(sprite_t) * 5);
 	sprite[14] = malloc(sizeof(sprite_t) * 5);
 	sprite[15] = malloc(sizeof(sprite_t) * 5);
+	sprite[16] = malloc(sizeof(sprite_t) * 5);
+	sprite[16] = create_sprite(sprite[16], "rsrc/pictures/gardian.png");
 	sprite[15] = create_sprite(sprite[15], "rsrc/pictures/timeout.png");
 	sprite[14] = create_sprite(sprite[14], "rsrc/pictures/chest.png");
 	sprite[13]->text = sfText_create();
@@ -363,15 +498,23 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[4]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[7]->s_sprt, NULL);
+	sfRenderWindow_drawSprite(window, sprite[16]->s_sprt, NULL);
+	sprite[16]->v_sprt.x = 198;
+	sprite[16]->v_sprt.y = 42;
+	sprite[16]->v_sprt.x = sprite[16]->v_sprt.x * 9.8- sprite[0]->r_sprt.left;
+	sprite[16]->v_sprt.y = sprite[16]->v_sprt.y * 18.5 - sprite[0]->r_sprt.top;
+	sfSprite_setPosition(sprite[16]->s_sprt, sprite[16]->v_sprt);
 	if (sprite[2]->o_sprt == 1) {
 		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
 		display_stat(sprite, window, stat);
+		display_inventory(window, icm);
 	}
 	if (sprite[8]->o_sprt == 1)
 		sfRenderWindow_drawSprite(window, sprite[8]->s_sprt, NULL);
 	if (sprite[14]->o_sprt == 1 && sprite[8]->o_sprt == 1) {
 		sfRenderWindow_drawSprite(window, sprite[14]->s_sprt, NULL);
 		display_chest(sprite[14]->v_sprt.x, sprite[14]->v_sprt.y, icm, window);
+		display_inventory(window, icm);
 	}
 	day_time(window, sprite);
 	game_event(window, event, sprite, icm);
@@ -398,7 +541,7 @@ void menu_loop(sfRenderWindow *window, icm_t *icm)
 	text_t **text = malloc(sizeof(text_t *) * 5);
 	sprite_t *bg = malloc(sizeof(sprite_t));
 	sfEvent event;
-	sprite_t **sprite = malloc(sizeof(sprite_t *) * 16);
+	sprite_t **sprite = malloc(sizeof(sprite_t *) * 17);
 	plstat_t *stat = malloc(sizeof(plstat_t));
 
 	icm->map_txt = get_map_txt();
@@ -477,10 +620,11 @@ int main(int argc, char **argv, char**envp)
 	sfMusic *music;
 	icm_t *icm = malloc(sizeof(icm_t));
 
+	srand((int) &icm);
 	icm->obj = malloc(sizeof(idobj_t *) * 16);
 	icm->s_obj = malloc(sizeof(sprite_t *) * 15);
-	//icm->inventory = malloc(sizeof(int) * 17);
-	//icm->inventory = create_inventory(icm->inventory);
+	icm->inventory = malloc(sizeof(int) * 17);
+	icm->inventory = create_inventory(icm->inventory);
 	icm->chests = create_chests(icm->chests);
 	icm->s_obj = fill_obj_sprite(icm->s_obj);
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)

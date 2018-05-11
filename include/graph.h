@@ -10,10 +10,15 @@
 
 #include <SFML/Graphics.h>
 #include <SFML/Graphics/Export.h>
+#include <SFML/Graphics/Color.h>
+#include <SFML/Graphics/Transform.h>
+#include <SFML/Graphics/Types.h>
 #include <SFML/Audio/Music.h>
 #include <SFML/Window/Export.h>
 #include <SFML/Window/Types.h>
 #include <SFML/System/Vector2.h>
+#include <SFML/System/Vector3.h>
+#include <SFML/System/InputStream.h>
 #include <SFML/Config.h>
 #include <stdlib.h>
 #include <fcntl.h>
