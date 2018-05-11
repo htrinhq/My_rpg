@@ -87,10 +87,136 @@ sprite_t **move_player(sprite_t **sprite, icm_t *icm, int pst)
 	return (player_animation(sprite, x, y));
 }
 
+void change_chest(sfEvent event, icm_t *icm)
+{
+	if (event.mouseButton.x > 747 &&  event.mouseButton.x < 846 && event.mouseButton.y > 432 && event.mouseButton.y < 531) {
+		if (icm->chests[icm->ch]->inside[0] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[0], icm))
+				icm->chests[icm->ch]->inside[0] = -1;
+		}
+	}
+	if (event.mouseButton.x > 857 &&  event.mouseButton.x < 955 && event.mouseButton.y > 432 && event.mouseButton.y < 531)
+		if (icm->chests[icm->ch]->inside[1] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[1], icm))
+				icm->chests[icm->ch]->inside[1] = -1;
+		}
+	if (event.mouseButton.x > 966 &&  event.mouseButton.x < 1065 && event.mouseButton.y > 432 && event.mouseButton.y < 531)
+		if (icm->chests[icm->ch]->inside[2] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[2], icm))
+				icm->chests[icm->ch]->inside[2] = -1;
+		}
+	if (event.mouseButton.x > 1077 &&  event.mouseButton.x < 1175 && event.mouseButton.y > 432 && event.mouseButton.y < 531)
+		if (icm->chests[icm->ch]->inside[3] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[3], icm))
+				icm->chests[icm->ch]->inside[3] = -1;
+		}
+	if (event.mouseButton.x > 747 &&  event.mouseButton.x < 846 && event.mouseButton.y > 558 && event.mouseButton.y < 656)
+		if (icm->chests[icm->ch]->inside[4] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[4], icm))
+				icm->chests[icm->ch]->inside[4] = -1;
+		}
+	if (event.mouseButton.x > 857 &&  event.mouseButton.x < 955 && event.mouseButton.y > 558 && event.mouseButton.y < 656)
+		if (icm->chests[icm->ch]->inside[5] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[5], icm))
+				icm->chests[icm->ch]->inside[5] = -1;
+		}
+	if (event.mouseButton.x > 966 &&  event.mouseButton.x < 1065 && event.mouseButton.y > 558 && event.mouseButton.y < 656)
+		if (icm->chests[icm->ch]->inside[6] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[6], icm))
+				icm->chests[icm->ch]->inside[6] = -1;
+		}
+	if (event.mouseButton.x > 1077 &&  event.mouseButton.x < 1175 && event.mouseButton.y > 558 && event.mouseButton.y < 656)
+		if (icm->chests[icm->ch]->inside[7] != -1) {
+			if (add_inventory(icm->chests[icm->ch]->inside[7], icm))
+				icm->chests[icm->ch]->inside[7] = -1;
+		}
+	if (event.mouseButton.x > 112 &&  event.mouseButton.x < 211 && event.mouseButton.y > 373 && event.mouseButton.y < 471)
+		if (icm->inventory[0] != -1) {
+			add_chest(icm->inventory[0], icm, icm->ch);
+			icm->inventory[0] = -1;
+		}
+	if (event.mouseButton.x > 221 &&  event.mouseButton.x < 322 && event.mouseButton.y > 373 && event.mouseButton.y < 471)
+		if (icm->inventory[1] != -1) {
+			if (add_chest(icm->inventory[1], icm, icm->ch))
+				icm->inventory[1] = -1;
+		}
+	if (event.mouseButton.x > 332 &&  event.mouseButton.x < 432 && event.mouseButton.y > 373 && event.mouseButton.y < 471)
+		if (icm->inventory[2] != -1) {
+			if (add_chest(icm->inventory[2], icm, icm->ch))
+				icm->inventory[2] = -1;
+		}
+	if (event.mouseButton.x > 442 &&  event.mouseButton.x < 541 && event.mouseButton.y > 373 && event.mouseButton.y < 471)
+		if (icm->inventory[3] != -1) {
+			if (add_chest(icm->inventory[3], icm, icm->ch))
+				icm->inventory[3] = -1;
+		}
+	if (event.mouseButton.x > 112 &&  event.mouseButton.x < 211 && event.mouseButton.y > 483 && event.mouseButton.y < 581)
+		if (icm->inventory[4] != -1) {
+			if (add_chest(icm->inventory[4], icm, icm->ch))
+				icm->inventory[4] = -1;
+		}
+	if (event.mouseButton.x > 221 &&  event.mouseButton.x < 322 && event.mouseButton.y > 483 && event.mouseButton.y < 581)
+		if (icm->inventory[5] != -1) {
+			if (add_chest(icm->inventory[5], icm, icm->ch))
+				icm->inventory[5] = -1;
+		}
+	if (event.mouseButton.x > 332 &&  event.mouseButton.x < 432 && event.mouseButton.y > 483 && event.mouseButton.y < 581)
+		if (icm->inventory[6] != -1) {
+			if (add_chest(icm->inventory[6], icm, icm->ch))
+				icm->inventory[6] = -1;
+		}
+	if (event.mouseButton.x > 442 &&  event.mouseButton.x < 541 && event.mouseButton.y > 483 && event.mouseButton.y < 581)
+		if (icm->inventory[7] != -1) {
+			if (add_chest(icm->inventory[7], icm, icm->ch))
+				icm->inventory[7] = -1;
+		}
+	if (event.mouseButton.x > 112 &&  event.mouseButton.x < 211 && event.mouseButton.y > 592 && event.mouseButton.y < 692)
+		if (icm->inventory[8] != -1) {
+			if (add_chest(icm->inventory[8], icm, icm->ch))
+				icm->inventory[8] = -1;
+		}
+	if (event.mouseButton.x > 221 &&  event.mouseButton.x < 322 && event.mouseButton.y > 592 && event.mouseButton.y < 692)
+		if (icm->inventory[9] != -1) {
+			add_chest(icm->inventory[9], icm, icm->ch);
+			icm->inventory[9] = -1;
+		}
+	if (event.mouseButton.x > 332 &&  event.mouseButton.x < 432 && event.mouseButton.y > 592 && event.mouseButton.y < 692)
+		if (icm->inventory[10] != -1) {
+			if (add_chest(icm->inventory[10], icm, icm->ch))
+				icm->inventory[10] = -1;
+		}
+	if (event.mouseButton.x > 442 &&  event.mouseButton.x < 541 && event.mouseButton.y > 592 && event.mouseButton.y < 692)
+		if (icm->inventory[11] != -1) {
+			if (add_chest(icm->inventory[11], icm, icm->ch))
+				icm->inventory[11] = -1;
+		}
+	if (event.mouseButton.x > 112 &&  event.mouseButton.x < 211 && event.mouseButton.y > 703 && event.mouseButton.y < 803)
+		if (icm->inventory[12] != -1) {
+			if (add_chest(icm->inventory[12], icm, icm->ch))
+				icm->inventory[12] = -1;
+		}
+	if (event.mouseButton.x > 221 &&  event.mouseButton.x < 322 && event.mouseButton.y > 703 && event.mouseButton.y < 803)
+		if (icm->inventory[13] != -1) {
+			if (add_chest(icm->inventory[13], icm, icm->ch))
+				icm->inventory[13] = -1;
+		}
+	if (event.mouseButton.x > 332 &&  event.mouseButton.x < 432 && event.mouseButton.y > 703 && event.mouseButton.y < 803)
+		if (icm->inventory[14] != -1) {
+			if (add_chest(icm->inventory[14], icm, icm->ch))
+				icm->inventory[14] = -1;
+		}
+	if (event.mouseButton.x > 442 &&  event.mouseButton.x < 541 && event.mouseButton.y > 703 && event.mouseButton.y < 803)
+		if (icm->inventory[15] != -1) {
+			if (add_chest(icm->inventory[15], icm, icm->ch))
+				icm->inventory[15] = -1;
+		}
+}
+
 void game_event2(sfRenderWindow *window, sfEvent event,
 		 sprite_t **sprite, icm_t *icm)
 {
 	int pst = 0;
+	int x = 0;
 	if (sprite[2]->o_sprt == 1 && (event.mouseButton.x >= 1332 &&
 				       event.mouseButton.x <= (1332 + 250)) &&
 	    (event.mouseButton.y >= 747 && event.mouseButton.y <= (747 + 95)) &&
@@ -102,6 +228,10 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 	    sfMouse_isButtonPressed(sfMouseLeft)) {
 		sprite[1]->o_sprt = 0;
 		sprite[5]->o_sprt = 0;
+	}
+	if (sprite[14]->o_sprt == 1) {
+		if (sfMouse_isButtonPressed(sfMouseLeft))
+			change_chest(event, icm);
 	}
 	if (event.type != sfEvtKeyPressed)
 		return;
@@ -116,16 +246,15 @@ void game_event2(sfRenderWindow *window, sfEvent event,
 			pst += 8;
 		if (pst != 0) {
 			move_player(sprite, icm, pst);
-			//particules(window, 975, 630, 1);
+			particules(window, 975, 630, 1);
 		}
 	}
 	if (sfKeyboard_isKeyPressed(sfKeyP))
 		sprite[5]->o_sprt = 3;
-	if (sfKeyboard_isKeyPressed(sfKeyI))
+	if (sfKeyboard_isKeyPressed(sfKeyI) && sprite[14]->o_sprt == 0)
 		sprite[2]->o_sprt = (sprite[2]->o_sprt == 0) ? 1 : 0;
-	if (sfKeyboard_isKeyPressed(sfKeyE) && sprite[8]->o_sprt == 1) {
+	if (sfKeyboard_isKeyPressed(sfKeyE) && sprite[8]->o_sprt == 1 && sprite[2]->o_sprt == 0)
 		sprite[14]->o_sprt = (sprite[14]->o_sprt == 0) ? 1 : 0;
-	}
 }
 
 sprite_t **game_event(sfRenderWindow *window, sfEvent event,
@@ -364,12 +493,14 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 	if (sprite[2]->o_sprt == 1) {
 		sfRenderWindow_drawSprite(window, sprite[2]->s_sprt, NULL);
 		display_stat(sprite, window, stat);
+		display_inventory(window, icm);
 	}
 	if (sprite[8]->o_sprt == 1)
 		sfRenderWindow_drawSprite(window, sprite[8]->s_sprt, NULL);
 	if (sprite[14]->o_sprt == 1 && sprite[8]->o_sprt == 1) {
 		sfRenderWindow_drawSprite(window, sprite[14]->s_sprt, NULL);
 		display_chest(sprite[14]->v_sprt.x, sprite[14]->v_sprt.y, icm, window);
+		display_inventory(window, icm);
 	}
 	day_time(window, sprite);
 	game_event(window, event, sprite, icm);
@@ -475,10 +606,11 @@ int main(int argc, char **argv, char**envp)
 	sfMusic *music;
 	icm_t *icm = malloc(sizeof(icm_t));
 
+	srand((int) &icm);
 	icm->obj = malloc(sizeof(idobj_t *) * 16);
 	icm->s_obj = malloc(sizeof(sprite_t *) * 15);
-	//icm->inventory = malloc(sizeof(int) * 17);
-	//icm->inventory = create_inventory(icm->inventory);
+	icm->inventory = malloc(sizeof(int) * 17);
+	icm->inventory = create_inventory(icm->inventory);
 	icm->chests = create_chests(icm->chests);
 	icm->s_obj = fill_obj_sprite(icm->s_obj);
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)

@@ -14,8 +14,11 @@ int *fill_object(int *inside)
 
 	if (x == 0)
 		return (inside);
-	for (y = 0; y < x; y = y + 1)
+	for (y = 0; y < x; y = y + 1) {
 		inside[y] = rand_gen(0, 14);
+		if (inside[y] == 5 || inside[y] == 6)
+			inside[y] = 10;
+	}
 	return (inside);
 }
 
@@ -38,26 +41,28 @@ chest_t **create_chests(chest_t **chests)
 	return (chests);
 }
 
-void add_in_chest(chest_t **chests, int chestnb, int id)
+int add_inventory(int id, icm_t *icm)
 {
 	int x = 0;
 
-	for (x = 0; chests[chestnb]->inside[x] != -2; x = x + 1) {
-		if (chests[chestnb]->inside[x] == -1) {
-			chests[chestnb]->inside[x] = id;
-			break;
+	for (x = 0; icm->inventory[x] != -2; x = x + 1) {
+		if (icm->inventory[x] == -1) {
+			icm->inventory[x] = id;
+			return (1);
 		}
 	}
+	return (0);
 }
 
-void remove_in_chest(chest_t **chests, int chestnb, int id)
+int add_chest(int id, icm_t *icm, int nb)
 {
 	int x = 0;
 
-	for (x = 0; chests[chestnb]->inside[x] != -2; x = x + 1) {
-		if (chests[chestnb]->inside[x] == id) {
-			chests[chestnb]->inside[x] = -1;
-			break;
+	for (x = 0; icm->chests[nb]->inside[x] != -2; x = x + 1) {
+		if (icm->chests[nb]->inside[x] == -1) {
+			icm->chests[nb]->inside[x] = id;
+			return (1);
 		}
 	}
+	return (0);
 }

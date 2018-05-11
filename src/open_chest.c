@@ -7,6 +7,16 @@
 
 #include "rpg.h"
 
+int *create_inventory(int *inventory)
+{
+	int x = 0;
+
+	for (x = 0; x < 16; x = x + 1)
+		inventory[x] = -1;
+	inventory[16] = -2;
+	return (inventory);
+}
+
 sprite_t **fill_obj_sprite(sprite_t **obj)
 {
 	sfVector2f scale = {0.15, 0.15};
@@ -65,63 +75,177 @@ void display_inside(chest_t *chests, icm_t *icm, sfRenderWindow *window)
 	sfVector2f pos2 = {855, 435};
 	sfVector2f pos3 = {960, 435};
 	sfVector2f pos4 = {1075, 435};
+	sfVector2f pos5 = {750, 550};
+	sfVector2f pos6 = {855, 550};
+	sfVector2f pos7 = {960, 550};
+	sfVector2f pos8 = {1075, 550};
 
-	if (chests->inside[0] == -1)
-		return;
-	sfSprite_setPosition(icm->s_obj[chests->inside[0]]->s_sprt, pos1);
-	sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[0]]->s_sprt, NULL);
-	if (chests->inside[1] == -1)
-		return;
-	sfSprite_setPosition(icm->s_obj[chests->inside[1]]->s_sprt, pos2);
-	sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[1]]->s_sprt, NULL);
-	if (chests->inside[2] == -1)
-		return;
-	sfSprite_setPosition(icm->s_obj[chests->inside[2]]->s_sprt, pos3);
-	sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[2]]->s_sprt, NULL);
-	if (chests->inside[3] == -1)
-		return;
-	sfSprite_setPosition(icm->s_obj[chests->inside[3]]->s_sprt, pos4);
-	sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[3]]->s_sprt, NULL);
-	if (chests->inside[4] == -1)
-		return;
-	sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[4]]->s_sprt, NULL);
-	if (chests->inside[5] == -1)
-		return;
-	sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[5]]->s_sprt, NULL);
-	if (chests->inside[6] == -1)
-		return;
-	sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[6]]->s_sprt, NULL);
-	if (chests->inside[7] == -1)
-		return;
-	sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[7]]->s_sprt, NULL);
+	if (chests->inside[0] != -1) {
+		sfSprite_setPosition(icm->s_obj[chests->inside[0]]->s_sprt, pos1);
+		sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[0]]->s_sprt, NULL);
+	}
+	if (chests->inside[1] != -1) {
+		sfSprite_setPosition(icm->s_obj[chests->inside[1]]->s_sprt, pos2);
+		sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[1]]->s_sprt, NULL);
+	}
+	if (chests->inside[2] != -1) {
+		sfSprite_setPosition(icm->s_obj[chests->inside[2]]->s_sprt, pos3);
+		sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[2]]->s_sprt, NULL);
+	}
+	if (chests->inside[3] != -1) {
+		sfSprite_setPosition(icm->s_obj[chests->inside[3]]->s_sprt, pos4);
+		sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[3]]->s_sprt, NULL);
+	}
+	if (chests->inside[4] != -1) {
+		sfSprite_setPosition(icm->s_obj[chests->inside[4]]->s_sprt, pos5);
+		sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[4]]->s_sprt, NULL);
+	}
+	if (chests->inside[5] != -1) {
+		sfSprite_setPosition(icm->s_obj[chests->inside[5]]->s_sprt, pos6);
+		sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[5]]->s_sprt, NULL);
+	}
+	if (chests->inside[6] != -1) {
+		sfSprite_setPosition(icm->s_obj[chests->inside[6]]->s_sprt, pos7);
+		sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[6]]->s_sprt, NULL);
+	}
+	if (chests->inside[7] != -1) {
+		sfSprite_setPosition(icm->s_obj[chests->inside[7]]->s_sprt, pos8);
+		sfRenderWindow_drawSprite(window, icm->s_obj[chests->inside[7]]->s_sprt, NULL);
+	}
+}
+
+void display_inventory(sfRenderWindow *window, icm_t *icm)
+{
+	sfVector2f pos1 = {110, 375};
+	sfVector2f pos2 = {215, 375};
+	sfVector2f pos3 = {325, 375};
+	sfVector2f pos4 = {435, 375};
+	sfVector2f pos5 = {110, 483};
+	sfVector2f pos6 = {215, 483};
+	sfVector2f pos7 = {325, 483};
+	sfVector2f pos8 = {435, 483};
+	sfVector2f pos9 = {110, 592};
+	sfVector2f pos10 = {215, 592};
+	sfVector2f pos11 = {325, 592};
+	sfVector2f pos12 = {435, 592};
+	sfVector2f pos13 = {110, 703};
+	sfVector2f pos14 = {215, 703};
+	sfVector2f pos15 = {325, 703};
+	sfVector2f pos16 = {435, 703};
+
+	if (icm->inventory[0] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[0]]->s_sprt, pos1);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[0]]->s_sprt, NULL);
+	}
+	if (icm->inventory[1] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[1]]->s_sprt, pos2);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[1]]->s_sprt, NULL);
+	}
+	if (icm->inventory[2] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[2]]->s_sprt, pos3);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[2]]->s_sprt, NULL);
+	}
+	if (icm->inventory[3] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[3]]->s_sprt, pos4);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[3]]->s_sprt, NULL);
+	}
+	if (icm->inventory[4] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[4]]->s_sprt, pos5);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[4]]->s_sprt, NULL);
+	}
+	if (icm->inventory[5] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[5]]->s_sprt, pos6);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[5]]->s_sprt, NULL);
+	}
+	if (icm->inventory[6] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[6]]->s_sprt, pos7);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[6]]->s_sprt, NULL);
+	}
+	if (icm->inventory[7] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[7]]->s_sprt, pos8);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[7]]->s_sprt, NULL);
+	}
+	if (icm->inventory[8] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[8]]->s_sprt, pos9);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[8]]->s_sprt, NULL);
+	}
+	if (icm->inventory[9] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[9]]->s_sprt, pos10);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[9]]->s_sprt, NULL);
+	}
+	if (icm->inventory[10] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[10]]->s_sprt, pos11);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[10]]->s_sprt, NULL);
+	}
+	if (icm->inventory[11] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[11]]->s_sprt, pos12);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[11]]->s_sprt, NULL);
+	}
+	if (icm->inventory[12] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[12]]->s_sprt, pos13);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[12]]->s_sprt, NULL);
+	}
+	if (icm->inventory[13] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[13]]->s_sprt, pos14);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[13]]->s_sprt, NULL);
+	}
+	if (icm->inventory[14] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[14]]->s_sprt, pos15);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[14]]->s_sprt, NULL);
+	}
+	if (icm->inventory[15] != -1) {
+		sfSprite_setPosition(icm->s_obj[icm->inventory[15]]->s_sprt, pos16);
+		sfRenderWindow_drawSprite(window, icm->s_obj[icm->inventory[15]]->s_sprt, NULL);
+	}
 
 }
 
 void display_chest(int x, int y, icm_t *icm, sfRenderWindow *window)
 {
-	if (x > 166 && x < 176 && y > 140 && y < 150)
+
+	if (x > 166 && x < 176 && y > 140 && y < 150) {
+		icm->ch = 0;
 		display_inside(icm->chests[0], icm, window);
-	if (x > 166 && x < 176 && y > 110 && y < 120)
+	}
+	if (x > 166 && x < 176 && y > 110 && y < 120) {
+		icm->ch = 1;
 		display_inside(icm->chests[1], icm, window);
-	if (x > 217 && x < 227 && y > 110 && y < 120)
+	}
+	if (x > 217 && x < 227 && y > 110 && y < 120) {
+		icm->ch = 2;
 		display_inside(icm->chests[2], icm, window);
-	if (x > 217 && x < 227 && y > 140 && y < 150)
+	}
+	if (x > 217 && x < 227 && y > 140 && y < 150) {
+		icm->ch = 3;
 		display_inside(icm->chests[3], icm, window);
-	if (x > 217 && x < 227 && y > 170 && y < 180)
+	}
+	if (x > 217 && x < 227 && y > 170 && y < 180) {
+		icm->ch = 4;
 		display_inside(icm->chests[4], icm, window);
-	if (x > 217 && x < 227 && y > 200 && y < 210)
+	}
+	if (x > 217 && x < 227 && y > 200 && y < 210) {
+		icm->ch = 5;
 		display_inside(icm->chests[5], icm, window);
-	if (x > 217 && x < 227 && y > 231 && y < 241)
+	}
+	if (x > 217 && x < 227 && y > 231 && y < 241) {
+		icm->ch = 6;
 		display_inside(icm->chests[6], icm, window);
-	if (x > 217 && x < 227 && y > 261 && y < 271)
+	}
+	if (x > 217 && x < 227 && y > 261 && y < 271) {
+		icm->ch = 7;
 		display_inside(icm->chests[7], icm, window);
-	if (x > 217 && x < 227 && y > 292 && y < 302)
+	}
+	if (x > 217 && x < 227 && y > 292 && y < 302) {
+		icm->ch = 8;
 		display_inside(icm->chests[8], icm, window);
-	if (x > 217 && x < 227 && y > 312 && y < 332)
+	}
+	if (x > 217 && x < 227 && y > 312 && y < 332) {
+		icm->ch = 9;
 		display_inside(icm->chests[9], icm, window);
+	}
 }
 
-int detect_chest(int x, int y, sprite_t **sprite, icm_t *icm)
+int detect_chest(int x, int y, sprite_t **sprite)
 {
 	if ((x > 166 && x < 176 && y > 140 && y < 150) ||
 	(x > 166 && x < 176 && y > 110 && y < 120) ||
