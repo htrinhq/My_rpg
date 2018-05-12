@@ -22,7 +22,16 @@ SRC	=	src/main.c		\
 		src/day_time.c		\
 		src/display_npc.c	\
 		src/read_paths.c	\
-		src/fight.c
+		src/fight.c		\
+		src/chest_event.c	\
+		src/change_chest.c	\
+		src/game_event.c	\
+		src/move_player.c	\
+		src/event.c		\
+		src/loop.c		\
+		src/initialize_text.c	\
+		src/game_loop.c		\
+		src/initialize_sprite.c	\
 
 OBJ	=	$(SRC:.c=.o)
 

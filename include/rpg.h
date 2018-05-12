@@ -59,12 +59,12 @@ typedef struct guards {
 
 #include "quests.h"
 
-char *my_getnbr();
-int detect_chest();
-void game_loop();
-void display_stat();
+char *my_getnbr(void);
+int detect_chest(void);
+void game_loop(void);
+void display_stat(void);
 int check_env(char **envp);
-void initialize_stat();
+void initialize_stat(void);
 char **get_paths(void);
 int my_tablen(char **tab);
 void display_tab(char **tab);
@@ -79,9 +79,9 @@ char *my_revstr(char *str);
 char *my_int_to_str(int nb);
 chest_t **create_chests(chest_t **chests);
 idobj_t **fill_obj_id(idobj_t **obj);
-void menu_loop();
-text_t **set_text_value();
-text_t **initialize_text();
+void menu_loop(void);
+text_t **set_text_value(void);
+text_t **initialize_text(void);
 int my_strcmp(char const *s1, char const *s2);
 int *shift_inventory(int *inventory);
 int *spawn_objects(void);
@@ -111,8 +111,33 @@ char **read_routes(char *path);
 void read_npc_routes(void);
 guard_t **get_all_guards(int guards_nb);
 npc_t **get_all_npcs(int npc_nb);
-void init_var();
+void init_var(rpg);
 sfIntRect npc_animation(sfIntRect rect);
 void display_npc(sfRenderWindow *window, sfIntRect rect, sprite_t *sprite);
+text_t **move_cursos_down(text_t **text);
+text_t **move_cursos_up(text_t **text);
+sprite_t **player_animation(sprite_t **sprite, int x, int y);
+sprite_t **move_player(sprite_t **sprite, icm_t *icm, int pst);
+sprite_t **game_event(sfRenderWindow *window, sfEvent event,
+sprite_t **sprite, icm_t *icm);
+void change_ch_inv(icm_t *icm, int id);
+void change_inv_ch(icm_t *icm, int id);
+void change_chest(sfEvent event, icm_t *icm);
+text_t **menu_event(sfRenderWindow *window, sfEvent event, text_t **text,
+sprite_t **sprite);
+void dlc_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite);
+void pause_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite);
+void disp_text(sfRenderWindow *window, text_t **text);
+void create_icm_stat_text(plstat_t *stat, sprite_t **sprite,
+icm_t *icm, text_t **text);
+text_t **initialize_text(text_t **text);
+text_t **set_text_value(text_t **text);
+void initialize_stat(plstat_t *stat);
+void menu_loop(sfRenderWindow *window, icm_t *icm);
+void dlc_loop(sfRenderWindow *window, sprite_t **sprite);
+void pause_loop(sfRenderWindow *window, sprite_t **sprite);
+void fight(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window);
+char **get_map_txt(void);
+sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat);
 
 #endif

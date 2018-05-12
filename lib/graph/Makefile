@@ -1,6 +1,6 @@
 ##
 ## EPITECH PROJECT, 2017
-## makefile for libmy 
+## makefile for libmy
 ## File description:
 ## compile a lib
 ##
