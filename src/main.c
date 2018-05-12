@@ -59,12 +59,6 @@ int main(int argc, char **argv, char**envp)
 	icm_t *icm = malloc(sizeof(icm_t));
 
 	srand((unsigned long) &icm);
-	/*icm->obj = malloc(sizeof(idobj_t *) * 16);
-	icm->s_obj = malloc(sizeof(sprite_t *) * 15);
-	icm->inventory = malloc(sizeof(int) * 17);
-	icm->inventory = create_inventory(icm->inventory);
-	icm->chests = create_chests(icm->chests);
-	icm->s_obj = fill_obj_sprite(icm->s_obj);*/
 	get_icm(icm);
 	if (check_env(envp) == 84 || argc != 1 || argv == NULL)
 		return (84);

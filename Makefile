@@ -15,11 +15,16 @@ SRC	=	src/main.c		\
 		src/chest.c		\
 		src/inventory.c		\
 		src/get_next_line.c	\
-		src/open_chest.c	\
+		src/display_inv.c	\
+		src/display_inv2.c	\
+		src/display_chest.c	\
+		src/display_inside.c	\
+		src/fill_obj.c		\
 		src/move_npc.c		\
 		src/pathfinding.c	\
 		src/stat.c		\
 		src/day_time.c		\
+		src/time.c		\
 		src/display_npc.c	\
 		src/read_paths.c	\
 		src/fight.c		\

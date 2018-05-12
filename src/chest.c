@@ -26,8 +26,8 @@ chest_t **create_chests(chest_t **chests)
 {
 	int x = 0;
 	int y = 0;
-	chests = malloc(sizeof(chest_t *) * 10);
 
+	chests = malloc(sizeof(chest_t *) * 10);
 	for (x = 0; x < 10; x = x + 1) {
 		chests[x] = malloc(sizeof(chest_t));
 		chests[x]->inside = malloc(sizeof(int) * 9);

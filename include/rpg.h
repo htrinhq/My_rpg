@@ -59,6 +59,9 @@ typedef struct guards {
 
 #include "quests.h"
 
+int delta_time(void);
+void day_time(void);
+void day_event(void);
 char *my_getnbr(void);
 int detect_chest(void);
 void game_loop(void);
@@ -77,6 +80,17 @@ npcst_t stat_gen(void);
 sprite_t *find_sprite(char *name);
 char *my_revstr(char *str);
 char *my_int_to_str(int nb);
+void display_inside();
+void display_inventory8();
+void display_inventory7();
+void display_inventory6();
+void fight();
+void day_time();
+void display_inventory5();
+void display_inventory4();
+void display_inventory3();
+void display_inventory2();
+void display_inventory();
 chest_t **create_chests(chest_t **chests);
 idobj_t **fill_obj_id(idobj_t **obj);
 void menu_loop(void);
