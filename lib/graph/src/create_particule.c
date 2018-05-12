@@ -44,8 +44,7 @@ void particules(sfRenderWindow *window, int x, int y, int color)
 	if (vertex == NULL)
 		return;
 	if (color == 0)
-		sfShader_setFloatParameter(shader, "clr_r",
-		(float)(rand() % 200) / 100);
+		sfShader_setFloatParameter(shader, "clr_r", 1.0);
 	else {
 		sfShader_setFloatParameter(shader, "clr_r", 0.7);
 		sfShader_setFloatParameter(shader, "clr_g", 0.6);

@@ -31,7 +31,6 @@ plstat_t *stat)
 {
 	display_sprites_game(window, sprite);
 	stat->force = count_weapons(icm);
-	fight(stat, sprite, window);
 }
 
 void end_game_loop(sfRenderWindow *window, sprite_t **sprite,
@@ -42,7 +41,7 @@ void end_game_loop(sfRenderWindow *window, sprite_t **sprite,
 }
 
 void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
-plstat_t *stat)
+		plstat_t *stat)
 {
 	sfEvent event;
 
@@ -64,4 +63,5 @@ plstat_t *stat)
 		display_inventory(window, icm);
 	}
 	end_game_loop(window, sprite, icm, event);
+	fight(stat, sprite, window);
 }
