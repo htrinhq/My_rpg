@@ -8,7 +8,7 @@
 
 SRC	=	src/create_sprite.c\
 		src/create_rect.c\
-		#src/create_particule.c
+		src/create_particule.c
 
 OBJ	=	$(SRC:.c=.o)
 
