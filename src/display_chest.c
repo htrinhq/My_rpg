@@ -76,7 +76,9 @@ int detect_chest(int x, int y, sprite_t **sprite)
 		sprite[14]->v_sprt.x = x;
 		sprite[14]->v_sprt.y = y;
 		sprite[8]->o_sprt = 1;
-	} else
+	} else if (x > 208 && x < 222 && y > 370 && y < 376)
+		sprite[8]->o_sprt = 2;
+	else
 		sprite[8]->o_sprt = 0;
 	return (1);
 }

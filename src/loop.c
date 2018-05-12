@@ -40,7 +40,7 @@ void menu_loop(sfRenderWindow *window, icm_t *icm)
 	text_t **text = malloc(sizeof(text_t *) * 5);
 	sprite_t *bg = malloc(sizeof(sprite_t));
 	sfEvent event;
-	sprite_t **sprite = malloc(sizeof(sprite_t *) * 20);
+	sprite_t **sprite = malloc(sizeof(sprite_t *) * 23);
 	plstat_t *stat = malloc(sizeof(plstat_t));
 
 	create_icm_stat_text(stat, sprite, icm, text);

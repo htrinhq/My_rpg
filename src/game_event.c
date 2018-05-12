@@ -24,7 +24,7 @@ void get_move(icm_t *icm, sprite_t **sprite, int pst, sfRenderWindow *window)
 }
 
 void mouse_button(sprite_t **sprite, sfEvent event, sfRenderWindow *window,
-icm_t *icm)
+		icm_t *icm)
 {
 	if (sprite[2]->o_sprt == 1 && (event.mouseButton.x >= 1332 &&
 		event.mouseButton.x <= (1332 + 250)) &&
@@ -47,9 +47,10 @@ icm_t *icm)
 }
 
 void game_event2(sfRenderWindow *window, sfEvent event,
-sprite_t **sprite, icm_t *icm)
+		sprite_t **sprite, icm_t *icm)
 {
 	int pst = 0;
+
 	mouse_button(sprite, event, window, icm);
 	if (event.type != sfEvtKeyPressed)
 		return;
@@ -62,10 +63,12 @@ sprite_t **sprite, icm_t *icm)
 	if (sfKeyboard_isKeyPressed(sfKeyE) && sprite[8]->o_sprt == 1 &&
 		sprite[2]->o_sprt == 0)
 		sprite[14]->o_sprt = (sprite[14]->o_sprt == 0) ? 1 : 0;
+	if (sfKeyboard_isKeyPressed(sfKeyE) && sprite[8]->o_sprt == 2)
+		sprite[20]->o_sprt = (sprite[20]->o_sprt == 0) ? 1 : 0;
 }
 
 sprite_t **game_event(sfRenderWindow *window, sfEvent event,
-sprite_t **sprite, icm_t *icm)
+		sprite_t **sprite, icm_t *icm)
 {
 	while (sfRenderWindow_pollEvent(window, &event)) {
 		if (event.type == sfEvtClosed)

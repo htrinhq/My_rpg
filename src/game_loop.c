@@ -11,7 +11,10 @@ void display_sprites_game(sfRenderWindow *window, sprite_t **sprite)
 {
 	sfRenderWindow_drawSprite(window, sprite[0]->s_sprt, NULL);
 	display_npc(window, sprite[0]->r_sprt, sprite[1]);
-	sfRenderWindow_drawSprite(window, sprite[1]->s_sprt, NULL);
+	if (sprite[20]->o_sprt == 0)
+		sfRenderWindow_drawSprite(window, sprite[1]->s_sprt, NULL);
+	else
+		sfRenderWindow_drawSprite(window, sprite[21]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[3]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[4]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[7]->s_sprt, NULL);
@@ -27,7 +30,7 @@ void set_sprite_16(sprite_t **s)
 }
 
 void fight_display(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
-plstat_t *stat)
+		plstat_t *stat)
 {
 	display_sprites_game(window, sprite);
 	stat->force = count_weapons(icm);
@@ -38,6 +41,12 @@ void end_game_loop(sfRenderWindow *window, sprite_t **sprite,
 {
 	day_time(window, sprite);
 	game_event(window, event, sprite, icm);
+	if (sprite[14]->o_sprt == 1 && sprite[8]->o_sprt == 1) {
+		sfRenderWindow_drawSprite(window, sprite[14]->s_sprt, NULL);
+		display_chest(sprite[14]->v_sprt.x, sprite[14]->v_sprt.y,
+		icm, window);
+		display_inventory(window, icm);
+	}
 }
 
 void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
@@ -56,12 +65,8 @@ void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 	}
 	if (sprite[8]->o_sprt == 1)
 		sfRenderWindow_drawSprite(window, sprite[8]->s_sprt, NULL);
-	if (sprite[14]->o_sprt == 1 && sprite[8]->o_sprt == 1) {
-		sfRenderWindow_drawSprite(window, sprite[14]->s_sprt, NULL);
-		display_chest(sprite[14]->v_sprt.x, sprite[14]->v_sprt.y,
-		icm, window);
-		display_inventory(window, icm);
-	}
+	if (sprite[8]->o_sprt == 2)
+		sfRenderWindow_drawSprite(window, sprite[20]->s_sprt, NULL);
 	end_game_loop(window, sprite, icm, event);
 	fight(stat, sprite, window);
 }

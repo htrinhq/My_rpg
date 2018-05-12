@@ -18,6 +18,10 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sprite[1]->r_sprt.left = 70;
 	sprite[1]->r_sprt.width = 136;
 	sprite[1]->r_sprt.height = 183;
+	sprite[21]->r_sprt.top = 10;
+	sprite[21]->r_sprt.left = 70;
+	sprite[21]->r_sprt.width = 136;
+	sprite[21]->r_sprt.height = 183;
 	sprite[7]->r_sprt.top = 20 * stat->life;
 	sprite[7]->r_sprt.left = 0;
 	sprite[7]->r_sprt.width = 100;
@@ -46,12 +50,16 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sprite[16]->v_sprt.y = 42;
 	sprite[7]->v_sprt.x = 40;
 	sprite[7]->v_sprt.y = 960;
+	sprite[21]->v_sprt.x = 960;
+	sprite[21]->v_sprt.y = 540;
 	sprite[1]->v_sprt.x = 960;
 	sprite[1]->v_sprt.y = 540;
 	sprite[4]->v_sprt.x = 225 / 2 - 6;
 	sprite[4]->v_sprt.y = 213 / 2 - 15;
 	sprite[8]->v_sprt.x = 960;
 	sprite[8]->v_sprt.y = 440;
+	sprite[20]->v_sprt.x = 960;
+	sprite[20]->v_sprt.y = 440;
 	sprite[9]->v_sprt.x = 700;
 	sprite[9]->v_sprt.y = 350;
 	sprite[10]->v_sprt.x = 700;
@@ -66,6 +74,7 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sprite[2]->o_sprt = 0;
 	sprite[5]->o_sprt = 0;
 	sprite[8]->o_sprt = 0;
+	sprite[20]->o_sprt = 0;
 	sprite[9]->o_sprt = 0;
 	sprite[15]->o_sprt = 0;
 	sprite[14]->o_sprt = 0;
@@ -73,8 +82,10 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sprite[18]->o_sprt = 0;
 	sprite[17]->o_sprt = 0;
 	sprite[19]->o_sprt = 0;
+	sprite[20]->o_sprt = 0;
 	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
 	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
+	sfSprite_setTextureRect(sprite[21]->s_sprt, sprite[21]->r_sprt);
 	sfSprite_setTextureRect(sprite[7]->s_sprt, sprite[7]->r_sprt);
 	sfSprite_setTextureRect(sprite[9]->s_sprt, sprite[9]->r_sprt);
 	sfSprite_setTextureRect(sprite[10]->s_sprt, sprite[10]->r_sprt);
@@ -82,16 +93,20 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sfSprite_setTextureRect(sprite[12]->s_sprt, sprite[12]->r_sprt);
 	sfSprite_setTextureRect(sprite[16]->s_sprt, sprite[16]->r_sprt);
 	sfSprite_setPosition(sprite[1]->s_sprt, sprite[1]->v_sprt);
+	sfSprite_setPosition(sprite[21]->s_sprt, sprite[21]->v_sprt);
 	sfSprite_setPosition(sprite[7]->s_sprt, sprite[7]->v_sprt);
 	sfSprite_setPosition(sprite[8]->s_sprt, sprite[8]->v_sprt);
+	sfSprite_setPosition(sprite[20]->s_sprt, sprite[20]->v_sprt);
 	sfSprite_setPosition(sprite[9]->s_sprt, sprite[9]->v_sprt);
 	sfSprite_setPosition(sprite[10]->s_sprt, sprite[10]->v_sprt);
 	sfSprite_setPosition(sprite[11]->s_sprt, sprite[11]->v_sprt);
 	sfSprite_setPosition(sprite[12]->s_sprt, sprite[12]->v_sprt);
 	sfSprite_setPosition(sprite[16]->s_sprt, sprite[16]->v_sprt);
 	sfSprite_setScale(sprite[1]->s_sprt, scale);
+	sfSprite_setScale(sprite[21]->s_sprt, scale);
 	sfSprite_setScale(sprite[7]->s_sprt, scale2);
 	sfSprite_setScale(sprite[8]->s_sprt, scale2);
+	sfSprite_setScale(sprite[20]->s_sprt, scale2);
 	sfSprite_setScale(sprite[9]->s_sprt, scale3);
 	sfSprite_setScale(sprite[10]->s_sprt, scale3);
 	sfSprite_setScale(sprite[11]->s_sprt, scale3);
@@ -106,8 +121,10 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 
 sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
 {
-	for (int i = 0; i < 20; i++)
+	for (int i = 0; i < 22; i++)
 		sprite[i] = malloc(sizeof(sprite_t) * 5);
+	sprite[21] = create_sprite(sprite[21], "rsrc/pictures/gardian.png");
+	sprite[20] = create_sprite(sprite[20], "rsrc/pictures/keeper.png");
 	sprite[19] = create_sprite(sprite[19], "rsrc/pictures/begin.png");
 	sprite[18] = create_sprite(sprite[18], "rsrc/pictures/die.png");
 	sprite[17] = create_sprite(sprite[17], "rsrc/pictures/win.png");
