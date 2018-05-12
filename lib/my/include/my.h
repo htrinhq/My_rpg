@@ -14,7 +14,7 @@ char *my_concat(char *src, char *dest, int j);
 char *my_evil_str(char *str);
 char *my_strcat(char *str, int nblist, ...);
 char *my_strdup(char *str);
-char *my_strcpy (char *dest, char const *src);
+char *my_strcpy(char *dest, char const *src);
 int multi_flag_plus(char *s, va_list listarg, int i);
 int multi_flag_minus(char *s, va_list listarg, int i);
 int flag_nbr(char *s, va_list listarg, int i);

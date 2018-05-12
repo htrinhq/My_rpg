@@ -23,7 +23,7 @@ sfRenderWindow *renderwindow_create(sfRenderWindow *wd)
 	v_mode.height = 1075;
 	v_mode.bitsPerPixel = 32;
 	wd = sfRenderWindow_create(v_mode, "The Great Escape",
-				sfDefaultStyle, NULL);
+	sfDefaultStyle, NULL);
 	return (wd);
 }
 

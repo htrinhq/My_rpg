@@ -10,7 +10,7 @@
 
 int my_printf(char *s, ...);
 int my_rand(int max);
-char *my_strcpy (char *dest, char const *src);
+char *my_strcpy(char *dest, char const *src);
 char *my_evil_str(char *str);
 char *my_strdup(char *str);
 char *my_strcat(char *str, int nblist, ...);

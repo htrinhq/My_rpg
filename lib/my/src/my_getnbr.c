@@ -5,7 +5,8 @@
 ** getnbr
 */
 
-int condit(char const *str, int i, int nb) {
+int condit(char const *str, int i, int nb)
+{
 	while (str[i] <= '9' && str[i] >= '0') {
 		nb = nb	+ (str[i] - 48);
 		nb = nb	* 10;
@@ -30,7 +31,7 @@ int my_getnbr(char const *str)
 	if (nb != 0 && (minus_count % 2) != 0)
 		nb = (nb) * (-1);
 	nb = nb / 10;
-		return (nb);
+	return (nb);
 }
 
 int find_greater(int *array, int size)

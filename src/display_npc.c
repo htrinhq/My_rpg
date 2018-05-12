@@ -28,7 +28,7 @@ void display_npc(sfRenderWindow *window, sfIntRect rect, sprite_t *sprite)
 		if (a > 0.03) {
 			get_pos_routine(npc[i]->token, npc[i]->map);
 			npc[i]->spr->r_sprt = npc_animation(
-				npc[i]->spr->r_sprt);
+			npc[i]->spr->r_sprt);
 			sfClock_restart(sprite->clock);
 		}
 		display_npc3(window, rect, npc[i]);
@@ -46,7 +46,7 @@ void display_guards(sfRenderWindow *window, sfIntRect rect, float a)
 		if (a > 0.03) {
 			get_pos_routine(guard[i]->token, guard[i]->map);
 			guard[i]->sprite->r_sprt = npc_animation(
-				guard[i]->sprite->r_sprt);
+			guard[i]->sprite->r_sprt);
 		}
 		display_guards2(window, rect, guard[i]);
 		i = i + 1;

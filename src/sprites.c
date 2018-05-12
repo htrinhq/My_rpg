@@ -72,7 +72,7 @@ int check_name(char *name)
 	while (name[i] != '.')
 		i = i + 1;
 	if (name[i + 1] == 'p' && name[i + 2] == 'n' && name[i + 3] == 'g' &&
-	name[i + 4] == '\0')
+		name[i + 4] == '\0')
 		return (1);
 	else
 		return (0);

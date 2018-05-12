@@ -7,19 +7,21 @@
 
 #include "graph.h"
 
-sfVertex *create_vertex(sfVector2f pos)
+sfVertex *create_vertex(sfVector2f pos, int s_x, int s_y)
 {
 	sfVertex *vertex = malloc(40 * sizeof(sfVertex));
-	int s_x;
-	int s_y;
 
 	if (vertex == NULL)
 		return (NULL);
 	for (int i = 0; i < 10 ; i++) {
-		vertex[i * 4 + 0].position = (sfVector2f){pos.x, pos.y};
-		vertex[i * 4 + 1].position = (sfVector2f){pos.x + 10, pos.y};
-		vertex[i * 4 + 2].position = (sfVector2f){pos.x + 10, pos.y + 10};
-		vertex[i * 4 + 3].position = (sfVector2f){pos.x, pos.y + 10};
+		vertex[i * 4 + 0].position = (sfVector2f){pos.x,
+			pos.y};
+		vertex[i * 4 + 1].position = (sfVector2f)
+		{pos.x + 10, pos.y};
+		vertex[i * 4 + 2].position = (sfVector2f)
+		{pos.x + 10, pos.y + 10};
+		vertex[i * 4 + 3].position = (sfVector2f)
+		{pos.x, pos.y + 10};
 		s_x = rand() % 20;
 		s_y = rand() % 20;
 		for (int x = 0; x < 4; x++) {
@@ -33,15 +35,17 @@ sfVertex *create_vertex(sfVector2f pos)
 void particules(sfRenderWindow *window, int x, int y, int color)
 {
 	sfVector2f pos = {x, y};
-	sfVertex *vertex = create_vertex(pos);
-	sfShader *shader = sfShader_createFromFile(NULL, "lib/graph/shaders/blood.frag");
-	sfRenderStates state = {sfBlendAlpha, sfTransform_Identity, NULL, shader};
+	sfVertex *vertex = create_vertex(pos, 0, 0);
+	sfShader *shader = sfShader_createFromFile(NULL,
+	"lib/graph/shaders/blood.frag");
+	sfRenderStates state = {sfBlendAlpha, sfTransform_Identity, NULL,
+		shader};
 
 	if (vertex == NULL)
 		return;
 	if (color == 0)
 		sfShader_setFloatParameter(shader, "clr_r",
-					   (float)(rand() % 200) / 100);
+		(float)(rand() % 200) / 100);
 	else {
 		sfShader_setFloatParameter(shader, "clr_r", 0.7);
 		sfShader_setFloatParameter(shader, "clr_g", 0.6);

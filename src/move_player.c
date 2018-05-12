@@ -41,23 +41,33 @@ sprite_t **player_animation(sprite_t **sprite, int x, int y)
 	return (sprite);
 }
 
+int got_key(icm_t *icm)
+{
+	int x = 0;
+
+	for (x = 0; icm->inventory[x] != -2; x = x + 1)
+		if (icm->inventory[x] == 5)
+			return (1);
+	return (0);
+}
+
 sprite_t **move_player(sprite_t **sprite, icm_t *icm, int pst)
 {
 	int y =  (sprite[0]->r_sprt.left - 1260) / 10 + 225;
 	int x = (sprite[0]->r_sprt.top - 1480) / 10 + 213;
 
-	detect_chest(x, y, sprite, icm);
+	detect_chest(x, y, sprite);
 	if ((pst == 1 ||pst == 3 ||pst == 5 || pst == 9) && x > 0
-	&& icm->map_txt[x - 1][y] == ' ')
+		&& icm->map_txt[x - 1][y] == ' ')
 		sprite[0]->r_sprt.top -= 10;
 	if ((pst == 2 ||pst == 6 ||pst == 10 || pst == 3) && x < 305
-	    && icm->map_txt[x + 1][y] == ' ')
+		&& icm->map_txt[x + 1][y] == ' ')
 		sprite[0]->r_sprt.top += 10;
 	if ((pst == 4 ||pst == 6 ||pst == 5 || pst == 12) && y > 0 &&
-	    icm->map_txt[x][y - 1] == ' ')
+		icm->map_txt[x][y - 1] == ' ')
 		sprite[0]->r_sprt.left -= 10;
 	if ((pst == 8 ||pst == 10 ||pst == 9 || pst == 14) && y < 460 &&
-	    icm->map_txt[x][y + 1] == ' ')
+		icm->map_txt[x][y + 1] == ' ')
 		sprite[0]->r_sprt.left += 10;
 	return (player_animation(sprite, x, y));
 }

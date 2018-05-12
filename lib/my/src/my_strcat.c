@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include "my.h"
 
-char *my_strcpy (char *dest, char const *src)
+char *my_strcpy(char *dest, char const *src)
 {
 	int j = 0;
 

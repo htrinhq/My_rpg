@@ -68,3 +68,16 @@ idobj_t **fill_obj_id(idobj_t **obj)
 	obj = fill_obj_2(obj);
 	return (obj);
 }
+
+int count_weapons(icm_t *icm)
+{
+	int x = 0;
+	int st = 0;
+
+	for (x = 0; icm->inventory[x] != -2; x = x + 1)
+		if (icm->inventory[x] == 3 || icm->inventory[x] == 6 ||
+			icm->inventory[x] == 7 || icm->inventory[x] == 11 ||
+			icm->inventory[x] == 12)
+			st = st + 1;
+	return (st);
+}

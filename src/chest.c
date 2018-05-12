@@ -16,7 +16,7 @@ int *fill_object(int *inside)
 		return (inside);
 	for (y = 0; y < x; y = y + 1) {
 		inside[y] = rand_gen(0, 14);
-		if (inside[y] == 5 || inside[y] == 6)
+		if (inside[y] == 5)
 			inside[y] = 10;
 	}
 	return (inside);
@@ -38,6 +38,7 @@ chest_t **create_chests(chest_t **chests)
 		chests[x]->name = x;
 		chests[x]->inside = fill_object(chests[x]->inside);
 	}
+	chests[9]->inside[7] = 5;
 	return (chests);
 }
 

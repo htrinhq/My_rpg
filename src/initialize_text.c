@@ -14,7 +14,8 @@ void disp_text(sfRenderWindow *window, text_t **text)
 	sfRenderWindow_drawText(window, text[2]->text, NULL);
 }
 
-void create_icm_stat_text(plstat_t *stat, sprite_t **sprite, icm_t *icm, text_t **text)
+void create_icm_stat_text(plstat_t *stat, sprite_t **sprite,
+icm_t *icm, text_t **text)
 {
 	icm->map_txt = get_map_txt();
 	initialize_stat(stat);
@@ -28,7 +29,8 @@ text_t **initialize_text(text_t **text)
 	text[0] = malloc(sizeof(text_t));
 	text[1] = malloc(sizeof(text_t));
 	text[2] = malloc(sizeof(text_t));
-	text[0]->font = sfFont_createFromFile("./rsrc/fonts/copyfonts.com_algol-ix.ttf");
+	text[0]->font = sfFont_createFromFile(
+	"./rsrc/fonts/copyfonts.com_algol-ix.ttf");
 	text[0]->text = sfText_create();
 	text[0]->pos.x = 550;
 	text[0]->pos.y = 125;
@@ -63,9 +65,9 @@ text_t **set_text_value(text_t **text)
 
 void initialize_stat(plstat_t *stat)
 {
-	stat->force = 1;
-	stat->inteligence = 1;
-	stat->speed = 1;
-	stat->xp = 165;
-	stat->life = 5;
+	stat->force = 0;
+	stat->inteligence = 0;
+	stat->speed = 0;
+	stat->xp = 0;
+	stat->life = 8;
 }
