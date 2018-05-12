@@ -41,15 +41,19 @@ void end_game_loop(sfRenderWindow *window, sprite_t **sprite,
 
 	day_time(window, sprite);
 	game_event(window, event, sprite, icm);
+	if (sprite[17]->o_sprt == 0)
+		sfRenderWindow_drawSprite(window, sprite[19]->s_sprt, NULL);
 	if (sprite[17]->o_sprt == 1)
 		sfRenderWindow_drawSprite(window, sprite[18]->s_sprt, NULL);
 	if (sprite[17]->o_sprt == 2)
 		sfRenderWindow_drawSprite(window, sprite[17]->s_sprt, NULL);
-	if (sprite[17]->o_sprt != 0)
+	if (sprite[17]->o_sprt != 3)
 		if ((int)sfTime_asSeconds(sfClock_getElapsedTime(sprite[2]->clock))
-		% 2 >= 1)
+		% 3 >= 1)
 			mem++;
-	if (mem >= 5)
+	if (mem == 100)
+		sprite[17]->o_sprt = 3;
+	if (mem >= 200)
 		sfRenderWindow_close(window);
 	sfRenderWindow_display(window);
 }
