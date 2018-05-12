@@ -127,6 +127,7 @@ sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
 	sprite[0] = create_sprite(sprite[0], "rsrc/pictures/map.png");
 	sprite[0]->clock = sfClock_create();
 	sprite[1]->clock = sfClock_create();
+	sprite[2]->clock = sfClock_create();
 	sprite[0]->r_sprt.top = 1480;
 	sprite[0]->r_sprt.left = 1260;
 	sprite[0]->r_sprt.width = 1920;
