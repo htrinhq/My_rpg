@@ -14,7 +14,7 @@ void fight(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window)
 		sprite[16]->o_sprt -= stat->force;
 		stat->life -= 3;
 		if (stat->life < 1) {
-			printf("You died !\n");
+			sprite[17]->o_sprt = 1;
 			sfRenderWindow_close(window);
 		}
 	}

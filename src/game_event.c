@@ -7,7 +7,7 @@
 
 #include "rpg.h"
 
-void get_move(icm_t *icm, sprite_t **sprite, int pst)
+void get_move(icm_t *icm, sprite_t **sprite, int pst, sfRenderWindow *window)
 {
 	if (sfKeyboard_isKeyPressed(sfKeyZ))
 		pst += 1;
@@ -54,7 +54,7 @@ sprite_t **sprite, icm_t *icm)
 	if (event.type != sfEvtKeyPressed)
 		return;
 	if (sprite[14]->o_sprt == 0)
-		get_move(icm, sprite, pst);
+		get_move(icm, sprite, pst, window);
 	if (sfKeyboard_isKeyPressed(sfKeyP))
 		sprite[5]->o_sprt = 3;
 	if (sfKeyboard_isKeyPressed(sfKeyI) && sprite[14]->o_sprt == 0)

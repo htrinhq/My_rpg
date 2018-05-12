@@ -69,6 +69,7 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sprite[9]->o_sprt = 0;
 	sprite[14]->o_sprt = 0;
 	sprite[16]->o_sprt = 8;
+	sprite[19]->o_sprt = 0;
 	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
 	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
 	sfSprite_setTextureRect(sprite[7]->s_sprt, sprite[7]->r_sprt);
@@ -102,23 +103,11 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 
 sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
 {
-	sprite[0] = malloc(sizeof(sprite_t) * 5);
-	sprite[1] = malloc(sizeof(sprite_t) * 5);
-	sprite[2] = malloc(sizeof(sprite_t) * 5);
-	sprite[3] = malloc(sizeof(sprite_t) * 5);
-	sprite[4] = malloc(sizeof(sprite_t) * 5);
-	sprite[5] = malloc(sizeof(sprite_t) * 5);
-	sprite[6] = malloc(sizeof(sprite_t) * 5);
-	sprite[7] = malloc(sizeof(sprite_t) * 5);
-	sprite[8] = malloc(sizeof(sprite_t) * 5);
-	sprite[9] = malloc(sizeof(sprite_t) * 5);
-	sprite[10] = malloc(sizeof(sprite_t) * 5);
-	sprite[11] = malloc(sizeof(sprite_t) * 5);
-	sprite[12] = malloc(sizeof(sprite_t) * 5);
-	sprite[13] = malloc(sizeof(sprite_t) * 5);
-	sprite[14] = malloc(sizeof(sprite_t) * 5);
-	sprite[15] = malloc(sizeof(sprite_t) * 5);
-	sprite[16] = malloc(sizeof(sprite_t) * 5);
+	for (int i = 0; i < 20; i++)
+		sprite[i] = malloc(sizeof(sprite_t) * 5);
+	sprite[19] = create_sprite(sprite[19], "rsrc/pictures/begin.png");
+	sprite[18] = create_sprite(sprite[18], "rsrc/pictures/die.png");
+	sprite[17] = create_sprite(sprite[17], "rsrc/pictures/win.png");
 	sprite[16] = create_sprite(sprite[16], "rsrc/pictures/gardian.png");
 	sprite[15] = create_sprite(sprite[15], "rsrc/pictures/timeout.png");
 	sprite[14] = create_sprite(sprite[14], "rsrc/pictures/chest.png");
