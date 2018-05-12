@@ -24,6 +24,7 @@ SRC	=	src/main.c		\
 		src/pathfinding.c	\
 		src/stat.c		\
 		src/day_time.c		\
+		src/time.c		\
 		src/display_npc.c	\
 		src/read_paths.c	\
 		src/fight.c

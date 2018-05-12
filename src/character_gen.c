@@ -46,10 +46,10 @@ npcst_t stat_gen(void)
 npc_t *npc_gen(void)
 {
 	npc_t *npc = malloc(sizeof(npc_t));
-	int sprite_id = 0;
-	int i = 0;
 	char *s = malloc(sizeof(char) * 23);
 	static int token = 48;
+	int sprite_id = 0;
+	int i = 0;
 
 	sprite_id = rand_gen(2, 14);
 	s = my_strcat("rsrc/pictures/p", 3, my_int_to_str(sprite_id), ".png");

@@ -59,6 +59,9 @@ typedef struct guards {
 
 #include "quests.h"
 
+int delta_time();
+void day_time();
+void day_event();
 char *my_getnbr();
 int detect_chest();
 void game_loop();
