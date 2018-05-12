@@ -610,11 +610,11 @@ text_t **set_text_value(text_t **text)
 
 void initialize_stat(plstat_t *stat)
 {
-	stat->force = 1;
+	stat->force = 4;
 	stat->inteligence = 1;
 	stat->speed = 1;
 	stat->xp = 165;
-	stat->life = 5;
+	stat->life = 8;
 }
 
 int main(int argc, char **argv, char**envp)
