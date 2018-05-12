@@ -9,6 +9,8 @@
 
 void modif_sprite(sprite_t **sprite, sfEvent event)
 {
+	if (event.type != sfEvtMouseButtonPressed)
+		return;
 	if (event.mouseButton.x >= 1480 &&
 		event.mouseButton.x <= 1680 &&
 		event.mouseButton.y >= 690 &&

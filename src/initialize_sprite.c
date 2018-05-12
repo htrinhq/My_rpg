@@ -67,6 +67,7 @@ void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 	sprite[5]->o_sprt = 0;
 	sprite[8]->o_sprt = 0;
 	sprite[9]->o_sprt = 0;
+	sprite[15]->o_sprt = 0;
 	sprite[14]->o_sprt = 0;
 	sprite[16]->o_sprt = 8;
 	sprite[18]->o_sprt = 0;
