@@ -23,7 +23,7 @@ void display_stat(sprite_t **sprite, sfRenderWindow *window, plstat_t *stat)
 	sfRenderWindow_drawSprite(window, sprite[9]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[10]->s_sprt, NULL);
 	sfRenderWindow_drawSprite(window, sprite[11]->s_sprt, NULL);
-	sfRenderWindow_drawSprite(window, sprite[12]->s_sprt, NULL);	
+	sfRenderWindow_drawSprite(window, sprite[12]->s_sprt, NULL);
 	if (stat->xp < 100)
 		level = my_itoa(0);
 	else
