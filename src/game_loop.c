@@ -48,8 +48,8 @@ void end_game_loop(sfRenderWindow *window, sprite_t **sprite,
 	if (sprite[17]->o_sprt == 2)
 		sfRenderWindow_drawSprite(window, sprite[17]->s_sprt, NULL);
 	if (sprite[17]->o_sprt != 3)
-		if ((int)sfTime_asSeconds(sfClock_getElapsedTime(sprite[2]->clock))
-		% 3 >= 1)
+		if ((int)sfTime_asSeconds(
+		sfClock_getElapsedTime(sprite[2]->clock)) % 3 >= 1)
 			mem++;
 	if (mem == 100)
 		sprite[17]->o_sprt = 3;
