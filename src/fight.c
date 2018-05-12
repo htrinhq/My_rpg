@@ -18,7 +18,7 @@ void fight(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window)
 		sfClock_restart(sprite[2]->clock);
 	}
 	if (sprite[0]->r_sprt.top <= 300 && sprite[0]->r_sprt.left >= 850 &&
-	sprite[0]->r_sprt.left <= 1110 && sprite[16]->o_sprt > 0)
+		sprite[0]->r_sprt.left <= 1110 && sprite[16]->o_sprt > 0)
 		particules(window, 975, 580, 0);
 	if (stat->life < 1)
 		sprite[17]->o_sprt = 1;

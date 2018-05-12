@@ -30,14 +30,14 @@ void set_sprite_16(sprite_t **s)
 }
 
 void fight_display(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
-		plstat_t *stat)
+plstat_t *stat)
 {
 	display_sprites_game(window, sprite);
 	stat->force = count_weapons(icm);
 }
 
 void end_game_loop(sfRenderWindow *window, sprite_t **sprite,
-		icm_t *icm, sfEvent event)
+icm_t *icm, sfEvent event)
 {
 	day_time(window, sprite);
 	game_event(window, event, sprite, icm);
@@ -50,7 +50,7 @@ void end_game_loop(sfRenderWindow *window, sprite_t **sprite,
 }
 
 void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
-		plstat_t *stat)
+plstat_t *stat)
 {
 	sfEvent event;
 

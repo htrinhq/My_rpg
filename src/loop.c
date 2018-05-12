@@ -11,16 +11,17 @@ void first_if_menuloop(sfRenderWindow *window, sprite_t *bg, text_t **text)
 {
 	sfRenderWindow_drawSprite(window, bg->s_sprt, NULL);
 	disp_text(window, text);
+	sfRenderWindow_display(window);
 }
 
 void launch_game(sfRenderWindow *window, sprite_t **sprite,
-		icm_t *icm, plstat_t *stat)
+icm_t *icm, plstat_t *stat)
 {
 	if (sprite[17]->o_sprt == 0 && (int)sfTime_asSeconds(
-	sfClock_getElapsedTime(sprite[3]->clock)) >= 5)
+		sfClock_getElapsedTime(sprite[3]->clock)) >= 5)
 		sprite[17]->o_sprt = 3;
 	if ((int)sfTime_asSeconds(
-	sfClock_getElapsedTime(sprite[3]->clock)) == 6)
+		sfClock_getElapsedTime(sprite[3]->clock)) == 6)
 		sfRenderWindow_close(window);
 	if (sprite[17]->o_sprt == 0)
 		sfRenderWindow_drawSprite(window, sprite[19]->s_sprt, NULL);
@@ -49,7 +50,6 @@ void menu_loop(sfRenderWindow *window, icm_t *icm)
 		if (sprite[5]->o_sprt == 0) {
 			text = menu_event(window, event, text, sprite);
 			first_if_menuloop(window, bg, text);
-			sfRenderWindow_display(window);
 			continue;
 		}
 		if (sprite[5]->o_sprt == 3) {

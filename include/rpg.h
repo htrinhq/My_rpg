@@ -147,5 +147,12 @@ void pause_loop(sfRenderWindow *window, sprite_t **sprite);
 void fight(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window);
 char **get_map_txt(void);
 sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat);
+void set_rect(sprite_t **sprite, plstat_t *stat);
+void set_rect_2(sprite_t **sprite, plstat_t *stat, int level);
+void set_rect_3(sprite_t **sprite);
+void set_o_sprt(sprite_t **sprite);
+void set_texture_rect(sprite_t **sprite);
+void set_position(sprite_t **sprite);
+void set_scale(sprite_t **sprite);
 
 #endif

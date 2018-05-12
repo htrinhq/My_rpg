@@ -37,3 +37,23 @@ char **read_routes(char *path)
 	map_txt[153] = NULL;
 	return (map_txt);
 }
+
+text_t **move_cursos_down(text_t **text)
+{
+	if (text[2]->pos.y == 375 + (3 * 77))
+		text[2]->pos.y = 375;
+	else
+		text[2]->pos.y += 77;
+	sfText_setPosition(text[2]->text, text[2]->pos);
+	return (text);
+}
+
+text_t **move_cursos_up(text_t **text)
+{
+	if (text[2]->pos.y == 375)
+		text[2]->pos.y = 375 + (3 * 77);
+	else
+		text[2]->pos.y -= 77;
+	sfText_setPosition(text[2]->text, text[2]->pos);
+	return (text);
+}

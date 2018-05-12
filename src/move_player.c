@@ -7,26 +7,6 @@
 
 #include "rpg.h"
 
-text_t **move_cursos_down(text_t **text)
-{
-	if (text[2]->pos.y == 375 + (3 * 77))
-		text[2]->pos.y = 375;
-	else
-		text[2]->pos.y += 77;
-	sfText_setPosition(text[2]->text, text[2]->pos);
-	return (text);
-}
-
-text_t **move_cursos_up(text_t **text)
-{
-	if (text[2]->pos.y == 375)
-		text[2]->pos.y = 375 + (3 * 77);
-	else
-		text[2]->pos.y -= 77;
-	sfText_setPosition(text[2]->text, text[2]->pos);
-	return (text);
-}
-
 sprite_t **player_animation(sprite_t **sprite, int x, int y)
 {
 	sprite[4]->v_sprt.x = y / 2 - 6;

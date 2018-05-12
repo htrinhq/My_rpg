@@ -9,120 +9,25 @@
 
 void initialize_sprite2(sprite_t **sprite, plstat_t *stat)
 {
-	sfVector2f scale = {0.5, 0.5};
-	sfVector2f scale2 = {2, 2};
-	sfVector2f scale3 = {5, 5};
 	int level = (stat->xp % 100) * 8 / 100;
 
-	sprite[1]->r_sprt.top = 10;
-	sprite[1]->r_sprt.left = 70;
-	sprite[1]->r_sprt.width = 136;
-	sprite[1]->r_sprt.height = 183;
-	sprite[21]->r_sprt.top = 10;
-	sprite[21]->r_sprt.left = 70;
-	sprite[21]->r_sprt.width = 136;
-	sprite[21]->r_sprt.height = 183;
-	sprite[7]->r_sprt.top = 20 * stat->life;
-	sprite[7]->r_sprt.left = 0;
-	sprite[7]->r_sprt.width = 100;
-	sprite[7]->r_sprt.height = 20;
-	sprite[9]->r_sprt.top = 20 * stat->force;
-	sprite[9]->r_sprt.left = 0;
-	sprite[9]->r_sprt.width = 100;
-	sprite[9]->r_sprt.height = 20;
-	sprite[10]->r_sprt.top = 20 * stat->inteligence;
-	sprite[10]->r_sprt.left = 0;
-	sprite[10]->r_sprt.width = 100;
-	sprite[10]->r_sprt.height = 20;
-	sprite[11]->r_sprt.top = 20 * stat->speed;
-	sprite[11]->r_sprt.left = 0;
-	sprite[11]->r_sprt.width = 100;
-	sprite[11]->r_sprt.height = 20;
-	sprite[12]->r_sprt.top = 20 * level;
-	sprite[12]->r_sprt.left = 0;
-	sprite[12]->r_sprt.width = 100;
-	sprite[12]->r_sprt.height = 20;
-	sprite[16]->r_sprt.top = 10;
-	sprite[16]->r_sprt.left = 70;
-	sprite[16]->r_sprt.width = 136;
-	sprite[16]->r_sprt.height = 183;
-	sprite[16]->v_sprt.x = 198;
-	sprite[16]->v_sprt.y = 42;
-	sprite[7]->v_sprt.x = 40;
-	sprite[7]->v_sprt.y = 960;
-	sprite[21]->v_sprt.x = 960;
-	sprite[21]->v_sprt.y = 540;
-	sprite[1]->v_sprt.x = 960;
-	sprite[1]->v_sprt.y = 540;
-	sprite[4]->v_sprt.x = 225 / 2 - 6;
-	sprite[4]->v_sprt.y = 213 / 2 - 15;
-	sprite[8]->v_sprt.x = 960;
-	sprite[8]->v_sprt.y = 440;
-	sprite[20]->v_sprt.x = 960;
-	sprite[20]->v_sprt.y = 440;
-	sprite[9]->v_sprt.x = 700;
-	sprite[9]->v_sprt.y = 350;
-	sprite[10]->v_sprt.x = 700;
-	sprite[10]->v_sprt.y = 450;
-	sprite[11]->v_sprt.x = 700;
-	sprite[11]->v_sprt.y = 550;
-	sprite[12]->v_sprt.x = 700;
-	sprite[12]->v_sprt.y = 650;
-	sprite[13]->v_sprt.x = 730;
-	sprite[13]->v_sprt.y = 650;
-	sprite[1]->o_sprt = 0;
-	sprite[2]->o_sprt = 0;
-	sprite[5]->o_sprt = 0;
-	sprite[8]->o_sprt = 0;
-	sprite[20]->o_sprt = 0;
-	sprite[9]->o_sprt = 0;
-	sprite[15]->o_sprt = 0;
-	sprite[14]->o_sprt = 0;
-	sprite[16]->o_sprt = 8;
-	sprite[18]->o_sprt = 0;
-	sprite[17]->o_sprt = 0;
-	sprite[19]->o_sprt = 0;
-	sprite[20]->o_sprt = 0;
-	sfSprite_setTextureRect(sprite[0]->s_sprt, sprite[0]->r_sprt);
-	sfSprite_setTextureRect(sprite[1]->s_sprt, sprite[1]->r_sprt);
-	sfSprite_setTextureRect(sprite[21]->s_sprt, sprite[21]->r_sprt);
-	sfSprite_setTextureRect(sprite[7]->s_sprt, sprite[7]->r_sprt);
-	sfSprite_setTextureRect(sprite[9]->s_sprt, sprite[9]->r_sprt);
-	sfSprite_setTextureRect(sprite[10]->s_sprt, sprite[10]->r_sprt);
-	sfSprite_setTextureRect(sprite[11]->s_sprt, sprite[11]->r_sprt);
-	sfSprite_setTextureRect(sprite[12]->s_sprt, sprite[12]->r_sprt);
-	sfSprite_setTextureRect(sprite[16]->s_sprt, sprite[16]->r_sprt);
-	sfSprite_setPosition(sprite[1]->s_sprt, sprite[1]->v_sprt);
-	sfSprite_setPosition(sprite[21]->s_sprt, sprite[21]->v_sprt);
-	sfSprite_setPosition(sprite[7]->s_sprt, sprite[7]->v_sprt);
-	sfSprite_setPosition(sprite[8]->s_sprt, sprite[8]->v_sprt);
-	sfSprite_setPosition(sprite[20]->s_sprt, sprite[20]->v_sprt);
-	sfSprite_setPosition(sprite[9]->s_sprt, sprite[9]->v_sprt);
-	sfSprite_setPosition(sprite[10]->s_sprt, sprite[10]->v_sprt);
-	sfSprite_setPosition(sprite[11]->s_sprt, sprite[11]->v_sprt);
-	sfSprite_setPosition(sprite[12]->s_sprt, sprite[12]->v_sprt);
-	sfSprite_setPosition(sprite[16]->s_sprt, sprite[16]->v_sprt);
-	sfSprite_setScale(sprite[1]->s_sprt, scale);
-	sfSprite_setScale(sprite[21]->s_sprt, scale);
-	sfSprite_setScale(sprite[7]->s_sprt, scale2);
-	sfSprite_setScale(sprite[8]->s_sprt, scale2);
-	sfSprite_setScale(sprite[20]->s_sprt, scale2);
-	sfSprite_setScale(sprite[9]->s_sprt, scale3);
-	sfSprite_setScale(sprite[10]->s_sprt, scale3);
-	sfSprite_setScale(sprite[11]->s_sprt, scale3);
-	sfSprite_setScale(sprite[12]->s_sprt, scale3);
-	sfSprite_setScale(sprite[16]->s_sprt, scale);
+	set_rect(sprite, stat);
+	set_rect_2(sprite, stat, level);
+	set_rect_3(sprite);
+	set_o_sprt(sprite);
+	set_texture_rect(sprite);
+	set_position(sprite);
+	set_scale(sprite);
 	sprite[13]->text = sfText_create();
-	sprite[13]->font = sfFont_createFromFile("rsrc/fonts/copyfonts.com_algol-ix.ttf");
+	sprite[13]->font = sfFont_createFromFile(
+	"rsrc/fonts/copyfonts.com_algol-ix.ttf");
 	sfText_setFont(sprite[13]->text, sprite[13]->font);
 	sfText_setPosition(sprite[13]->text, sprite[13]->v_sprt);
 	sfText_setCharacterSize(sprite[13]->text, 70);
 }
 
-sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
+void malloc_sprite(sprite_t **sprite)
 {
-	for (int i = 0; i < 22; i++)
-		sprite[i] = malloc(sizeof(sprite_t) * 5);
 	sprite[21] = create_sprite(sprite[21], "rsrc/pictures/gardian.png");
 	sprite[20] = create_sprite(sprite[20], "rsrc/pictures/keeper.png");
 	sprite[19] = create_sprite(sprite[19], "rsrc/pictures/begin.png");
@@ -143,6 +48,10 @@ sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
 	sprite[4] = create_sprite(sprite[4], "rsrc/pictures/minimap_perso.png");
 	sprite[3] = create_sprite(sprite[3], "rsrc/pictures/minimap.png");
 	sprite[2] = create_sprite(sprite[2], "rsrc/pictures/inventory.png");
+}
+
+void clock_create(sprite_t **sprite)
+{
 	sprite[1] = create_sprite(sprite[1], "rsrc/pictures/p1.png");
 	sprite[0] = create_sprite(sprite[0], "rsrc/pictures/map.png");
 	sprite[0]->clock = sfClock_create();
@@ -154,7 +63,16 @@ sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
 	sprite[0]->r_sprt.width = 1920;
 	sprite[0]->r_sprt.height = 1080;
 	sprite[0]->text = sfText_create();
-	sprite[0]->font = sfFont_createFromFile("./rsrc/fonts/copyfonts.com_algol-ix.ttf");
+	sprite[0]->font = sfFont_createFromFile(
+	"./rsrc/fonts/copyfonts.com_algol-ix.ttf");
+}
+
+sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat)
+{
+	for (int i = 0; i < 22; i++)
+		sprite[i] = malloc(sizeof(sprite_t) * 5);
+	malloc_sprite(sprite);
+	clock_create(sprite);
 	sfText_setFont(sprite[0]->text, sprite[0]->font);
 	sfText_setCharacterSize(sprite[0]->text, 90);
 	sfText_setColor(sprite[0]->text, sfColor_fromRGB(255, 255, 255));

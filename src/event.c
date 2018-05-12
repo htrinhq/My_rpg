@@ -19,7 +19,7 @@ void modif_sprite(sprite_t **sprite, sfEvent event)
 }
 
 void inside_menu_while(sfEvent event, sfRenderWindow *window,
-		text_t **text, sprite_t **sprite)
+text_t **text, sprite_t **sprite)
 {
 	if (event.type == sfEvtClosed)
 		sfRenderWindow_close(window);
@@ -39,7 +39,7 @@ void inside_menu_while(sfEvent event, sfRenderWindow *window,
 }
 
 text_t **menu_event(sfRenderWindow *window, sfEvent event, text_t **text,
-		sprite_t **sprite)
+sprite_t **sprite)
 {
 	while (sfRenderWindow_pollEvent(window, &event))
 		inside_menu_while(event, window, text, sprite);
