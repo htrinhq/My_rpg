@@ -7,11 +7,13 @@
 
 #include "rpg.h"
 
-void first_if_menuloop(sfRenderWindow *window, sprite_t *bg, text_t **text)
+void first_if_menuloop(sfRenderWindow *window, sprite_t *bg, text_t **text,
+		sprite_t **sprite)
 {
 	sfRenderWindow_drawSprite(window, bg->s_sprt, NULL);
 	disp_text(window, text);
 	sfRenderWindow_display(window);
+	sfClock_restart(sprite[3]->clock);
 }
 
 void launch_game(sfRenderWindow *window, sprite_t **sprite,
@@ -49,7 +51,7 @@ void menu_loop(sfRenderWindow *window, icm_t *icm)
 	while (sfRenderWindow_isOpen(window)) {
 		if (sprite[5]->o_sprt == 0) {
 			text = menu_event(window, event, text, sprite);
-			first_if_menuloop(window, bg, text);
+			first_if_menuloop(window, bg, text, sprite);
 			continue;
 		}
 		if (sprite[5]->o_sprt == 3) {
