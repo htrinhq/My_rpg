@@ -17,6 +17,7 @@ icm_t *icm)
 		sprite[16]->o_sprt -= stat->force;
 		stat->life -= 1;
 		sfClock_restart(sprite[2]->clock);
+		sfMusic_play(icm->punch);
 	}
 	if (sprite[0]->r_sprt.top <= 300 && sprite[0]->r_sprt.left >= 850 &&
 		sprite[0]->r_sprt.left <= 1110 && sprite[16]->o_sprt > 0)
@@ -25,6 +26,4 @@ icm_t *icm)
 		sprite[17]->o_sprt = 1;
 	if (sprite[16]->o_sprt <= 0)
 		sprite[17]->o_sprt = 2;
-	if (sprite[21]->o_sprt == 1)
-		sfMusic_play(icm->punch);
 }
