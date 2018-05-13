@@ -15,7 +15,7 @@ icm_t *icm)
 	(int)sfTime_asSeconds(
 	sfClock_getElapsedTime(sprite[2]->clock)) >= 2) {
 		sprite[16]->o_sprt -= stat->force;
-		stat->life -= 1;
+		stat->life -= 3;
 		sfClock_restart(sprite[2]->clock);
 		sfMusic_play(icm->punch);
 	}
