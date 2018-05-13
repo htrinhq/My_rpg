@@ -44,7 +44,7 @@ OBJ	=	$(SRC:.c=.o)
 
 NAME	=	my_rpg
 
-CFLAGS	=	-W -Wall -Wextra -I include -g -fdiagnostics-color=always
+CFLAGS	=	-W -Wall -Wextra -I include -g
 
 LDFLAGS =	-l c_graph_prog -L ./lib/my/ -lmyprintf -L ./lib/graph/ -lgraph
 
