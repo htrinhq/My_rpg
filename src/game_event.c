@@ -67,8 +67,6 @@ sprite_t **sprite, icm_t *icm)
 	}
 	if (sfKeyboard_isKeyPressed(sfKeyE) && sprite[8]->o_sprt == 2)
 		sprite[20]->o_sprt = (sprite[20]->o_sprt == 0) ? 1 : 0;
-	if (sprite[21]->o_sprt == 1)
-		sfMusic_play(icm->punch);
 }
 
 sprite_t **game_event(sfRenderWindow *window, sfEvent event,
