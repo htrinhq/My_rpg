@@ -53,7 +53,15 @@ int delta_time(int t1, int t2)
 	return (t2 - t1);
 }
 
-void day_time(sfRenderWindow *wd, sprite_t **sprite)
+void update_stat(plstat_t *stat)
+{
+	stat->xp += 100;
+	stat->force += 1;
+	stat->inteligence += 1;
+	stat->speed += 1;
+}
+
+void day_time(sfRenderWindow *wd, sprite_t **sprite, plstat_t *stat)
 {
 	float time = sfTime_asSeconds(sfClock_getElapsedTime(sprite[0]->clock));
 	static int hour = 7;
@@ -67,8 +75,10 @@ void day_time(sfRenderWindow *wd, sprite_t **sprite)
 		hour++;
 		min = 0;
 	}
-	if (hour == 20)
+	if (hour == 20) {
 		hour = 7;
+		update_stat(stat);
+	}
 	set_time(hour, min, sprite);
 	day_event(wd, sprite, hour, min);
 }

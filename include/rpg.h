@@ -61,7 +61,7 @@ typedef struct guards {
 
 #include "quests.h"
 
-void day_time(sfRenderWindow *wd, sprite_t **sprite);
+void day_time(sfRenderWindow *wd, sprite_t **sprite, plstat_t *stat);
 int delta_time(int t1, int t2);
 void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 plstat_t *stat);

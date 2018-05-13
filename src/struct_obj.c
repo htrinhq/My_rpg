@@ -69,6 +69,17 @@ idobj_t **fill_obj_id(idobj_t **obj)
 	return (obj);
 }
 
+int count_intel(icm_t *icm)
+{
+	int x = 0;
+	int st = 0;
+
+	for (x = 0; icm->inventory[x] != -2; x = x + 1)
+		if (icm->inventory[x] == 1)
+			st = st + 1;
+	return (st);
+}
+
 int count_weapons(icm_t *icm)
 {
 	int x = 0;

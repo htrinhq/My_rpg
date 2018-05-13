@@ -36,13 +36,22 @@ void fight_display(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
 plstat_t *stat)
 {
 	display_sprites_game(window, sprite);
-	stat->force = count_weapons(icm);
+	stat->force = count_weapons(icm) + 1;
+	stat->inteligence = count_intel(icm) + 1;
+	sprite[7]->r_sprt.top = 20 * (stat->life - 1);
+	sprite[9]->r_sprt.top = 20 * (stat->force - 1);
+	sprite[10]->r_sprt.top = 20 * (stat->inteligence - 1);
+	sprite[11]->r_sprt.top = 20 * (stat->speed - 1);
+	sfSprite_setTextureRect(sprite[7]->s_sprt, sprite[7]->r_sprt);
+	sfSprite_setTextureRect(sprite[9]->s_sprt, sprite[9]->r_sprt);
+	sfSprite_setTextureRect(sprite[10]->s_sprt, sprite[10]->r_sprt);
+	sfSprite_setTextureRect(sprite[11]->s_sprt, sprite[11]->r_sprt);
+	sfSprite_setTextureRect(sprite[12]->s_sprt, sprite[12]->r_sprt);
 }
 
 void end_game_loop(sfRenderWindow *window, sprite_t **sprite,
 icm_t *icm, sfEvent event)
 {
-	day_time(window, sprite);
 	game_event(window, event, sprite, icm);
 	if (sprite[14]->o_sprt == 1 && sprite[8]->o_sprt == 1) {
 		sfRenderWindow_drawSprite(window, sprite[14]->s_sprt, NULL);
@@ -67,6 +76,7 @@ plstat_t *stat)
 		sfRenderWindow_drawSprite(window, sprite[8]->s_sprt, NULL);
 	if (sprite[8]->o_sprt == 2)
 		sfRenderWindow_drawSprite(window, sprite[20]->s_sprt, NULL);
+	day_time(window, sprite, stat);
 	end_game_loop(window, sprite, icm, event);
 	fight(stat, sprite, window, icm);
 }
