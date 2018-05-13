@@ -65,9 +65,9 @@ text_t **set_text_value(text_t **text)
 
 void initialize_stat(plstat_t *stat)
 {
-	stat->force = 0;
-	stat->inteligence = 0;
-	stat->speed = 0;
-	stat->xp = 0;
+	stat->force = 1;
+	stat->inteligence = 1;
+	stat->speed = 1;
+	stat->xp = 1;
 	stat->life = 8;
 }

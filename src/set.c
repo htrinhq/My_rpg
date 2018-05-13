@@ -17,15 +17,15 @@ void set_rect(sprite_t **sprite, plstat_t *stat)
 	sprite[21]->r_sprt.left = 70;
 	sprite[21]->r_sprt.width = 136;
 	sprite[21]->r_sprt.height = 183;
-	sprite[7]->r_sprt.top = 20 * stat->life;
+	sprite[7]->r_sprt.top = 20 * (stat->life - 1);
 	sprite[7]->r_sprt.left = 0;
 	sprite[7]->r_sprt.width = 100;
 	sprite[7]->r_sprt.height = 20;
-	sprite[9]->r_sprt.top = 20 * stat->force;
+	sprite[9]->r_sprt.top = 20 * (stat->force - 1);
 	sprite[9]->r_sprt.left = 0;
 	sprite[9]->r_sprt.width = 100;
 	sprite[9]->r_sprt.height = 20;
-	sprite[10]->r_sprt.top = 20 * stat->inteligence;
+	sprite[10]->r_sprt.top = 20 * (stat->inteligence - 1);
 	sprite[10]->r_sprt.left = 0;
 	sprite[10]->r_sprt.width = 100;
 	sprite[10]->r_sprt.height = 20;
@@ -33,7 +33,7 @@ void set_rect(sprite_t **sprite, plstat_t *stat)
 
 void set_rect_2(sprite_t **sprite, plstat_t *stat, int level)
 {
-	sprite[11]->r_sprt.top = 20 * stat->speed;
+	sprite[11]->r_sprt.top = 20 * (stat->speed - 1);
 	sprite[11]->r_sprt.left = 0;
 	sprite[11]->r_sprt.width = 100;
 	sprite[11]->r_sprt.height = 20;
