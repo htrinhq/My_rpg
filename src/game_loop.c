@@ -68,5 +68,5 @@ plstat_t *stat)
 	if (sprite[8]->o_sprt == 2)
 		sfRenderWindow_drawSprite(window, sprite[20]->s_sprt, NULL);
 	end_game_loop(window, sprite, icm, event);
-	fight(stat, sprite, window);
+	fight(stat, sprite, window, icm);
 }

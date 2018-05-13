@@ -7,7 +7,8 @@
 
 #include "rpg.h"
 
-void fight(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window)
+void fight(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window,
+icm_t *icm)
 {
 	if (sprite[0]->r_sprt.top <= 300 && sprite[0]->r_sprt.left >= 850 &&
 	sprite[0]->r_sprt.left <= 1110 && sprite[16]->o_sprt > 0 &&
@@ -24,4 +25,6 @@ void fight(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window)
 		sprite[17]->o_sprt = 1;
 	if (sprite[16]->o_sprt <= 0)
 		sprite[17]->o_sprt = 2;
+	if (sprite[21]->o_sprt == 1)
+		sfMusic_play(icm->punch);
 }

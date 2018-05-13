@@ -31,8 +31,8 @@ typedef struct icm {
 	int *inventory;
 	int ch;
 	sprite_t **s_obj;
-	sfMusic *punch;
 	sfMusic *chest;
+	sfMusic *punch;
 } icm_t;
 
 typedef struct stat_npc {
@@ -146,7 +146,8 @@ void initialize_stat(plstat_t *stat);
 void menu_loop(sfRenderWindow *window, icm_t *icm);
 void dlc_loop(sfRenderWindow *window, sprite_t **sprite);
 void pause_loop(sfRenderWindow *window, sprite_t **sprite);
-void fight(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window);
+void fight(plstat_t *stat, sprite_t **sprite, sfRenderWindow *window,
+icm_t *icm);
 char **get_map_txt(void);
 sprite_t **initialize_sprite(sprite_t **sprite, plstat_t *stat);
 void set_rect(sprite_t **sprite, plstat_t *stat);
