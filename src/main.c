@@ -50,6 +50,8 @@ void get_icm(icm_t *icm)
 	icm->inventory = create_inventory(icm->inventory);
 	icm->chests = create_chests(icm->chests);
 	icm->s_obj = fill_obj_sprite(icm->s_obj);
+	icm->punch = sfMusic_createFromFile("rsrc/sounds/punch.wav");
+	icm->chest = sfMusic_createFromFile("rsrc/sounds/chest.wav");
 }
 
 int main(int argc, char **argv, char**envp)
@@ -70,5 +72,7 @@ int main(int argc, char **argv, char**envp)
 	sfRenderWindow_setFramerateLimit(window, 60);
 	menu_loop(window, icm);
 	sfMusic_destroy(music);
+	sfMusic_destroy(icm->punch);
+	sfMusic_destroy(icm->chest);
 	return (0);
 }

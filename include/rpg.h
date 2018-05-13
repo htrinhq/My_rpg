@@ -31,6 +31,8 @@ typedef struct icm {
 	int *inventory;
 	int ch;
 	sprite_t **s_obj;
+	sfMusic *punch;
+	sfMusic *chest;
 } icm_t;
 
 typedef struct stat_npc {
