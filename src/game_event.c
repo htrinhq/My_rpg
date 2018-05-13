@@ -56,7 +56,8 @@ sprite_t **sprite, icm_t *icm)
 		return;
 	if (sprite[14]->o_sprt == 0)
 		get_move(icm, sprite, pst, window);
-	if (sfKeyboard_isKeyPressed(sfKeyP))
+	if (sfKeyboard_isKeyPressed(sfKeyP) ||
+	sfKeyboard_isKeyPressed(sfKeyEscape))
 		sprite[5]->o_sprt = 3;
 	if (sfKeyboard_isKeyPressed(sfKeyI) && sprite[14]->o_sprt == 0)
 		sprite[2]->o_sprt = (sprite[2]->o_sprt == 0) ? 1 : 0;

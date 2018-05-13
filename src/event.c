@@ -67,6 +67,8 @@ void pause_event(sfRenderWindow *window, sfEvent event, sprite_t **sprite)
 			sfRenderWindow_close(window);
 		if (event.type != sfEvtKeyPressed)
 			return;
+		if (sfKeyboard_isKeyPressed(sfKeyH))
+			sprite[5]->o_sprt = 0;
 		if (sfKeyboard_isKeyPressed(sfKeyQ))
 			sfRenderWindow_close(window);
 		if (sfKeyboard_isKeyPressed(sfKeyP) ||
