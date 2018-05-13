@@ -8,6 +8,8 @@
 #ifndef QUEST_H_
 #define QUEST_H_
 
+#include "struct.h"
+
 typedef struct quest {
 	int bo;
 	int main_q;

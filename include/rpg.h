@@ -5,71 +5,31 @@
 ** rpg
 */
 
+
+#ifndef RPG_H_
+#define RPG_H_
+
 #include <sys/types.h>
 #include <dirent.h>
 #include "get_next_line.h"
 #include "my_printf.h"
 #include "graph.h"
-
-#ifndef RPG_H_
-#define RPG_H_
-
-typedef struct id {
-	char *path;
-	int id;
-} idobj_t;
-
-typedef struct chest {
-	int *inside;
-	int name;
-} chest_t;
-
-typedef struct icm {
-	char **map_txt;
-	idobj_t **obj;
-	chest_t **chests;
-	int *inventory;
-	int ch;
-	sprite_t **s_obj;
-	sfMusic *chest;
-	sfMusic *punch;
-} icm_t;
-
-typedef struct stat_npc {
-	int level;
-	int max_lp;
-	int lp;
-	int strength;
-} npcst_t;
-
-typedef struct stat_pl {
-	int xp;
-	int force;
-	int inteligence;
-	int life;
-	int speed;
-	sprite_t **sprite;
-} plstat_t;
-
-typedef struct guards {
-	sprite_t *sprite;
-	npcst_t stat;
-	sfVector2f pos;
-	char token;
-	char **map;
-} guard_t;
-
 #include "quests.h"
+#include "struct.h"
 
-void day_time(sfRenderWindow *wd, sprite_t **sprite, plstat_t *stat);
+void day_time(sfRenderWindow *wd, sprite_t **sprite,
+plstat_t *stat);
 int delta_time(int t1, int t2);
-void game_loop(sfRenderWindow *window, sprite_t **sprite, icm_t *icm,
+void game_loop(sfRenderWindow *window, sprite_t **sprite,
+icm_t *icm,
 plstat_t *stat);
 void day_event(sfRenderWindow *wd, sprite_t **sprite, int hour, int min);
 int detect_chest(int x, int y, sprite_t **sprite);
-void display_stat(sprite_t **sprite, sfRenderWindow *window, plstat_t *stat);
+void display_stat(sprite_t **sprite, sfRenderWindow *window,
+plstat_t *stat);
 int count_weapons(icm_t *icm);
-void display_inside(chest_t *chests, icm_t *icm, sfRenderWindow *window);
+void display_inside(chest_t *chests, icm_t *icm,
+sfRenderWindow *window);
 int check_env(char **envp);
 char **get_paths(void);
 int my_tablen(char **tab);
@@ -157,5 +117,6 @@ void set_o_sprt(sprite_t **sprite);
 void set_texture_rect(sprite_t **sprite);
 void set_position(sprite_t **sprite);
 void set_scale(sprite_t **sprite);
+int count_intel(icm_t *icm);
 
 #endif
