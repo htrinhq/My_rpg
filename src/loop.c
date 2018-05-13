@@ -8,7 +8,7 @@
 #include "rpg.h"
 
 void first_if_menuloop(sfRenderWindow *window, sprite_t *bg, text_t **text,
-		sprite_t **sprite)
+sprite_t **sprite)
 {
 	sfRenderWindow_drawSprite(window, bg->s_sprt, NULL);
 	disp_text(window, text);
